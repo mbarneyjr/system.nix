@@ -1,4 +1,4 @@
-{ nix-darwin }:
+{ nix-darwin, home-manager, username }:
 
 { system }:
 
@@ -7,6 +7,7 @@ let
     system.stateVersion = 4;
     services.nix-daemon.enable = true;
     nix.settings.experimental-features = "nix-command flakes";
+    users.users.${username}.home = "/Users/${username}";
 
     environment.systemPackages = [ pkgs.vim pkgs.neovim pkgs.git ];
 
@@ -46,5 +47,23 @@ nix-darwin.lib.darwinSystem {
   inherit system;
   modules = [ 
     configuration
+    home-manager.darwinModules.home-manager {
+      home-manager.useGlobalPkgs = true;
+      home-manager.useUserPackages = true;
+      home-manager.users.${username}.imports = [
+        ({ pkgs, ... }: {
+          home.stateVersion = "23.11";
+          home.packages = [
+            pkgs.git
+            pkgs.neovim
+            pkgs.neofetch
+            pkgs.ripgrep
+            pkgs.jq
+            pkgs.fzf
+            pkgs.gnupg
+          ];
+        })
+      ];
+    }
   ];
 }
