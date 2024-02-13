@@ -1,0 +1,60 @@
+#!/usr/bin/env zsh
+
+_git_branch() {
+  local git_status="$(git status 2> /dev/null)"
+  if [ -z "$git_status" ]; then return 0; fi
+  local branchname="$(git branch 2> /dev/null | sed -n -e 's/^\* \(.*\)/\1/p')"
+  if [ ! -z "$(git status --porcelain 2> /dev/null)" ]; then
+    printf "%%F{red}($branchname ✘)"
+  elif [ ! -z "$(git log origin/$branchname..$branchname 2> /dev/null)" ]; then
+    printf "%%F{yellow}($branchname ?)"
+  else
+    printf "%%F{green}($branchname ✔)"
+  fi
+}
+_aws_region() {
+    if [ $AWS_REGION ]; then
+        printf "%%F{magenta}($AWS_REGION)"
+    fi
+}
+_awsume_profile() {
+    if [ $AWSUME_PROFILE ]; then
+        printf "%%F{blue}($AWSUME_PROFILE"
+        if [ $AWSUME_EXPIRATION ]; then
+            EXPIRATION=$(date -j -f "%Y-%m-%dT%H:%M:%S" $AWSUME_EXPIRATION +"%H:%M:%S")
+            EXP_SECONDS=(`date -j -f "%Y-%m-%dT%H:%M:%S" $AWSUME_EXPIRATION +"%s"`)
+            NOW_SECONDS=(`date +%s`)
+            DIFF=$((EXP_SECONDS - NOW_SECONDS))
+            if ((DIFF < 60)); then
+                COLOR="%%F{red}"
+              elif ((DIFF < 300)); then
+                COLOR="%%F{yellow}"
+            else
+                COLOR="%%F{green}"
+            fi
+            printf "|"
+            printf "$COLOR$EXPIRATION"
+        fi
+        printf "%%F{blue})"
+    fi
+}
+NEWLINE=$'\n'
+PROMPT='%F{yellow}➜'
+PROMPT+=' %F{cyan}%*'
+PROMPT+=' $(_aws_region)'
+PROMPT+='$(_awsume_profile)'
+PROMPT+='$(_git_branch)'
+PROMPT+=' %F{cyan}%~'
+PROMPT+='${NEWLINE}$ '
+export RPROMPT=""
+
+export PYTHONDONTWRITEBYTECODE=1
+export PIPENV_VENV_IN_PROJECT=true
+export EDITOR=nvim
+
+alias back="cd -"
+alias echo-path="echo $PATH | tr : '\n'"
+alias awsid="aws sts get-caler-identity --query Account --output text"
+alias tf="terraform"
+alias tms="~/.local/bin/tmux-sessionizer.sh"
+alias tmn="~/.local/bin/tmux-new-session.sh"

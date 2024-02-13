@@ -1,23 +1,40 @@
-{ nix-darwin, home-manager, username }:
+{ nix-darwin, home-manager, nixpkgs-unstable, nix-homebrew, homebrew-core, homebrew-cask, homebrew-bundle, username }:
 
 { system }:
 
 let
+  unstable = import nixpkgs-unstable { system = system; };
   configuration = { pkgs, ... }: {
     system.stateVersion = 4;
     services.nix-daemon.enable = true;
     nix.settings.experimental-features = "nix-command flakes";
-    users.users.${username}.home = "/Users/${username}";
-
-    environment.systemPackages = [ pkgs.vim pkgs.neovim pkgs.git ];
-
-    programs.bash = {
-      enable = true;
-      enableCompletion = true;
+    nixpkgs.config = {
+      allowUnfree = true;
     };
+    users.users.${username}.home = "/Users/${username}";
+    fonts.fontDir.enable = true;
+    fonts.fonts = [
+      (pkgs.nerdfonts.override { fonts = [ "Meslo" ]; })
+    ];
+
+    environment.shells = [
+      pkgs.bashInteractive
+    ];
+    environment.systemPackages = [ pkgs.vim pkgs.git unstable.yabai unstable.skhd ];
+
     programs.zsh = {
       enable = true;
       enableCompletion = true;
+    };
+
+    services.yabai = {
+      package = unstable.yabai;
+      enable = true;
+      enableScriptingAddition = true;
+    };
+    services.skhd = {
+      enable = true;
+      package = unstable.skhd;
     };
 
     security.pam.enableSudoTouchIdAuth = true;
@@ -31,6 +48,7 @@ let
       dock.autohide-time-modifier = 0.0;
       dock.orientation = "left";
       dock.tilesize = 32;
+      dock.mru-spaces = false;
       finder.AppleShowAllExtensions = true;
       finder.AppleShowAllFiles = true;
       finder._FXShowPosixPathInTitle = true;
@@ -41,29 +59,53 @@ let
     };
     system.keyboard.enableKeyMapping = true;
     system.keyboard.remapCapsLockToEscape = true;
+    homebrew = {
+      enable = true;
+      caskArgs.no_quarantine = true;
+      global.brewfile = true;
+      masApps = {};
+      casks = [
+        "1password"
+        "google-chrome"
+        "spotify"
+        "keybase"
+        "tenor"
+        "tailscale"
+        "discord"
+        "slack"
+        "obsidian"
+        "shapr3d"
+        "protonvpn"
+        "docker"
+      ];
+    };
   };
+  home-config = import ../home;
 in
 nix-darwin.lib.darwinSystem {
   inherit system;
-  modules = [ 
+  modules = [
     configuration
     home-manager.darwinModules.home-manager {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.users.${username}.imports = [
-        ({ pkgs, ... }: {
-          home.stateVersion = "23.11";
-          home.packages = [
-            pkgs.git
-            pkgs.neovim
-            pkgs.neofetch
-            pkgs.ripgrep
-            pkgs.jq
-            pkgs.fzf
-            pkgs.gnupg
-          ];
-        })
+        home-config
       ];
+    }
+    nix-homebrew.darwinModules.nix-homebrew {
+      nix-homebrew = {
+        enable = true;
+        enableRosetta = system == "aarch64-darwin";
+        user = username;
+        taps = {
+          "homebrew/homebrew-core" = homebrew-core;
+          "homebrew/homebrew-bundle" = homebrew-bundle;
+          "homebrew/homebrew-cask" = homebrew-cask;
+        };
+        mutableTaps = false;
+        autoMigrate = true;
+      };
     }
   ];
 }
