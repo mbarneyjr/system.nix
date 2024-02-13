@@ -67,15 +67,20 @@
   };
   programs.ssh = {
     enable = true;
-    includes = [ "~/.ssh/1password.config" ];
+    includes = [
+      "~/.ssh/1password.config"
+      "~/.ssh/ssm.config"
+    ];
   };
   home.file.onepasswordSshConfig = {
     enable = true;
     target = ".ssh/1password.config";
-    text = ''
-      Host *
-        IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-    '';
+    source = ./ssh/1password.config;
+  };
+  home.file.ssmConfig = {
+    enable = true;
+    target = ".ssh/ssm.config";
+    source = ./ssh/ssm.config;
   };
 
   programs.git = import ./git.nix;
