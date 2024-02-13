@@ -23,9 +23,13 @@
     pkgs.alacritty
     pkgs.raycast
     pkgs.docker
+    pkgs.aws-sam-cli
+    pkgs.pipx
+    pkgs.python311Packages.yq
+    pkgs.git-remote-codecommit
     # nvim dependencies
     pkgs.nodejs_20
-    pkgs.python39
+    pkgs.python311Full
     pkgs.go
     pkgs.cargo
     pkgs.darwin.libiconv
