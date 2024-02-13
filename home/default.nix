@@ -44,6 +44,9 @@
     enable = true;
     enableCompletion = true;
     initExtra = builtins.readFile ./zsh/zshrc;
+    initExtraFirst = ''
+      fpath=(~/.awsume/zsh-autocomplete/ $fpath)
+    '';
     sessionVariables = {
       PATH = "$HOME/.local/bin:$PATH";
     };

@@ -1,5 +1,8 @@
 #!/usr/bin/env zsh
 
+bindkey "^[[1;3C" forward-word
+bindkey "^[[1;3D" backward-word
+
 _git_branch() {
   local git_status="$(git status 2> /dev/null)"
   if [ -z "$git_status" ]; then return 0; fi
@@ -58,3 +61,4 @@ alias awsid="aws sts get-caler-identity --query Account --output text"
 alias tf="terraform"
 alias tms="~/.local/bin/tmux-sessionizer.sh"
 alias tmn="~/.local/bin/tmux-new-session.sh"
+alias awsume="source awsume"
