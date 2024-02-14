@@ -56,6 +56,8 @@ export PIPENV_VENV_IN_PROJECT=true
 export EDITOR=nvim
 
 alias back="cd -"
+alias ls="eza"
+alias cat="bat"
 alias echo-path="echo $PATH | tr : '\n'"
 alias awsid="aws sts get-caler-identity --query Account --output text"
 alias tf="terraform"

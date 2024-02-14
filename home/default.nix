@@ -6,6 +6,8 @@
     pkgs.ripgrep
     pkgs.jq
     pkgs.fzf
+    pkgs.eza
+    pkgs.bat
     pkgs.wget
     pkgs.gnupg
     pkgs.ack
