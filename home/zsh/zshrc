@@ -51,6 +51,7 @@ PROMPT+=' %F{cyan}%~'
 PROMPT+='${NEWLINE}$ '
 export RPROMPT=""
 
+export LESS="-F -X -R"
 export PYTHONDONTWRITEBYTECODE=1
 export PIPENV_VENV_IN_PROJECT=true
 export EDITOR=nvim
