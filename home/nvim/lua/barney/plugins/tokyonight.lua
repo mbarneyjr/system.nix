@@ -13,13 +13,14 @@ return {
         functions = {},
         variables = {},
         -- Background styles. Can be "dark", "transparent" or "normal"
-        sidebars = "dark", -- style for sidebars, see below
-        floats = "dark", -- style for floating windows
+        --   sidebars = "dark", -- style for sidebars, see below
+        --   floats = "dark", -- style for floating windows
       },
       dim_inactive = true, -- dims inactive windows
       lualine_bold = true, -- When `true`, section headers in the lualine theme will be bold
     })
-    vim.o.background = "dark"
+    vim.opt.termguicolors = true
+    -- vim.o.background = "dark"
     vim.cmd.colorscheme("tokyonight-storm")
     local swap_colorscheme = function()
       if vim.o.background == "light" then

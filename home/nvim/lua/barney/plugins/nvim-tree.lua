@@ -4,8 +4,6 @@ return {
     vim.g.loaded_netrw = 1
     vim.g.loaded_netrwPlugin = 1
 
-    -- set termguicolors to enable highlight groups
-    vim.opt.termguicolors = true
     local nvim_tree = require("nvim-tree")
     local api = require("nvim-tree.api")
 

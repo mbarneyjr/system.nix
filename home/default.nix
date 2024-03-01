@@ -68,6 +68,9 @@
       font.normal.family = "MesloLGL Nerd Font Mono";
       font.size = 14;
       selection.save_to_clipboard = true;
+      env = {
+        TERM = "xterm-256color";
+      };
     };
   };
   programs.ssh = {
