@@ -77,6 +77,7 @@ let
         "shapr3d"
         "protonvpn"
         "docker"
+        "raycast"
       ];
     };
   };

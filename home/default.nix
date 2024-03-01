@@ -23,7 +23,6 @@
     pkgs.slides
     pkgs.speedtest-cli
     pkgs.alacritty
-    pkgs.raycast
     pkgs.docker
     pkgs.aws-sam-cli
     pkgs.pipx
@@ -64,6 +63,10 @@
         opacity = 0.9;
         blur = true;
         dynamic_padding = true;
+      };
+      shell = {
+        program = "/bin/zsh";
+        args = ["--login"];
       };
       font.normal.family = "MesloLGL Nerd Font Mono";
       font.size = 14;
