@@ -46,6 +46,7 @@ return {
         "dot",
         "make",
         "ini",
+        "mermaid",
       },
       incremental_selection = {
         enable = false,
