@@ -27,6 +27,7 @@ return {
         "terraformls",
         "pyright",
         "templ",
+        "nil_ls",
       },
       automatic_installation = true,
     })
@@ -69,6 +70,7 @@ return {
         "stylua",
         "eslint-lsp",
         "eslint_d",
+        "nixpkgs-fmt",
       },
     })
 
