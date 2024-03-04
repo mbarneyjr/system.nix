@@ -28,6 +28,7 @@
     pkgs.pipx
     pkgs.python311Packages.yq
     pkgs.git-remote-codecommit
+    pkgs.ggshield
     pkgs.yarn-berry
     pkgs.libcxxabi
     pkgs.darwin.libiconv
