@@ -28,6 +28,7 @@ return {
       -- ensure these language parsers are installed
       ensure_installed = {
         "json",
+        "yaml",
         "javascript",
         "jsdoc",
         "typescript",

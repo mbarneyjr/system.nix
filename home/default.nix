@@ -31,6 +31,7 @@
     pkgs.yarn-berry
     pkgs.libcxxabi
     pkgs.darwin.libiconv
+    pkgs.libcxxStdenv
     # nvim dependencies
     pkgs.nodejs_20
     pkgs.python311Full
@@ -38,7 +39,6 @@
     pkgs.cargo
     pkgs.darwin.libiconv
     pkgs.gopls
-    pkgs.clang
     pkgs.cmake
     pkgs.gnumake
     # other
@@ -53,8 +53,8 @@
     '';
     sessionVariables = {
       PATH = "$HOME/.local/bin:$PATH";
-      LD_LIBRARY_PATH = "${pkgs.darwin.libiconv}/lib:${pkgs.libcxxabi}/lib:$LD_LIBRARY_PATH";
-      LIBRARY_PATH = "${pkgs.darwin.libiconv}/lib:${pkgs.libcxxabi}/lib:$LD_LIBRARY_PATH";
+      LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.darwin.libiconv}/lib:${pkgs.libcxxabi}/lib:$LD_LIBRARY_PATH";
+      LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.darwin.libiconv}/lib:${pkgs.libcxxabi}/lib:$LD_LIBRARY_PATH";
     };
     oh-my-zsh = {
       enable = true;
