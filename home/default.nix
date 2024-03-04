@@ -28,6 +28,9 @@
     pkgs.pipx
     pkgs.python311Packages.yq
     pkgs.git-remote-codecommit
+    pkgs.yarn-berry
+    pkgs.libcxxabi
+    pkgs.darwin.libiconv
     # nvim dependencies
     pkgs.nodejs_20
     pkgs.python311Full
@@ -50,6 +53,8 @@
     '';
     sessionVariables = {
       PATH = "$HOME/.local/bin:$PATH";
+      LD_LIBRARY_PATH = "${pkgs.darwin.libiconv}/lib:${pkgs.libcxxabi}/lib:$LD_LIBRARY_PATH";
+      LIBRARY_PATH = "${pkgs.darwin.libiconv}/lib:${pkgs.libcxxabi}/lib:$LD_LIBRARY_PATH";
     };
     oh-my-zsh = {
       enable = true;
