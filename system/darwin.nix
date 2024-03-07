@@ -78,6 +78,7 @@ let
         "protonvpn"
         "docker"
         "raycast"
+        "parallels"
       ];
     };
   };
