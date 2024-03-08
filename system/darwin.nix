@@ -7,6 +7,7 @@ let
   configuration = { pkgs, ... }: {
     system.stateVersion = 4;
     services.nix-daemon.enable = true;
+    nix.package = pkgs.nix;
     nix.settings.experimental-features = "nix-command flakes";
     nixpkgs.config = {
       allowUnfree = true;
@@ -91,6 +92,9 @@ nix-darwin.lib.darwinSystem {
     home-manager.darwinModules.home-manager {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
+      home-manager.extraSpecialArgs = {
+        inherit unstable;
+      };
       home-manager.users.${username}.imports = [
         home-config
       ];

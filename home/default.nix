@@ -1,4 +1,4 @@
-({ pkgs, ... }: {
+({ pkgs, unstable, ... }: {
   home.stateVersion = "23.11";
   home.packages = [
     pkgs.neovim
@@ -29,7 +29,7 @@
     pkgs.python311Packages.yq
     pkgs.git-remote-codecommit
     pkgs.ggshield
-    pkgs.yarn-berry
+    unstable.yarn-berry
     pkgs.libcxxabi
     pkgs.darwin.libiconv
     pkgs.libcxxStdenv
