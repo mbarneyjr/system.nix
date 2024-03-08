@@ -2,6 +2,18 @@
 
 Nix, nix-darwin, home-manager setup for my development environment.
 
+## First-Time Setup
+
+You may need to install rosetta with the following command:
+
+```sh
+$ softwareupdate --install-rosetta
+```
+
+Then, install nix, by following the directions at [nixos.org](https://nixos.org/).
+
+Next, insteall nix-darwin by following the directions at [nix-darwin](https://github.com/LnL7/nix-darwin).
+
 ## Running
 
 For intel-based macs:
@@ -14,6 +26,15 @@ For Apple silicon-based macs:
 
 ```sh
 $ darwin-rebuild switch --flake ~/system.nix#aarch64
+```
+
+## Post-Setup
+
+### Keybase GPG
+
+```sh
+keybase pgp export|gpg --import -
+keybase pgp export -s|gpg --allow-secret-key-import --import -
 ```
 
 ## Troubleshooting
