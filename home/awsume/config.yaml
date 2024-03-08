@@ -1,0 +1,11 @@
+colors: true
+console:
+  # browser_command: '"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --user-data-dir=/tmp/{profile} "{url}" --no-first-run'
+  services:
+    c: cloudformation
+    logs: https://console.aws.amazon.com/cloudwatch/home?region={region}#logsV2:log-groups
+fuzzy-match: true
+h: help
+region: us-east-1
+role-duration: 0
+role-session-name: mbarney
