@@ -33,6 +33,7 @@
     pkgs.libcxxabi
     pkgs.darwin.libiconv
     pkgs.libcxxStdenv
+    pkgs.terraform
     # nvim dependencies
     pkgs.nodejs_20
     pkgs.python311Full
@@ -133,5 +134,11 @@
     target = ".config/skhd/skhdrc";
     executable = true;
     source = ./skhd/skhdrc;
+  };
+
+  home.file.awsume = {
+    enable = true;
+    source = ./awsume/config.yaml;
+    target = ".awsume/config.yaml";
   };
 })
