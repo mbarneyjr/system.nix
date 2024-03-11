@@ -21,7 +21,18 @@ let
     environment.shells = [
       pkgs.bashInteractive
     ];
-    environment.systemPackages = [ pkgs.vim pkgs.git unstable.yabai unstable.skhd ];
+    environment.systemPackages = [
+      pkgs.vim
+      pkgs.git
+      pkgs.pam-reattach
+      unstable.yabai
+      unstable.skhd
+    ];
+    environment.etc."pam.d/sudo_local".text = ''
+      # Managed by Nix Darwin
+      auth       optional       ${pkgs.pam-reattach}/lib/pam/pam_reattach.so ignore_ssh
+      auth       sufficient     pam_tid.so
+    '';
 
     programs.zsh = {
       enable = true;
