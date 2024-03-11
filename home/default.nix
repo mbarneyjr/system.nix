@@ -102,7 +102,7 @@
   };
 
   programs.git = import ./git.nix;
-  programs.tmux = import ./tmux { inherit pkgs; };
+  programs.tmux = import ./tmux { inherit pkgs unstable; };
   home.file.tmux-new-session = {
     enable = true;
     executable = true;
