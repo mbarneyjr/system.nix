@@ -80,6 +80,7 @@ let
         "docker"
         "raycast"
         "parallels"
+        "bruno"
       ];
     };
   };
