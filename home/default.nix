@@ -34,6 +34,7 @@
     pkgs.darwin.libiconv
     pkgs.libcxxStdenv
     pkgs.terraform
+    pkgs.swig
     # nvim dependencies
     pkgs.nodejs_20
     pkgs.python311Full
