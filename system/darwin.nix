@@ -92,6 +92,7 @@ let
         "raycast"
         "parallels"
         "bruno"
+        "ticktick"
       ];
     };
   };
