@@ -142,4 +142,5 @@
     source = ./awsume/config.yaml;
     target = ".awsume/config.yaml";
   };
+  targets.darwin.currentHostDefaults."com.apple.controlcenter".BatteryShowPercentage = true;
 })
