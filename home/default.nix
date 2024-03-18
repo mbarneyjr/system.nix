@@ -11,7 +11,7 @@
     pkgs.wget
     pkgs.gnupg
     pkgs.ack
-    pkgs.awscli2
+    unstable.awscli2
     pkgs.fd
     pkgs.ffmpeg
     pkgs.fswatch
