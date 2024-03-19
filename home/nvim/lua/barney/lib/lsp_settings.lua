@@ -1,4 +1,15 @@
 return {
+  ["nil"] = {
+    settings = {
+      ["nil"] = {
+        nix = {
+          flake = {
+            autoEvalInputs = true,
+          },
+        },
+      },
+    },
+  },
   tsserver = {
     settings = {
       diagnostics = {
