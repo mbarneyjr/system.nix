@@ -5,6 +5,7 @@ return {
     "jay-babu/mason-nvim-dap.nvim",
     "theHamsta/nvim-dap-virtual-text",
     "nvim-telescope/telescope-dap.nvim",
+    "nvim-neotest/nvim-nio",
     {
       "mxsdev/nvim-dap-vscode-js",
       opts = {
