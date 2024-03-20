@@ -60,9 +60,11 @@ alias back="cd -"
 alias ls="eza"
 alias cat="bat"
 alias echo-path="echo $PATH | tr : '\n'"
-alias awsid="aws sts get-caler-identity --query Account --output text"
+alias awsid="aws sts get-caller-identity --query Account --output text"
 alias tf="terraform"
 alias tms="~/.local/bin/tmux-sessionizer.sh"
 alias tmn="~/.local/bin/tmux-new-session.sh"
 alias awsume="source awsume"
 alias awsumel="source awsume --role-duration 43200"
+
+complete -C 'aws_completer' aws
