@@ -1,1 +1,8 @@
-return { "stevearc/dressing.nvim", config = true }
+return {
+  "stevearc/dressing.nvim",
+  config = {
+    input = {
+      enabled = false,
+    },
+  },
+}
