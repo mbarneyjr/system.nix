@@ -75,7 +75,7 @@ let
       enable = true;
       caskArgs.no_quarantine = true;
       global.brewfile = true;
-      masApps = {};
+      masApps = { };
       casks = [
         "1password"
         "google-chrome"
@@ -102,7 +102,8 @@ nix-darwin.lib.darwinSystem {
   inherit system;
   modules = [
     configuration
-    home-manager.darwinModules.home-manager {
+    home-manager.darwinModules.home-manager
+    {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.extraSpecialArgs = {
@@ -112,7 +113,8 @@ nix-darwin.lib.darwinSystem {
         home-config
       ];
     }
-    nix-homebrew.darwinModules.nix-homebrew {
+    nix-homebrew.darwinModules.nix-homebrew
+    {
       nix-homebrew = {
         enable = true;
         enableRosetta = system == "aarch64-darwin";

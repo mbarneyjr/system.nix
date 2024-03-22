@@ -35,6 +35,7 @@
     pkgs.libcxxStdenv
     pkgs.terraform
     pkgs.swig
+    pkgs.nixpkgs-fmt
     # nvim dependencies
     pkgs.nodejs_20
     pkgs.python311Full
@@ -74,7 +75,7 @@
       };
       shell = {
         program = "/bin/zsh";
-        args = ["--login"];
+        args = [ "--login" ];
       };
       font.normal.family = "MesloLGL Nerd Font Mono";
       font.size = 14;
