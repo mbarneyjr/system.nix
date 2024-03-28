@@ -1,5 +1,10 @@
 return {
   "zbirenbaum/copilot.lua",
+  dependencies = {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    branch = "canary",
+    "nvim-lua/plenary.nvim",
+  },
   config = function()
     require("copilot").setup({
       panel = { enabled = false },
@@ -21,6 +26,9 @@ return {
       },
       copilot_node_command = "node", -- Node.js version must be > 16.x
       server_opts_overrides = {},
+    })
+    require("CopilotChat").setup({
+      debug = true, -- Enable debugging
     })
   end,
 }
