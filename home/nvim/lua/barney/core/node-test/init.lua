@@ -17,7 +17,7 @@ local function node_test()
     workspace_args = "--workspace " .. workspaces[index]
   end
 
-  local reporter = vim.fn.stdpath("config") .. "/lua/barney/core/node-test/reporter.local.mjs"
+  local reporter = vim.fn.stdpath("config") .. "/lua/barney/core/node-test/reporter.mjs"
   vim.print(reporter)
   local command = "npm run test "
     .. workspace_args
