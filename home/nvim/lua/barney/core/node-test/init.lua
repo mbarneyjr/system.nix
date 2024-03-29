@@ -14,7 +14,9 @@ local function node_test()
   local workspace_args = ""
   if workspaces ~= nil then
     local index = vim.fn.inputlist(workspaces)
-    workspace_args = "--workspace " .. workspaces[index]
+    if workspaces[index] ~= nil then
+      workspace_args = "--workspace " .. workspaces[index]
+    end
   end
 
   local reporter = vim.fn.stdpath("config") .. "/lua/barney/core/node-test/reporter.mjs"
