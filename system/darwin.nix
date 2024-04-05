@@ -96,7 +96,7 @@ let
       ];
     };
   };
-  home-config = import ../home;
+  home-config = import ../home/darwin.nix;
 in
 nix-darwin.lib.darwinSystem {
   inherit system;

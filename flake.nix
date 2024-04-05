@@ -36,6 +36,7 @@
     let
       username = "mbarney";
       darwin-system = import ./system/darwin.nix { inherit nix-darwin nixpkgs-unstable home-manager nix-homebrew homebrew-core homebrew-cask homebrew-bundle mbnvim username; };
+      linux-system = import ./system/linux.nix { inherit nixpkgs nixpkgs-unstable username mbnvim home-manager; };
     in
     {
       darwinConfigurations = {
@@ -47,29 +48,11 @@
         };
       };
       homeConfigurations = {
-        x86_64 = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = {
-            inherit username mbnvim;
-            unstable = import nixpkgs-unstable {
-              system = "aarch64-linux";
-            };
-          };
-          modules = [
-            ./linux/home.nix
-          ];
+        x86_64 = linux-system {
+          system = "x86_64-linux";
         };
-        aarch64 = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.aarch64-linux;
-          extraSpecialArgs = {
-            inherit username mbnvim;
-            unstable = import nixpkgs-unstable {
-              system = "aarch64-linux";
-            };
-          };
-          modules = [
-            ./linux/home.nix
-          ];
+        aarch64 = linux-system {
+          system = "aarch64-linux";
         };
       };
     };

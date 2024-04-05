@@ -56,19 +56,19 @@
   ];
   home.file.awsume = {
     enable = true;
-    source = ../home/awsume/config.yaml;
+    source = ./awsume/config.yaml;
     target = ".awsume/config.yaml";
   };
   home.file.tmux-new-session = {
     enable = true;
     executable = true;
-    source = ../home/bin/tmux-new-session.sh;
+    source = ./bin/tmux-new-session.sh;
     target = ".local/bin/tmux-new-session.sh";
   };
   home.file.tmux-sessionizer = {
     enable = true;
     executable = true;
-    source = ../home/bin/tmux-sessionizer.sh;
+    source = ./bin/tmux-sessionizer.sh;
     target = ".local/bin/tmux-sessionizer.sh";
   };
   home.file.neovim = {
@@ -88,7 +88,7 @@
   };
   programs.zsh = {
     enable = true;
-    initExtra = builtins.readFile ../home/zsh/zshrc;
+    initExtra = builtins.readFile ./zsh/zshrc;
     sessionVariables = {
       PATH = "$HOME/.local/bin:$PATH";
       LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.libcxxabi}/lib:$LD_LIBRARY_PATH";
@@ -99,6 +99,6 @@
     };
   };
 
-  programs.git = import ../home/git.nix;
-  programs.tmux = import ../home/tmux { inherit pkgs unstable; };
+  programs.git = import ./git.nix;
+  programs.tmux = import ./tmux { inherit pkgs unstable; };
 }
