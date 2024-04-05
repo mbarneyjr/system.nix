@@ -88,7 +88,7 @@
   };
   programs.zsh = {
     enable = true;
-    initExtra = builtins.readFile ./zsh/zshrc;
+    initExtra = builtins.readFile ../home/zsh/zshrc;
     sessionVariables = {
       PATH = "$HOME/.local/bin:$PATH";
       LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.libcxxabi}/lib:$LD_LIBRARY_PATH";
