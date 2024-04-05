@@ -1,6 +1,11 @@
 { username, pkgs, unstable, mbnvim, ... }:
 
 {
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+    };
+  };
   home.username = username;
   home.homeDirectory = "/home/${username}";
   home.stateVersion = "23.05";
