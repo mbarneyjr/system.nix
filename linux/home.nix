@@ -52,8 +52,6 @@
     pkgs.gopls
     pkgs.cmake
     pkgs.gnumake
-    # other
-    pkgs.swift
   ];
   home.file.neovim = {
     enable = true;
