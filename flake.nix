@@ -47,14 +47,14 @@
         };
       };
       homeConfigurations = {
-        "${username}" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs;
+        aarch64 = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.aarch64-linux;
           extraSpecialArgs = {
-            inherit mbnvim;
+            inherit username mbnvim;
             unstable = nixpkgs-unstable;
           };
           modules = [
-            ./home
+            ./linux/home.nix
           ];
         };
       };
