@@ -3,6 +3,14 @@
 ## Installation/Setup
 
 - [install nix](https://nixos.org/download/#nix-install-linux)
+- enable experimental features
+  ```
+  # /etc/nix/nix.conf
+  experimental-features = nix-command flakes
+  ```
+
+...
+
 - [install home-manager](https://nix-community.github.io/home-manager/index.xhtml#preface)
 
   ```

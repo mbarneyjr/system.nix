@@ -49,7 +49,7 @@
       homeConfigurations = {
         "${username}" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs;
-          extraSpecialArts = {
+          extraSpecialArgs = {
             inherit mbnvim;
             unstable = nixpkgs-unstable;
           };
