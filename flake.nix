@@ -36,6 +36,7 @@
     let
       username = "mbarney";
       darwin-system = import ./system/darwin.nix { inherit nix-darwin nixpkgs-unstable home-manager nix-homebrew homebrew-core homebrew-cask homebrew-bundle mbnvim username; };
+      linux-system = import ./system/linux.nix { inherit nixpkgs nixpkgs-unstable username mbnvim home-manager; };
     in
     {
       darwinConfigurations = {
@@ -44,6 +45,14 @@
         };
         aarch64 = darwin-system {
           system = "aarch64-darwin";
+        };
+      };
+      homeConfigurations = {
+        x86_64 = linux-system {
+          system = "x86_64-linux";
+        };
+        aarch64 = linux-system {
+          system = "aarch64-linux";
         };
       };
     };
