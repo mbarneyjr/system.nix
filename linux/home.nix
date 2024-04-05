@@ -10,6 +10,7 @@
   home.homeDirectory = "/home/${username}";
   home.stateVersion = "23.05";
   home.packages = [
+    pkgs.git
     pkgs.neofetch
     pkgs.neovim
     pkgs.ripgrep
