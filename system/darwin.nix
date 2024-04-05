@@ -1,4 +1,4 @@
-{ nix-darwin, home-manager, nixpkgs-unstable, nix-homebrew, homebrew-core, homebrew-cask, homebrew-bundle, username }:
+{ nix-darwin, home-manager, nixpkgs-unstable, nix-homebrew, homebrew-core, homebrew-cask, homebrew-bundle, mbnvim, username }:
 
 { system }:
 
@@ -107,7 +107,7 @@ nix-darwin.lib.darwinSystem {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.extraSpecialArgs = {
-        inherit unstable;
+        inherit unstable mbnvim;
       };
       home-manager.users.${username}.imports = [
         home-config

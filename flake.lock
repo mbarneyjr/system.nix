@@ -104,6 +104,22 @@
         "type": "github"
       }
     },
+    "mbnvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1712342051,
+        "narHash": "sha256-gt/xy9q9Ixb8mNG5mkvCpu1MYquD3yoM0pAzd/57i88=",
+        "owner": "mbarneyjr",
+        "repo": "mbnvim",
+        "rev": "6801f82ebc63799c7eebf8e6e1f968e82ae7e4b0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mbarneyjr",
+        "repo": "mbnvim",
+        "type": "github"
+      }
+    },
     "nix-darwin": {
       "inputs": {
         "nixpkgs": [
@@ -230,6 +246,7 @@
         "homebrew-bundle": "homebrew-bundle",
         "homebrew-cask": "homebrew-cask",
         "homebrew-core": "homebrew-core",
+        "mbnvim": "mbnvim",
         "nix-darwin": "nix-darwin",
         "nix-homebrew": "nix-homebrew",
         "nixpkgs": "nixpkgs_3",

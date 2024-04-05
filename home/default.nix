@@ -1,4 +1,4 @@
-({ pkgs, unstable, ... }: {
+({ pkgs, unstable, mbnvim, ... }: {
   home.stateVersion = "23.11";
   home.packages = [
     pkgs.neovim
@@ -120,7 +120,7 @@
   home.file.neovim = {
     enable = true;
     recursive = true;
-    source = ./nvim;
+    source = "${mbnvim}";
     target = ".config/nvim";
   };
 
