@@ -46,5 +46,17 @@
           system = "aarch64-darwin";
         };
       };
+      homeConfigurations = {
+        "${username}" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs;
+          extraSpecialArts = {
+            inherit mbnvim;
+            unstable = nixpkgs-unstable;
+          };
+          modules = [
+            ./home
+          ];
+        };
+      };
     };
 }
