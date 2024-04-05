@@ -35,7 +35,6 @@
     pkgs.ggshield
     unstable.yarn-berry
     pkgs.libcxxabi
-    pkgs.darwin.libiconv
     pkgs.libcxxStdenv
     pkgs.terraform
     pkgs.swig
@@ -45,7 +44,6 @@
     pkgs.python311Full
     pkgs.go
     pkgs.cargo
-    pkgs.darwin.libiconv
     pkgs.gopls
     pkgs.cmake
     pkgs.gnumake
