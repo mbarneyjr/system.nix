@@ -51,7 +51,9 @@
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = {
             inherit username mbnvim;
-            unstable = nixpkgs-unstable;
+            unstable = import nixpkgs-unstable {
+              system = "aarch64-linux";
+            };
           };
           modules = [
             ./linux/home.nix
@@ -61,7 +63,9 @@
           pkgs = nixpkgs.legacyPackages.aarch64-linux;
           extraSpecialArgs = {
             inherit username mbnvim;
-            unstable = nixpkgs-unstable;
+            unstable = import nixpkgs-unstable {
+              system = "aarch64-linux";
+            };
           };
           modules = [
             ./linux/home.nix
