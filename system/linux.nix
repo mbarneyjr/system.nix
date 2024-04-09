@@ -3,7 +3,7 @@
 { system }:
 
 home-manager.lib.homeManagerConfiguration {
-  pkgs = nixpkgs.legacyPackages.aarch64-linux;
+  pkgs = nixpkgs.legacyPackages."${system}";
   extraSpecialArgs = {
     inherit username mbnvim;
     unstable = import nixpkgs-unstable {
