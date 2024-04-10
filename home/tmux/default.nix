@@ -7,5 +7,7 @@
   mouse = true;
   keyMode = "vi";
   customPaneNavigationAndResize = true;
-  extraConfig = builtins.readFile ./tmux.conf;
+  extraConfig = ''
+    set-option -g default-shell ${pkgs.zsh}/bin/zsh
+  '' + builtins.readFile ./tmux.conf;
 }
