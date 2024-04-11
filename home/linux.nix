@@ -82,8 +82,8 @@
     enable = true;
     sessionVariables = {
       PATH = "$HOME/.local/bin:$PATH";
-      LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.libcxxabi}/lib:$LD_LIBRARY_PATH";
-      LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.libcxxabi}/lib:$LD_LIBRARY_PATH";
+      # LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.libcxxabi}/lib:$LD_LIBRARY_PATH";
+      # LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.libcxxabi}/lib:$LD_LIBRARY_PATH";
     };
   };
   programs.zsh = {
@@ -91,8 +91,8 @@
     initExtra = builtins.readFile ./zsh/zshrc;
     sessionVariables = {
       PATH = "$HOME/.local/bin:$PATH";
-      LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.libcxxabi}/lib:$LD_LIBRARY_PATH";
-      LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.libcxxabi}/lib:$LD_LIBRARY_PATH";
+      # LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.libcxxabi}/lib:$LD_LIBRARY_PATH";
+      # LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.libcxxabi}/lib:$LD_LIBRARY_PATH";
     };
     oh-my-zsh = {
       enable = true;
