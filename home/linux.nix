@@ -45,6 +45,7 @@
     pkgs.terraform
     pkgs.swig
     pkgs.nixpkgs-fmt
+    pkgs.pinentry-curses
     # nvim dependencies
     pkgs.gnumake
     pkgs.nodejs_20
@@ -76,6 +77,14 @@
     recursive = true;
     source = "${mbnvim}";
     target = ".config/nvim";
+  };
+  home.file.gpg-agent = {
+    enable = true;
+    recursive = true;
+    text = ''
+      pinentry-program ${pkgs.pinentry-curses}/bin/pinentry-curses
+    '';
+    target = ".gnupg/gpg-agent.conf";
   };
   programs.home-manager.enable = true;
   programs.bash = {
