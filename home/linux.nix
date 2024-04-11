@@ -91,6 +91,7 @@
     enable = true;
     sessionVariables = {
       PATH = "$HOME/.local/bin:$PATH";
+      GPG_TTY = "$(tty)";
       # LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.libcxxabi}/lib:$LD_LIBRARY_PATH";
       # LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.libcxxabi}/lib:$LD_LIBRARY_PATH";
     };
@@ -100,6 +101,7 @@
     initExtra = builtins.readFile ./zsh/zshrc;
     sessionVariables = {
       PATH = "$HOME/.local/bin:$PATH";
+      GPG_TTY = "$(tty)";
       # LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.libcxxabi}/lib:$LD_LIBRARY_PATH";
       # LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.libcxxabi}/lib:$LD_LIBRARY_PATH";
     };
