@@ -46,13 +46,13 @@
     pkgs.swig
     pkgs.nixpkgs-fmt
     # nvim dependencies
+    pkgs.gnumake
     pkgs.nodejs_20
     pkgs.python311Full
     pkgs.go
-    pkgs.cargo
     pkgs.gopls
-    pkgs.cmake
-    pkgs.gnumake
+    pkgs.cargo
+    pkgs.fzf
   ];
   home.file.awsume = {
     enable = true;
