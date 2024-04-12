@@ -46,6 +46,8 @@
     pkgs.swig
     pkgs.nixpkgs-fmt
     pkgs.pinentry-curses
+    pkgs.keybase
+    pkgs.kbfs
     # nvim dependencies
     pkgs.gnumake
     pkgs.nodejs_20
