@@ -1,6 +1,7 @@
 ({ pkgs, unstable, mbnvim, ... }: {
   home.stateVersion = "23.11";
   home.packages = [
+    pkgs._1password
     pkgs.neovim
     pkgs.neofetch
     pkgs.ripgrep
@@ -116,6 +117,12 @@
     executable = true;
     source = ./bin/tmux-sessionizer.sh;
     target = ".local/bin/tmux-sessionizer.sh";
+  };
+  home.file.op-aws-credential-process = {
+    enable = true;
+    executable = true;
+    source = ./bin/op-aws-credential-process.sh;
+    target = ".local/bin/op-aws-credential-process.sh";
   };
   home.file.neovim = {
     enable = true;

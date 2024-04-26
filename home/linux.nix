@@ -10,6 +10,7 @@
   home.homeDirectory = "/home/${username}";
   home.stateVersion = "23.05";
   home.packages = [
+    pkgs._1password
     pkgs.git
     pkgs.neofetch
     pkgs.neovim
@@ -73,6 +74,12 @@
     executable = true;
     source = ./bin/tmux-sessionizer.sh;
     target = ".local/bin/tmux-sessionizer.sh";
+  };
+  home.file.op-aws-credential-process = {
+    enable = true;
+    executable = true;
+    source = ./bin/op-aws-credential-process.sh;
+    target = ".local/bin/op-aws-credential-process.sh";
   };
   home.file.neovim = {
     enable = true;
