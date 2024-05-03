@@ -40,7 +40,6 @@
     pkgs.python311Packages.yq
     pkgs.git-remote-codecommit
     pkgs.ggshield
-    unstable.yarn-berry
     pkgs.libcxxabi
     pkgs.libcxxStdenv
     unstable.terraform
