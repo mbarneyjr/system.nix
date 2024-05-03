@@ -43,7 +43,7 @@
     unstable.yarn-berry
     pkgs.libcxxabi
     pkgs.libcxxStdenv
-    pkgs.terraform
+    unstable.terraform
     pkgs.swig
     pkgs.nixpkgs-fmt
     pkgs.pinentry-curses

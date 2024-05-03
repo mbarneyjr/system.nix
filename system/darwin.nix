@@ -3,7 +3,12 @@
 { system }:
 
 let
-  unstable = import nixpkgs-unstable { system = system; };
+  unstable = import nixpkgs-unstable {
+    inherit system;
+    config = {
+      allowUnfree = true;
+    };
+  };
   configuration = { pkgs, ... }: {
     system.stateVersion = 4;
     services.nix-daemon.enable = true;

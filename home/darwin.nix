@@ -34,7 +34,7 @@
     pkgs.libcxxabi
     pkgs.darwin.libiconv
     pkgs.libcxxStdenv
-    pkgs.terraform
+    unstable.terraform
     pkgs.swig
     pkgs.nixpkgs-fmt
     # nvim dependencies

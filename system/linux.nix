@@ -8,6 +8,9 @@ home-manager.lib.homeManagerConfiguration {
     inherit username mbnvim;
     unstable = import nixpkgs-unstable {
       inherit system;
+      config = {
+        allowUnfree = true;
+      };
     };
   };
   modules = [
