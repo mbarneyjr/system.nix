@@ -33,7 +33,6 @@
     pkgs.libcxxabi
     pkgs.darwin.libiconv
     pkgs.libcxxStdenv
-    unstable.terraform
     pkgs.swig
     pkgs.nixpkgs-fmt
     # nvim dependencies
@@ -84,6 +83,12 @@
         TERM = "xterm-256color";
       };
     };
+  };
+  programs.direnv = {
+    enable = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
+    nix-direnv.enable = true;
   };
   programs.ssh = {
     enable = true;

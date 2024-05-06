@@ -9,6 +9,8 @@
     ".cache_ggshield"
     "orb.db"
     ".nvim.lua"
+    ".envrc"
+    ".direnv/"
   ];
   userEmail = "mbarneyme@gmail.com";
   userName = "Michael Barney, Jr";

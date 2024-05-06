@@ -42,7 +42,6 @@
     pkgs.ggshield
     pkgs.libcxxabi
     pkgs.libcxxStdenv
-    unstable.terraform
     pkgs.swig
     pkgs.nixpkgs-fmt
     pkgs.pinentry-curses
@@ -116,6 +115,12 @@
     oh-my-zsh = {
       enable = true;
     };
+  };
+  programs.direnv = {
+    enable = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
+    nix-direnv.enable = true;
   };
 
   programs.git = import ./git.nix;
