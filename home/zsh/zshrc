@@ -26,8 +26,8 @@ _awsume_profile() {
     if [ $AWSUME_PROFILE ]; then
         printf "%%F{blue}($AWSUME_PROFILE"
         if [ $AWSUME_EXPIRATION ]; then
-            EXPIRATION=$(date -j -f "%Y-%m-%dT%H:%M:%S" $AWSUME_EXPIRATION +"%H:%M:%S")
-            EXP_SECONDS=(`date -j -f "%Y-%m-%dT%H:%M:%S" $AWSUME_EXPIRATION +"%s"`)
+            EXPIRATION=$(date -d $AWSUME_EXPIRATION +"%H:%M:%S")
+            EXP_SECONDS=(`date -d $AWSUME_EXPIRATION +"%s"`)
             NOW_SECONDS=(`date +%s`)
             DIFF=$((EXP_SECONDS - NOW_SECONDS))
             if ((DIFF < 60)); then
