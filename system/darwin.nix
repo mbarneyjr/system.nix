@@ -80,7 +80,9 @@ let
       enable = true;
       caskArgs.no_quarantine = true;
       global.brewfile = true;
-      masApps = { };
+      masApps = {
+        "Monosnap - screenshot editor" = 540348655;
+      };
       casks = [
         "1password"
         "google-chrome"
