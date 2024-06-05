@@ -100,6 +100,7 @@ let
         "parallels"
         "bruno"
         "ticktick"
+        "aldente"
       ];
     };
   };
