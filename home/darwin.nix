@@ -13,7 +13,7 @@
     pkgs.wget
     pkgs.gnupg
     pkgs.ack
-    unstable.awscli2
+    pkgs.awscli2
     pkgs.fd
     pkgs.ffmpeg
     pkgs.fswatch
@@ -36,6 +36,7 @@
     pkgs.libcxxStdenv
     pkgs.swig
     pkgs.nixpkgs-fmt
+    pkgs.terraform
     # nvim dependencies
     pkgs.nodejs_20
     pkgs.python311Full
