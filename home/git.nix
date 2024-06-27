@@ -32,6 +32,9 @@
     init = {
       defaultBranch = "main";
     };
+    status = {
+      showUntrackedFiles = "all";
+    };
     merge = {
       conflictstyle = "diff3";
       tool = "nvimdiff";
@@ -47,10 +50,14 @@
     };
     fetch = {
       prune = true;
+      pruneTabs = true;
       recurseSubmodules = true;
     };
     push = {
       autoSetupRemote = true;
+    };
+    rerere = {
+      enabled = true;
     };
     "protocol \"file\"" = {
       allow = "always";
