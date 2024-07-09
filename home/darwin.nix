@@ -37,6 +37,7 @@
     pkgs.swig
     pkgs.nixpkgs-fmt
     pkgs.terraform
+    pkgs.yt-dlp
     # nvim dependencies
     pkgs.nodejs_20
     pkgs.python311Full
