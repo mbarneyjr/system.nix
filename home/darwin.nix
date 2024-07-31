@@ -25,6 +25,7 @@
     pkgs.slides
     pkgs.speedtest-cli
     pkgs.alacritty
+    pkgs.kitty
     pkgs.docker
     pkgs.aws-sam-cli
     pkgs.pipx
