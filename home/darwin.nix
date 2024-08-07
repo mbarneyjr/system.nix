@@ -44,6 +44,7 @@
     pkgs.nodejs_20
     pkgs.python311Full
     pkgs.go
+    pkgs.golangci-lint
     pkgs.cargo
     pkgs.darwin.libiconv
     pkgs.gopls
