@@ -11,6 +11,8 @@
     ".nvim.lua"
     ".envrc"
     ".direnv/"
+    "*.barneylocal"
+    "*.barneylocal.*"
   ];
   userEmail = "mbarneyme@gmail.com";
   userName = "Michael Barney, Jr";
