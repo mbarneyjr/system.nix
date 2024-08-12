@@ -147,6 +147,11 @@
     source = "${mbnvim}";
     target = ".config/nvim";
   };
+  home.file.kitty = {
+    enable = true;
+    source = ./kitty/kitty.conf;
+    target = ".config/kitty/kitty.conf";
+  };
 
   home.file.yabairc = {
     enable = true;

@@ -69,5 +69,6 @@ alias tms="~/.local/bin/tmux-sessionizer.sh"
 alias tmn="~/.local/bin/tmux-new-session.sh"
 alias awsume="source awsume"
 alias awsumel="source awsume --role-duration 43200"
+alias icat="kitten icat"
 
 complete -C 'aws_completer' aws
