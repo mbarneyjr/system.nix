@@ -1,4 +1,4 @@
-{ nix-darwin, home-manager, nixpkgs-unstable, nix-homebrew, homebrew-core, homebrew-cask, homebrew-bundle, mbnvim, username }:
+{ nix-darwin, home-manager, nixpkgs-unstable, nix-homebrew, homebrew-core, homebrew-cask, homebrew-bundle, nikitabobko-tap, mbnvim, username }:
 
 { system }:
 
@@ -46,11 +46,11 @@ let
 
     services.yabai = {
       package = unstable.yabai;
-      enable = true;
+      enable = false;
       enableScriptingAddition = true;
     };
     services.skhd = {
-      enable = true;
+      enable = false;
       package = unstable.skhd;
     };
 
@@ -100,7 +100,7 @@ let
         "parallels"
         "bruno"
         "ticktick"
-        "aldente"
+        "nikitabobko/tap/aerospace"
       ];
     };
   };
@@ -128,6 +128,7 @@ nix-darwin.lib.darwinSystem {
         enableRosetta = system == "aarch64-darwin";
         user = username;
         taps = {
+          "nikitabobko/homebrew-tap" = nikitabobko-tap;
           "homebrew/homebrew-core" = homebrew-core;
           "homebrew/homebrew-bundle" = homebrew-bundle;
           "homebrew/homebrew-cask" = homebrew-cask;

@@ -40,6 +40,7 @@
     pkgs.terraform
     pkgs.yt-dlp
     pkgs.nix-tree
+    pkgs.lighttpd
     # nvim dependencies
     pkgs.nodejs_20
     pkgs.python311Full
@@ -153,6 +154,11 @@
     target = ".config/kitty/kitty.conf";
   };
 
+  home.file.aerospace = {
+    enable = true;
+    target = ".config/aerospace/aerospace.toml";
+    source = ./aerospace/aerospace.toml;
+  };
   home.file.yabairc = {
     enable = true;
     target = ".config/yabai/yabairc";
@@ -174,6 +180,9 @@
   };
   targets.darwin.currentHostDefaults."com.apple.controlcenter".BatteryShowPercentage = true;
   targets.darwin.defaults = {
+    dock = {
+      expose-group-by-app = false;
+    };
     "com.apple.symbolichotkeys" = {
       AppleSymbolicHotKeys = {
         # default values

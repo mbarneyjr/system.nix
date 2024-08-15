@@ -25,6 +25,10 @@
       url = "github:homebrew/homebrew-cask";
       flake = false;
     };
+    nikitabobko-tap = {
+      url = "github:nikitabobko/homebrew-tap";
+      flake = false;
+    };
 
     mbnvim = {
       url = "github:mbarneyjr/mbnvim";
@@ -32,10 +36,10 @@
     };
   };
 
-  outputs = inputs @ { self, nixpkgs, nix-darwin, nixpkgs-unstable, nix-homebrew, homebrew-core, homebrew-cask, homebrew-bundle, home-manager, mbnvim }:
+  outputs = inputs @ { self, nixpkgs, nix-darwin, nixpkgs-unstable, nix-homebrew, homebrew-core, homebrew-cask, homebrew-bundle, nikitabobko-tap, home-manager, mbnvim }:
     let
       username = "mbarney";
-      darwin-system = import ./system/darwin.nix { inherit nix-darwin nixpkgs-unstable home-manager nix-homebrew homebrew-core homebrew-cask homebrew-bundle mbnvim username; };
+      darwin-system = import ./system/darwin.nix { inherit nix-darwin nixpkgs-unstable home-manager nix-homebrew homebrew-core homebrew-cask homebrew-bundle nikitabobko-tap mbnvim username; };
       linux-system = import ./system/linux.nix { inherit nixpkgs nixpkgs-unstable username mbnvim home-manager; };
     in
     {
