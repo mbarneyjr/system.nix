@@ -154,7 +154,7 @@ alt-shift-f = 'fullscreen'
 if.app-id = 'com.tinyspeck.slackmacgap'
 run = "move-node-to-workspace 1"
 [[on-window-detected]]
-if.app-id = 'com.tinyspeck.notes'
+if.app-id = 'com.apple.Notes'
 run = "move-node-to-workspace 1"
 [[on-window-detected]]
 if.app-id = 'com.google.Chrome'
