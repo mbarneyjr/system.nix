@@ -32,7 +32,7 @@
     pkgs.python311Packages.yq
     pkgs.git-remote-codecommit
     pkgs.ggshield
-    pkgs.libcxxabi
+    pkgs.libcxx
     pkgs.darwin.libiconv
     pkgs.libcxxStdenv
     pkgs.swig
@@ -63,8 +63,8 @@
     '';
     sessionVariables = {
       PATH = "$HOME/.local/bin:$PATH";
-      LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.darwin.libiconv}/lib:${pkgs.libcxxabi}/lib:$LD_LIBRARY_PATH";
-      LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.darwin.libiconv}/lib:${pkgs.libcxxabi}/lib:$LD_LIBRARY_PATH";
+      LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.darwin.libiconv}/lib:${pkgs.libcxx}/lib:$LD_LIBRARY_PATH";
+      LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.darwin.libiconv}/lib:${pkgs.libcxx}/lib:$LD_LIBRARY_PATH";
     };
     oh-my-zsh = {
       enable = true;

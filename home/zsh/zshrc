@@ -72,3 +72,5 @@ alias awsumel="source awsume --role-duration 43200"
 alias icat="kitten icat"
 
 complete -C 'aws_completer' aws
+
+source <(fzf --zsh)

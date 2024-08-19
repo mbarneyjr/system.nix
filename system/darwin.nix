@@ -18,8 +18,7 @@ let
       allowUnfree = true;
     };
     users.users.${username}.home = "/Users/${username}";
-    fonts.fontDir.enable = true;
-    fonts.fonts = [
+    fonts.packages = [
       (pkgs.nerdfonts.override { fonts = [ "Meslo" ]; })
     ];
 
