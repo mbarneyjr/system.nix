@@ -122,7 +122,7 @@
     source = ./ssh/ssm.config;
   };
 
-  programs.git = import ./git.nix;
+  programs.git = import ./git.nix { inherit pkgs; };
   programs.tmux = import ./tmux { inherit pkgs unstable; };
   home.file.tmux-new-session = {
     enable = true;

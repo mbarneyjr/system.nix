@@ -1,3 +1,5 @@
+{ pkgs }:
+
 {
   enable = true;
   aliases = {
@@ -26,6 +28,12 @@
     }
   ];
   extraConfig = {
+    "credential \"https://github.com\"" = {
+      helper = "!${pkgs.gh}/bin/gh auth git-credential";
+    };
+    "credential \"https://gist.github.com\"" = {
+      helper = "!${pkgs.gh}/bin/gh auth git-credential";
+    };
     user.signingkey = "0383630977773772";
     commit.gpgsign = true;
     core = {
