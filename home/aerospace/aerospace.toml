@@ -131,6 +131,8 @@ alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 alt-shift-leftSquareBracket = 'move-workspace-to-monitor --wrap-around next'
 alt-shift-rightSquareBracket = 'move-workspace-to-monitor --wrap-around prev'
 
+alt-shift-f = 'fullscreen'
+
 # See: https://nikitabobko.github.io/AeroSpace/commands#mode
 alt-shift-semicolon = 'mode service'
 
@@ -147,8 +149,6 @@ alt-shift-h = ['join-with left', 'mode main']
 alt-shift-j = ['join-with down', 'mode main']
 alt-shift-k = ['join-with up', 'mode main']
 alt-shift-l = ['join-with right', 'mode main']
-
-alt-shift-f = 'fullscreen'
 
 [[on-window-detected]]
 if.app-id = 'com.tinyspeck.slackmacgap'
