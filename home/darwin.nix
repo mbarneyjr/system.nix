@@ -31,6 +31,7 @@
     pkgs.pipx
     pkgs.python311Packages.yq
     pkgs.git-remote-codecommit
+    pkgs.git-lfs
     pkgs.ggshield
     pkgs.libcxx
     pkgs.darwin.libiconv
