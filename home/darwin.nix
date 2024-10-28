@@ -3,7 +3,7 @@
   home.packages = [
     pkgs.coreutils
     pkgs._1password
-    pkgs.neovim
+    unstable.neovim
     pkgs.neofetch
     pkgs.ripgrep
     pkgs.jq
