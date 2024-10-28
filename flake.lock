@@ -107,11 +107,11 @@
     "mbnvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1730128554,
-        "narHash": "sha256-cA7PkrJuY/MrLu05FboIEDEuMgBcyCOYs8Zl5Y8ZvzY=",
+        "lastModified": 1730137936,
+        "narHash": "sha256-szE1E2xpUiYb4jnJ6gmBLaVLuUPAKDZbaKu7k8bAitg=",
         "owner": "mbarneyjr",
         "repo": "mbnvim",
-        "rev": "cc090c38946b2c918b5ef596bcb229553bd62882",
+        "rev": "c09699653ac19fed77e9a07ce35b5ace8306f21e",
         "type": "github"
       },
       "original": {
