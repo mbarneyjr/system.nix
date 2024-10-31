@@ -13,7 +13,7 @@
     pkgs.wget
     pkgs.gnupg
     pkgs.ack
-    pkgs.awscli2
+    unstable.awscli2
     pkgs.fd
     pkgs.ffmpeg
     pkgs.fswatch
@@ -24,8 +24,6 @@
     pkgs.pandoc
     pkgs.slides
     pkgs.speedtest-cli
-    pkgs.alacritty
-    pkgs.kitty
     pkgs.docker
     pkgs.aws-sam-cli
     pkgs.pipx
@@ -69,27 +67,6 @@
     };
     oh-my-zsh = {
       enable = true;
-    };
-  };
-  programs.alacritty = {
-    enable = true;
-    settings = {
-      window = {
-        decorations = "Full";
-        opacity = 0.9;
-        blur = true;
-        dynamic_padding = true;
-      };
-      shell = {
-        program = "/bin/zsh";
-        args = [ "--login" ];
-      };
-      font.normal.family = "MesloLGL Nerd Font Mono";
-      font.size = 14;
-      selection.save_to_clipboard = true;
-      env = {
-        TERM = "xterm-256color";
-      };
     };
   };
   programs.direnv = {

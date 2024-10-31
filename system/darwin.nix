@@ -100,6 +100,7 @@ let
         "bruno"
         "ticktick"
         "nikitabobko/tap/aerospace"
+        "kitty"
       ];
     };
   };
