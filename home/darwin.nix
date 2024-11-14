@@ -1,6 +1,7 @@
 ({ pkgs, unstable, mbnvim, ... }: {
   home.stateVersion = "23.11";
   home.packages = [
+    pkgs.kitty
     pkgs.coreutils
     pkgs._1password
     unstable.neovim
