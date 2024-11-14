@@ -153,8 +153,9 @@
 
   home.file.awsume = {
     enable = true;
-    source = ./awsume/config.yaml;
-    target = ".awsume/config.yaml";
+    recursive = true;
+    source = ./awsume;
+    target = ".awsume";
   };
   targets.darwin.currentHostDefaults."com.apple.controlcenter".BatteryShowPercentage = true;
   targets.darwin.defaults = {
