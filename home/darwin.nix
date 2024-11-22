@@ -41,6 +41,7 @@
     pkgs.yt-dlp
     pkgs.nix-tree
     pkgs.lighttpd
+    pkgs.pulumi
     # nvim dependencies
     pkgs.nodejs_20
     pkgs.python311Full
