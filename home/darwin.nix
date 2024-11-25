@@ -72,7 +72,7 @@
     };
   };
   programs.direnv = {
-    package = unstable.direnv;
+    package = pkgs.direnv;
     enable = true;
     enableBashIntegration = true;
     enableZshIntegration = true;
@@ -103,7 +103,7 @@
   };
 
   programs.git = import ./git.nix { inherit pkgs; };
-  programs.tmux = import ./tmux { inherit pkgs unstable; };
+  programs.tmux = import ./tmux { inherit pkgs; };
   home.file.tmux-new-session = {
     enable = true;
     executable = true;

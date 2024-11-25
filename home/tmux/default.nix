@@ -1,7 +1,7 @@
-{ pkgs, unstable, ... }:
+{ pkgs, ... }:
 
 {
-  package = unstable.tmux;
+  package = pkgs.tmux;
   enable = true;
   baseIndex = 1;
   mouse = true;
