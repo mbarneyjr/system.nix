@@ -8,7 +8,6 @@
   keyMode = "vi";
   customPaneNavigationAndResize = true;
   plugins = [
-    pkgs.tmuxPlugins.vim-tmux-navigator
   ];
   extraConfig = ''
     set-option -gu default-command
