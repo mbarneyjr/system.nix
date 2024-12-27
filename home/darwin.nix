@@ -134,6 +134,11 @@
     source = ./kitty/kitty.conf;
     target = ".config/kitty/kitty.conf";
   };
+  home.file.ghostty = {
+    enable = true;
+    source = ./ghostty/config;
+    target = ".config/ghostty/config";
+  };
 
   home.file.aerospace = {
     enable = true;
