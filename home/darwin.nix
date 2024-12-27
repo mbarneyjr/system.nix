@@ -3,7 +3,7 @@
   home.packages = [
     pkgs.kitty
     pkgs.coreutils
-    pkgs._1password
+    pkgs._1password-cli
     unstable.neovim
     pkgs.neofetch
     pkgs.ripgrep
@@ -41,7 +41,8 @@
     pkgs.yt-dlp
     pkgs.nix-tree
     pkgs.lighttpd
-    pkgs.pulumi
+    pkgs.rainfrog
+    # pkgs.pulumi
     # nvim dependencies
     pkgs.nodejs_20
     pkgs.python311Full
