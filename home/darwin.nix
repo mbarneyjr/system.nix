@@ -55,6 +55,7 @@
     pkgs.gnumake
     # other
     pkgs.swift
+    pkgs.presenterm
   ];
   programs.zsh = {
     enable = true;
