@@ -71,7 +71,7 @@ alias awsume="source awsume"
 alias awsumel="source awsume --role-duration 43200"
 alias icat="kitten icat"
 alias flush-mac-dns="sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
-
+alias git-delete-branches="git for-each-ref --sort=committerdate refs/heads/ --format='%(align:40)%(refname:short)%(end) # %(authorname) %(committerdate:relative)' > /tmp/branches-raw && vi /tmp/branches-raw && sed 's/#.*//g' /tmp/branches-raw > /tmp/branches && xargs git branch -D < /tmp/branches"
 
 complete -C 'aws_completer' aws
 
