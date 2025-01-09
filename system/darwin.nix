@@ -1,4 +1,4 @@
-{ nix-darwin, home-manager, nixpkgs-unstable, nix-homebrew, homebrew-core, homebrew-cask, homebrew-bundle, nikitabobko-tap, mbnvim, username }:
+{ nix-darwin, home-manager, nixpkgs-unstable, nix-homebrew, homebrew-core, homebrew-cask, homebrew-bundle, nikitabobko-tap, mbnvim, glimpse, username }:
 
 { system }:
 
@@ -115,6 +115,7 @@ nix-darwin.lib.darwinSystem {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.extraSpecialArgs = {
+        glimpse = glimpse.packages.${system}.default;
         inherit unstable mbnvim;
       };
       home-manager.users.${username}.imports = [

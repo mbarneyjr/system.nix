@@ -1,4 +1,4 @@
-({ pkgs, unstable, mbnvim, ... }: {
+({ pkgs, unstable, mbnvim, glimpse, ... }: {
   home.stateVersion = "23.11";
   home.packages = [
     pkgs.kitty
@@ -56,6 +56,7 @@
     # other
     pkgs.swift
     pkgs.presenterm
+    glimpse
   ];
   programs.zsh = {
     enable = true;
