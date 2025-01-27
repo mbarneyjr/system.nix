@@ -113,6 +113,12 @@
     source = ./bin/tmux-new-session.sh;
     target = ".local/bin/tmux-new-session.sh";
   };
+  home.file.tmux-list-sessions = {
+    enable = true;
+    executable = true;
+    source = ./bin/tmux-list-sessions.sh;
+    target = ".local/bin/tmux-list-sessions.sh";
+  };
   home.file.tmux-sessionizer = {
     enable = true;
     executable = true;
