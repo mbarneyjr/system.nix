@@ -19,7 +19,8 @@ let
     };
     users.users.${username}.home = "/Users/${username}";
     fonts.packages = [
-      (pkgs.nerdfonts.override { fonts = [ "Meslo" ]; })
+      pkgs.source-code-pro
+      (pkgs.nerdfonts.override { fonts = [ "Meslo" "SourceCodePro" ]; })
     ];
 
     environment.shells = [
