@@ -1,4 +1,5 @@
 font-family = "SourceCodePro Nerd Font Mono"
+font-feature = -calt
 background-opacity = 0.8
 background = "#000000"
 macos-titlebar-style = "transparent"
