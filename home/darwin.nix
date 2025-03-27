@@ -64,6 +64,7 @@
     initExtra = builtins.readFile ./zsh/zshrc;
     initExtraFirst = ''
       fpath=(~/.awsume/zsh-autocomplete/ $fpath)
+      setopt no_nomatch && source ~/.config/zsh/* > /dev/null 2>&1 || true && setopt nomatch
     '';
     sessionVariables = {
       PATH = "$HOME/.local/bin:$PATH";
