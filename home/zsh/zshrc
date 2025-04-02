@@ -1,6 +1,7 @@
 #!/usr/bin/env zsh
 
-unsetopt share_history
+setopt share_history
+setopt inc_append_history
 
 bindkey "^[[1;3C" forward-word
 bindkey "^[[1;3D" backward-word
