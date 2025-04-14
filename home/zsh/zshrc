@@ -23,8 +23,10 @@ _aws_region() {
         printf "%%F{magenta}($AWS_REGION)"
     fi
 }
-_awsume_profile() {
-    if [ $AWSUME_PROFILE ]; then
+_aws_profile() {
+    if [ $AWS_PROFILE ]; then
+        printf "%%F{blue}($AWS_PROFILE%%F{blue})"
+    elif [ $AWSUME_PROFILE ]; then
         printf "%%F{blue}($AWSUME_PROFILE"
         if [ $AWSUME_EXPIRATION ]; then
             EXPIRATION=$(date -d $AWSUME_EXPIRATION +"%H:%M:%S")
@@ -48,7 +50,7 @@ NEWLINE=$'\n'
 PROMPT='%F{yellow}➜'
 PROMPT+=' %F{cyan}%*'
 PROMPT+=' $(_aws_region)'
-PROMPT+='$(_awsume_profile)'
+PROMPT+='$(_aws_profile)'
 PROMPT+='$(_git_branch)'
 PROMPT+=' %F{cyan}%~'
 PROMPT+='${NEWLINE}$ '
