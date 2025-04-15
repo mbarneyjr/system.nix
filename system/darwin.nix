@@ -1,4 +1,4 @@
-{ nix-darwin, home-manager, nixpkgs-unstable, nix-homebrew, homebrew-core, homebrew-cask, homebrew-bundle, nikitabobko-tap, mbnvim, glimpse, username }:
+{ nix-darwin, home-manager, nixpkgs-unstable, nix-homebrew, homebrew-core, homebrew-cask, nikitabobko-tap, mbnvim, glimpse, username }:
 
 { system }:
 
@@ -132,7 +132,6 @@ nix-darwin.lib.darwinSystem {
         taps = {
           "nikitabobko/homebrew-tap" = nikitabobko-tap;
           "homebrew/homebrew-core" = homebrew-core;
-          "homebrew/homebrew-bundle" = homebrew-bundle;
           "homebrew/homebrew-cask" = homebrew-cask;
         };
         mutableTaps = false;

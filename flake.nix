@@ -17,10 +17,6 @@
       url = "github:homebrew/homebrew-core";
       flake = false;
     };
-    homebrew-bundle = {
-      url = "github:homebrew/homebrew-bundle";
-      flake = false;
-    };
     homebrew-cask = {
       url = "github:homebrew/homebrew-cask";
       flake = false;
@@ -38,10 +34,10 @@
     glimpse.url = "github:seatedro/glimpse";
   };
 
-  outputs = inputs @ { self, nixpkgs, nix-darwin, nixpkgs-unstable, nix-homebrew, homebrew-core, homebrew-cask, homebrew-bundle, nikitabobko-tap, home-manager, mbnvim, glimpse }:
+  outputs = inputs @ { self, nixpkgs, nix-darwin, nixpkgs-unstable, nix-homebrew, homebrew-core, homebrew-cask, nikitabobko-tap, home-manager, mbnvim, glimpse }:
     let
       username = "mbarney";
-      darwin-system = import ./system/darwin.nix { inherit nix-darwin nixpkgs-unstable home-manager nix-homebrew homebrew-core homebrew-cask homebrew-bundle nikitabobko-tap mbnvim glimpse username; };
+      darwin-system = import ./system/darwin.nix { inherit nix-darwin nixpkgs-unstable home-manager nix-homebrew homebrew-core homebrew-cask nikitabobko-tap mbnvim glimpse username; };
       linux-system = import ./system/linux.nix { inherit nixpkgs nixpkgs-unstable username mbnvim home-manager; };
     in
     {
