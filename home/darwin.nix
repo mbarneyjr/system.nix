@@ -55,7 +55,7 @@
     pkgs.gnumake
     # other
     pkgs.swift
-    pkgs.presenterm
+    unstable.presenterm
     glimpse
   ];
   programs.zsh = {
