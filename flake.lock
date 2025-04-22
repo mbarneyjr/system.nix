@@ -127,11 +127,11 @@
     "nikitabobko-tap": {
       "flake": false,
       "locked": {
-        "lastModified": 1740311806,
-        "narHash": "sha256-IW8C2HtlLLGTylUou6OcLW2juLe1yNX+Ikj0yQPfa48=",
+        "lastModified": 1744662913,
+        "narHash": "sha256-u+Z3wdxJSsIOsPJiat5ZJqCkkJuGV8/08dmYi1a2zxo=",
         "owner": "nikitabobko",
         "repo": "homebrew-tap",
-        "rev": "f48b006349858421c650551034c2c3beaea2936b",
+        "rev": "2629feb5ffdc523b004181b66f376d76161ce87b",
         "type": "github"
       },
       "original": {
