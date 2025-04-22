@@ -36,7 +36,7 @@
     pkgs.darwin.libiconv
     pkgs.libcxxStdenv
     pkgs.swig
-    pkgs.nixpkgs-fmt
+    pkgs.nixfmt-rfc-style
     pkgs.terraform
     pkgs.yt-dlp
     pkgs.nix-tree
