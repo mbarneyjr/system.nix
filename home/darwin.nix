@@ -108,6 +108,12 @@
 
   programs.git = import ./git.nix { inherit pkgs; };
   programs.tmux = import ./tmux { inherit pkgs; };
+  home.file.git-open = {
+    enable = true;
+    executable = true;
+    source = ./bin/git-open;
+    target = ".local/bin/git-open";
+  };
   home.file.tmux-new-session = {
     enable = true;
     executable = true;

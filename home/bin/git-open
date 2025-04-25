@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+REMOTE=${1:-origin}
+
+REMOTE_URL=$(git remote get-url --push $REMOTE)
+echo Remote URL from git: $REMOTE_URL
+
+case $REMOTE_URL in
+  git@github.com* | git@gitlab.com*)
+    echo Trying github/gitlab Saas
+    URL=https://$(echo $REMOTE_URL | sed 's/git@//g;s/\.git//g;s/:/\//g')
+    echo $URL
+    open $URL
+    ;;
+  https://*)
+    echo Trying https remote
+    URL=$(echo $REMOTE_URL | sed 's/\.git//g')
+    echo $URL
+    open $URL
+    ;;
+  *visualstudio*)
+    echo Trying azure devops remote
+    IFS='/' read -ra URL_PARTS <<< "$REMOTE_URL"
+    echo ${URL_PARTS[1]}
+    URL=https://${URL_PARTS[1]}.visualstudio.com/${URL_PARTS[2]}/_git/${URL_PARTS[3]}
+    echo $URL
+    open $URL
+    ;;
+  *)
+    echo Unknown remote format
+    ;;
+esac
+
