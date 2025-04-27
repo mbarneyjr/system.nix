@@ -1,0 +1,39 @@
+{ pkgs, config, inputs, system, ... }:
+{
+  nix-homebrew = {
+    enable = true;
+    enableRosetta = system == "aarch64-darwin";
+    user = inputs.username;
+    taps = {
+      "homebrew/homebrew-core" = inputs.homebrew-core;
+      "homebrew/homebrew-cask" = inputs.homebrew-cask;
+    };
+    mutableTaps = false;
+    autoMigrate = true;
+  };
+  homebrew = {
+    enable = true;
+    onActivation.cleanup = "zap";
+    caskArgs.no_quarantine = true;
+    global.brewfile = true;
+    taps = builtins.attrNames config.nix-homebrew.taps;
+    casks = [
+      "1password"
+      "google-chrome"
+      "spotify"
+      "keybase"
+      "tailscale"
+      "discord"
+      "slack"
+      "obsidian"
+      "shapr3d"
+      "protonvpn"
+      "docker"
+      "raycast"
+      "parallels"
+      "bruno"
+      "ticktick"
+      "ghostty"
+    ];
+  };
+}

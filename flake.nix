@@ -13,32 +13,32 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
-    homebrew-core = {
-      url = "github:homebrew/homebrew-core";
-      flake = false;
-    };
-    homebrew-cask = {
-      url = "github:homebrew/homebrew-cask";
-      flake = false;
-    };
-    nikitabobko-tap = {
-      url = "github:nikitabobko/homebrew-tap";
-      flake = false;
-    };
+    homebrew-core.url = "github:homebrew/homebrew-core";
+    homebrew-core.flake = false;
 
-    mbnvim = {
-      url = "github:mbarneyjr/mbnvim";
-      flake = false;
-    };
+    homebrew-cask.url = "github:homebrew/homebrew-cask";
+    homebrew-cask.flake = false;
+
+    mbnvim.url = "github:mbarneyjr/mbnvim";
+    mbnvim.flake = false;
 
     glimpse.url = "github:seatedro/glimpse";
   };
 
-  outputs = inputs @ { self, nixpkgs, nix-darwin, nixpkgs-unstable, nix-homebrew, homebrew-core, homebrew-cask, nikitabobko-tap, home-manager, mbnvim, glimpse }:
+  outputs = inputs @ { self, ... }:
     let
       username = "mbarney";
-      darwin-system = import ./system/darwin.nix { inherit nix-darwin nixpkgs-unstable home-manager nix-homebrew homebrew-core homebrew-cask nikitabobko-tap mbnvim glimpse username; };
-      linux-system = import ./system/linux.nix { inherit nixpkgs nixpkgs-unstable username mbnvim home-manager; };
+      darwin-system = import ./system/darwin.nix { 
+        username = username;
+        nix-darwin = inputs.nix-darwin;
+        nixpkgs-unstable = inputs.nixpkgs-unstable;
+        home-manager = inputs.home-manager;
+        nix-homebrew = inputs.nix-homebrew;
+        homebrew-core = inputs.homebrew-core;
+        homebrew-cask = inputs.homebrew-cask;
+        mbnvim = inputs.mbnvim;
+        glimpse = inputs.glimpse;
+      };
     in
     {
       darwinConfigurations = {
@@ -47,14 +47,6 @@
         };
         aarch64 = darwin-system {
           system = "aarch64-darwin";
-        };
-      };
-      homeConfigurations = {
-        x86_64 = linux-system {
-          system = "x86_64-linux";
-        };
-        aarch64 = linux-system {
-          system = "aarch64-linux";
         };
       };
     };
