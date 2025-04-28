@@ -57,6 +57,8 @@
       alt-shift-8 = "move-node-to-workspace 8";
       alt-shift-leftSquareBracket = "move-workspace-to-monitor --wrap-around next";
       alt-shift-rightSquareBracket = "move-workspace-to-monitor --wrap-around prev";
+      alt-shift-semicolon = "mode service";
+      alt-shift-f = "fullscreen";
     };
     mode.service.binding = {
       esc = [
