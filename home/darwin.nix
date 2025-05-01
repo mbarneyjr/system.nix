@@ -1,62 +1,37 @@
-({ pkgs, unstable, mbnvim, glimpse, ... }: {
+{ pkgs, unstable, mbnvim, glimpse, ... }: {
   home.stateVersion = "23.11";
   home.packages = [
-    pkgs.kitty
+    mbnvim
     pkgs.coreutils
-    pkgs._1password-cli
-    unstable.neovim
-    pkgs.neofetch
+    pkgs.eza # ls
+    pkgs.bat # cat
+    pkgs.ack # grep
+    pkgs.fd # find
+    pkgs.fswatch
+    pkgs.fzf
     pkgs.ripgrep
     pkgs.jq
-    pkgs.fzf
-    pkgs.eza
-    pkgs.bat
-    pkgs.wget
+    pkgs.yq
     pkgs.gnupg
-    pkgs.ack
-    unstable.awscli2
-    pkgs.fd
     pkgs.ffmpeg
-    pkgs.fswatch
-    pkgs.gh
     pkgs.graphviz
     pkgs.imagemagick
-    pkgs.lolcat
-    pkgs.pandoc
-    pkgs.slides
-    pkgs.speedtest-cli
+    pkgs.kitty # mainly for kitten icat
+    # unstable.neovim
+    pkgs.gh
+    unstable.awscli2
+    unstable.aws-sam-cli
     pkgs.docker
-    pkgs.aws-sam-cli
     pkgs.pipx
-    pkgs.python311Packages.yq
-    pkgs.git-remote-codecommit
-    pkgs.git-lfs
-    pkgs.ggshield
-    pkgs.libcxx
-    pkgs.darwin.libiconv
-    pkgs.libcxxStdenv
-    pkgs.swig
-    pkgs.nixfmt-rfc-style
-    pkgs.terraform
-    pkgs.yt-dlp
-    pkgs.nix-tree
-    pkgs.lighttpd
-    pkgs.rainfrog
-    # pkgs.pulumi
-    # nvim dependencies
-    pkgs.nodejs_20
-    pkgs.python311Full
-    pkgs.go
-    pkgs.golangci-lint
-    pkgs.cargo
-    pkgs.darwin.libiconv
-    pkgs.gopls
-    pkgs.cmake
-    pkgs.gnumake
-    # other
-    pkgs.swift
     unstable.presenterm
-    glimpse
+    unstable.ggshield
+    pkgs.nixfmt-rfc-style
+    pkgs.nix-tree
+    glimpse # get directory into llm
+    pkgs.rainfrog
+    pkgs.neofetch
+    pkgs.speedtest-cli
+    pkgs.yt-dlp
   ];
   programs.zsh = {
     enable = true;
@@ -68,8 +43,8 @@
     '';
     sessionVariables = {
       PATH = "$HOME/.local/bin:$PATH";
-      LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.darwin.libiconv}/lib:${pkgs.libcxx}/lib:$LD_LIBRARY_PATH";
-      LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.darwin.libiconv}/lib:${pkgs.libcxx}/lib:$LD_LIBRARY_PATH";
+      # LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.darwin.libiconv}/lib:${pkgs.libcxx}/lib:$LD_LIBRARY_PATH";
+      # LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.darwin.libiconv}/lib:${pkgs.libcxx}/lib:$LD_LIBRARY_PATH";
     };
     oh-my-zsh = {
       enable = true;
@@ -138,12 +113,6 @@
     source = ./bin/op-aws-credential-process.sh;
     target = ".local/bin/op-aws-credential-process.sh";
   };
-  home.file.neovim = {
-    enable = true;
-    recursive = true;
-    source = "${mbnvim}";
-    target = ".config/nvim";
-  };
   home.file.kitty = {
     enable = true;
     source = ./kitty/kitty.conf;
@@ -175,4 +144,4 @@
     source = ./awsume;
     target = ".awsume";
   };
-})
+}

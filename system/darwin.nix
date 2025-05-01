@@ -60,7 +60,8 @@ nix-darwin.lib.darwinSystem {
       home-manager.useUserPackages = true;
       home-manager.extraSpecialArgs = {
         glimpse = glimpse.packages.${system}.default;
-        inherit unstable mbnvim;
+        mbnvim = mbnvim.packages.${system}.default;
+        inherit unstable;
       };
       home-manager.users.${username}.imports = [
         home-config

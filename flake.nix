@@ -20,9 +20,10 @@
     homebrew-cask.flake = false;
 
     mbnvim.url = "github:mbarneyjr/mbnvim";
-    mbnvim.flake = false;
+    mbnvim.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
     glimpse.url = "github:seatedro/glimpse";
+    glimpse.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs @ { self, ... }:
