@@ -17,7 +17,6 @@
     pkgs.graphviz
     pkgs.imagemagick
     pkgs.kitty # mainly for kitten icat
-    # unstable.neovim
     pkgs.gh
     unstable.awscli2
     unstable.aws-sam-cli
@@ -43,8 +42,6 @@
     '';
     sessionVariables = {
       PATH = "$HOME/.local/bin:$PATH";
-      # LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.darwin.libiconv}/lib:${pkgs.libcxx}/lib:$LD_LIBRARY_PATH";
-      # LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.darwin.libiconv}/lib:${pkgs.libcxx}/lib:$LD_LIBRARY_PATH";
     };
     oh-my-zsh = {
       enable = true;
