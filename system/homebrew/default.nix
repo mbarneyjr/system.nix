@@ -37,7 +37,6 @@
       "docker"
       "raycast"
       "parallels"
-      "bruno"
       "ticktick"
       "ghostty"
     ];

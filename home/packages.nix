@@ -37,5 +37,6 @@
     pkgs.neofetch
     pkgs.speedtest-cli
     pkgs.yt-dlp
+    pkgs.bruno
   ];
 }
