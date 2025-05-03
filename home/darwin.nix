@@ -1,4 +1,11 @@
-{ pkgs, unstable, mbnvim, glimpse, ... }: {
+{
+  pkgs,
+  unstable,
+  mbnvim,
+  glimpse,
+  ...
+}:
+{
   home.stateVersion = "23.11";
   home.packages = [
     mbnvim
