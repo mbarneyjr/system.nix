@@ -1,19 +1,18 @@
-inputs@{
-  nix-darwin,
-  home-manager,
-  nixpkgs-unstable,
-  nix-homebrew,
-  homebrew-core,
-  homebrew-cask,
-  mbnvim,
-  glimpse,
+{
   username,
+  inputs,
 }:
 
 { system }:
 
 let
-  unstable = import nixpkgs-unstable {
+  pkgs = import inputs.nixpkgs {
+    inherit system;
+    config = {
+      allowUnfree = true;
+    };
+  };
+  unstable = import inputs.nixpkgs-unstable {
     inherit system;
     config = {
       allowUnfree = true;
@@ -34,33 +33,31 @@ let
       # default user setting
       users.users.${username}.home = "/Users/${username}";
     };
-  darwinSettings = import ./darwin-settings;
-  homebrew = import ./homebrew;
-  aerospace = import ./aerospace;
-  fonts = import ./fonts;
   home-config = import ../home/darwin.nix;
 in
-nix-darwin.lib.darwinSystem {
-  system = system;
+inputs.nix-darwin.lib.darwinSystem {
+  inherit system inputs pkgs;
   specialArgs = {
-    inputs = inputs;
-    system = system;
-    unstable = unstable;
+    inherit
+      system
+      username
+      unstable
+      ;
   };
   modules = [
     defaultConfiguration
-    darwinSettings
-    nix-homebrew.darwinModules.nix-homebrew
-    homebrew
-    aerospace
-    fonts
-    home-manager.darwinModules.home-manager
+    ./darwin-settings
+    ./homebrew
+    ./aerospace
+    ./fonts
+    inputs.nix-homebrew.darwinModules.nix-homebrew
+    inputs.home-manager.darwinModules.home-manager
     {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.extraSpecialArgs = {
-        glimpse = glimpse.packages.${system}.default;
-        mbnvim = mbnvim.packages.${system}.default;
+        glimpse = inputs.glimpse.packages.${system}.default;
+        mbnvim = inputs.mbnvim.packages.${system}.default;
         inherit unstable;
       };
       home-manager.users.${username}.imports = [

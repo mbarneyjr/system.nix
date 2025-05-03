@@ -1,9 +1,15 @@
-{ pkgs, config, inputs, system, ... }:
+{
+  config,
+  username,
+  inputs,
+  system,
+  ...
+}:
 {
   nix-homebrew = {
     enable = true;
     enableRosetta = system == "aarch64-darwin";
-    user = inputs.username;
+    user = username;
     taps = {
       "homebrew/homebrew-core" = inputs.homebrew-core;
       "homebrew/homebrew-cask" = inputs.homebrew-cask;

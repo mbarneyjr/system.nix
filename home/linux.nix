@@ -1,4 +1,10 @@
-{ username, pkgs, unstable, mbnvim, ... }:
+{
+  username,
+  pkgs,
+  unstable,
+  mbnvim,
+  ...
+}:
 
 {
   nixpkgs = {

@@ -1,4 +1,10 @@
-{ nixpkgs, nixpkgs-unstable, username, mbnvim, home-manager }:
+{
+  nixpkgs,
+  nixpkgs-unstable,
+  username,
+  mbnvim,
+  home-manager,
+}:
 
 { system }:
 
@@ -17,6 +23,3 @@ home-manager.lib.homeManagerConfiguration {
     ../home/linux.nix
   ];
 }
-
-
-

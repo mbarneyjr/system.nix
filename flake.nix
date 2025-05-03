@@ -26,29 +26,16 @@
     glimpse.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs @ { self, ... }:
+  outputs =
+    inputs@{ self, ... }:
     let
       username = "mbarney";
-      darwin-system = import ./system/darwin.nix { 
-        username = username;
-        nix-darwin = inputs.nix-darwin;
-        nixpkgs-unstable = inputs.nixpkgs-unstable;
-        home-manager = inputs.home-manager;
-        nix-homebrew = inputs.nix-homebrew;
-        homebrew-core = inputs.homebrew-core;
-        homebrew-cask = inputs.homebrew-cask;
-        mbnvim = inputs.mbnvim;
-        glimpse = inputs.glimpse;
-      };
+      darwin-system = import ./system/darwin.nix { inherit username inputs; };
     in
     {
       darwinConfigurations = {
-        x86_64 = darwin-system {
-          system = "x86_64-darwin";
-        };
-        aarch64 = darwin-system {
-          system = "aarch64-darwin";
-        };
+        x86_64 = darwin-system { system = "x86_64-darwin"; };
+        aarch64 = darwin-system { system = "aarch64-darwin"; };
       };
     };
 }
