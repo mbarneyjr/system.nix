@@ -1,31 +1,37 @@
 # system.nix
 
-Nix, nix-darwin, home-manager setup for my development environment.
+Nix flake for macOS and Linux via nix-darwin, NixOS, or Home Manager.
 
-## First-Time Setup
+## Darwin Requirements
 
-You may need to install rosetta with the following command:
+You may need to install rosetta and the xcode command-line tools with the following command:
 
 ```sh
 $ softwareupdate --install-rosetta
+$ xcode-select --install
 ```
 
-Then, install nix, by following the directions at [nixos.org](https://nixos.org/).
+Then, install nix.
+The [`nix-installer`](https://github.com/DeterminateSystems/nix-installer) is the most convenient option.
+It enables `nix-command` and `flake` experimental features by default and provides an uninstaller.
+If using the Determinate Systems nix installer, be sure to choose the nixos.org install option.
 
-Next, insteall nix-darwin by following the directions at [nix-darwin](https://github.com/LnL7/nix-darwin).
+```sh
+$ curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+```
 
 ## Running
 
 For intel-based macs:
 
 ```sh
-$ darwin-rebuild switch --flake ~/system.nix#x86_64
+$ ./build.darwin.x86_64.sh
 ```
 
 For Apple silicon-based macs:
 
 ```sh
-$ darwin-rebuild switch --flake ~/system.nix#aarch64
+$ ./build.darwin.aarch64.sh
 ```
 
 ## Post-Setup
@@ -46,14 +52,5 @@ could not write domain com.apple.universalaccess
 ```
 
 Open System Preferences -> Security & Privacy -> Full Disk Access.
-Find "Terminal" and check the box next to it.
+Find "Terminal" (or whatever terminal emulator you're using) and check the box next to it.
 Then retry the `darwin-rebuild switch` command.
-
-## Linux installation/setup
-
-- [install nix](https://nixos.org/download/#nix-install-linux)
-- enable experimental features
-  ```
-  # /etc/nix/nix.conf
-  experimental-features = nix-command flakes
-  ```
