@@ -33,6 +33,26 @@ let
       # default user setting
       users.users.${username}.home = "/Users/${username}";
     };
+  homeManagerConfig =
+    {
+      pkgs,
+      config,
+      inputs,
+      system,
+      username,
+      unstable,
+      ...
+    }:
+    {
+      home-manager.useGlobalPkgs = true;
+      home-manager.useUserPackages = true;
+      home-manager.extraSpecialArgs = {
+        glimpse = inputs.glimpse.packages.${system}.default;
+        mbnvim = inputs.mbnvim.packages.${system}.default;
+        inherit unstable;
+      };
+      home-manager.users.${username} = import ../home { inherit pkgs username; };
+    };
 in
 inputs.nix-darwin.lib.darwinSystem {
   inherit system inputs pkgs;
@@ -51,6 +71,6 @@ inputs.nix-darwin.lib.darwinSystem {
     ./fonts
     inputs.nix-homebrew.darwinModules.nix-homebrew
     inputs.home-manager.darwinModules.home-manager
-    ../home
+    homeManagerConfig
   ];
 }

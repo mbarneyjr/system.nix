@@ -31,11 +31,16 @@
     let
       username = "mbarney";
       darwin-system = import ./system/darwin.nix { inherit username inputs; };
+      home = import ./system/home-manager.nix { inherit username inputs; };
     in
     {
       darwinConfigurations = {
         x86_64 = darwin-system { system = "x86_64-darwin"; };
         aarch64 = darwin-system { system = "aarch64-darwin"; };
+      };
+      homeConfigurations = {
+        x86_64 = home { system = "x86_64-linux"; };
+        aarch64 = home { system = "aarch64-linux"; };
       };
     };
 }
