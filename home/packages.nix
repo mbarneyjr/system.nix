@@ -38,5 +38,11 @@
     pkgs.speedtest-cli
     pkgs.yt-dlp
     pkgs.bruno
+    unstable.aws-sso-util
+    unstable.awscurl
+    unstable.rain # cfn tools
+    unstable.cfn-transform # local sam transform
+    unstable.former # cfn snippets cli
+    unstable.aws-whoami
   ];
 }

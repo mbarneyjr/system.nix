@@ -17,6 +17,12 @@ let
     config = {
       allowUnfree = true;
     };
+    overlays = [
+      (import ./overlays/awscurl.nix)
+      (import ./overlays/cfn-transform.nix)
+      (import ./overlays/former.nix)
+      (import ./overlays/aws-whoami.nix)
+    ];
   };
   defaultConfiguration =
     { pkgs, config, ... }:
