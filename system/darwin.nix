@@ -11,12 +11,6 @@ let
     config = {
       allowUnfree = true;
     };
-  };
-  unstable = import inputs.nixpkgs-unstable {
-    inherit system;
-    config = {
-      allowUnfree = true;
-    };
     overlays = [
       (import ./overlays/awscurl.nix)
       (import ./overlays/cfn-transform.nix)
@@ -28,9 +22,9 @@ let
     { pkgs, config, ... }:
     {
       # nix-darwin version
-      system.stateVersion = 5;
+      system.stateVersion = 6;
       # nix configuration
-      services.nix-daemon.enable = true;
+      nix.enable = true;
       nix.package = pkgs.nix;
       nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
       nix.settings.experimental-features = "nix-command flakes";
@@ -38,7 +32,11 @@ let
         allowUnfree = true;
       };
       # default user setting
-      users.users.${username}.home = "/Users/${username}";
+      system.primaryUser = username;
+      users.users.${username} = {
+        home = "/Users/${username}";
+        shell = pkgs.zsh;
+      };
     };
   homeManagerConfig =
     {
@@ -47,7 +45,6 @@ let
       inputs,
       system,
       username,
-      unstable,
       ...
     }:
     {
@@ -56,7 +53,6 @@ let
       home-manager.extraSpecialArgs = {
         glimpse = inputs.glimpse.packages.${system}.default;
         mbnvim = inputs.mbnvim.packages.${system}.default;
-        inherit unstable;
       };
       home-manager.users.${username} = import ../home { inherit pkgs username; };
     };
@@ -67,7 +63,6 @@ inputs.nix-darwin.lib.darwinSystem {
     inherit
       system
       username
-      unstable
       ;
   };
   modules = [

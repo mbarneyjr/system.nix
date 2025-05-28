@@ -19,6 +19,7 @@
   };
   homebrew = {
     enable = true;
+    user = username;
     onActivation.cleanup = "zap";
     caskArgs.no_quarantine = true;
     global.brewfile = true;

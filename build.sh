@@ -11,9 +11,9 @@ fi
 
 if [[ "$(uname)" == "Darwin" ]]; then
   echo "Building system.nix for macOS on ${ARCH}..."
-  nix run \
+  sudo -H nix run \
     --extra-experimental-features 'nix-command flakes' \
-    nix-darwin/nix-darwin-24.11#darwin-rebuild -- \
+    nix-darwin/master#darwin-rebuild -- \
     switch --flake ~/system.nix#${ARCH}
 fi
 

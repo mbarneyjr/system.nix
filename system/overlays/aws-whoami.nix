@@ -15,7 +15,7 @@ final: prev: {
     ];
 
     # Allow using boto3 directly instead of checking for imports
-    pythonImportsCheck = [];
+    pythonImportsCheck = [ ];
 
     meta = with prev.lib; {
       description = "CLI tool to print out the current AWS identity";

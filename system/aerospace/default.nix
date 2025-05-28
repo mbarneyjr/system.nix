@@ -1,12 +1,11 @@
 {
   pkgs,
   config,
-  unstable,
   ...
 }:
 {
   services.aerospace.enable = true;
-  services.aerospace.package = unstable.aerospace;
+  services.aerospace.package = pkgs.aerospace;
   services.aerospace.settings = {
     after-login-command = [ ];
     after-startup-command = [ ];

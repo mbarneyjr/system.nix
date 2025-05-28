@@ -6,12 +6,12 @@ let
     config = {
       allowUnfree = true;
     };
-  };
-  unstable = import inputs.nixpkgs-unstable {
-    inherit system;
-    config = {
-      allowUnfree = true;
-    };
+    overlays = [
+      (import ./overlays/awscurl.nix)
+      (import ./overlays/cfn-transform.nix)
+      (import ./overlays/former.nix)
+      (import ./overlays/aws-whoami.nix)
+    ];
   };
 in
 inputs.home-manager.lib.homeManagerConfiguration {
@@ -19,7 +19,7 @@ inputs.home-manager.lib.homeManagerConfiguration {
   extraSpecialArgs = {
     glimpse = inputs.glimpse.packages.${system}.default;
     mbnvim = inputs.mbnvim.packages.${system}.default;
-    inherit inputs username unstable;
+    inherit inputs username;
   };
   modules = [
     ../home
