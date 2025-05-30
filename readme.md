@@ -22,16 +22,8 @@ $ curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/ni
 
 ## Running
 
-For intel-based macs:
-
 ```sh
-$ ./build.darwin.x86_64.sh
-```
-
-For Apple silicon-based macs:
-
-```sh
-$ ./build.darwin.aarch64.sh
+$ ./build.sh
 ```
 
 ## Post-Setup
