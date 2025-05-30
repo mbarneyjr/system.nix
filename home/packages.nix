@@ -38,6 +38,7 @@
     pkgs.speedtest-cli
     pkgs.yt-dlp
     pkgs.bruno
+    pkgs.claude-code
     unstable.aws-sso-util
     unstable.awscurl
     unstable.rain # cfn tools

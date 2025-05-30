@@ -9,6 +9,7 @@
     '';
     sessionVariables = {
       PATH = "$HOME/.local/bin:$PATH";
+      CLAUDE_CODE_USE_BEDROCK = "1";
     };
     oh-my-zsh = {
       enable = true;
