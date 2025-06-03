@@ -42,6 +42,7 @@
     pkgs.cfn-transform # local sam transform
     pkgs.former # cfn snippets cli
     pkgs.aws-whoami
+    pkgs.mergiraf
     mbnvim
     glimpse # get directory into llm
   ];

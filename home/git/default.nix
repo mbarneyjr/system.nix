@@ -37,6 +37,9 @@
         };
       }
     ];
+    attributes = [
+      "* merge=mergiraf"
+    ];
     extraConfig = {
       "credential \"https://github.com\"" = {
         helper = "!${pkgs.gh}/bin/gh auth git-credential";
@@ -58,6 +61,10 @@
       merge = {
         conflictstyle = "diff3";
         tool = "nvimdiff";
+      };
+      merge.mergiraf = {
+        name = "mergiraf";
+        driver = "mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L";
       };
       diff = {
         tool = "nvimdiff";
