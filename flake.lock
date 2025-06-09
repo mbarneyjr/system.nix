@@ -155,11 +155,11 @@
         "twoslash-queries-src": "twoslash-queries-src"
       },
       "locked": {
-        "lastModified": 1749047740,
-        "narHash": "sha256-Bxbk4uNOFRIzUcl87BlrtySRclAEU2a8R4U2pvqqNDw=",
+        "lastModified": 1749429202,
+        "narHash": "sha256-CRW5oMejjo/tcZ/gSaEfQAoue2QRthJ8M+2ojprLKXA=",
         "owner": "mbarneyjr",
         "repo": "mbnvim",
-        "rev": "1362a4bc31edf09ba4d90a4177caab52f381248e",
+        "rev": "acd0284f77370056c683450fa74c4e6ef402e57c",
         "type": "github"
       },
       "original": {
