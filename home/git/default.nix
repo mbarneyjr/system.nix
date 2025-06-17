@@ -9,6 +9,12 @@
     source = ./git-open;
     target = ".local/bin/git-open";
   };
+  home.file.git-claude-commit = {
+    enable = true;
+    executable = true;
+    source = ./git-claude-commit;
+    target = ".local/bin/git-claude-commit";
+  };
   programs.git = {
     enable = true;
     package = pkgs.gitFull;
