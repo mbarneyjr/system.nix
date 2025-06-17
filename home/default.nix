@@ -16,5 +16,6 @@
     ./tmux
     ./ghostty
     ./awsume
+    ./claude
   ];
 }

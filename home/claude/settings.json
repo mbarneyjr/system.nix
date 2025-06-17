@@ -1,0 +1,7 @@
+{
+  "includeCoAuthoredBy": false,
+  "env": {
+    "AWS_PROFILE": "claude",
+    "CLAUDE_CODE_USE_BEDROCK": "1"
+  }
+}
