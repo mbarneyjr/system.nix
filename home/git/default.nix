@@ -43,6 +43,9 @@
         };
       }
     ];
+    difftastic = {
+      enable = true;
+    };
     attributes = [
       "* merge=mergiraf"
     ];
