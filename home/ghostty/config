@@ -4,3 +4,4 @@ font-size = 18
 background-opacity = 0.9
 macos-titlebar-style = "transparent"
 confirm-close-surface = false
+theme = dark:tokyonight,light:tokyonight-day

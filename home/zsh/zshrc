@@ -63,7 +63,7 @@ export EDITOR=nvim
 
 alias back="cd -"
 alias ls="eza"
-alias cat="bat"
+alias cat="bat --theme auto:system"
 alias echo-path="echo $PATH | tr : '\n'"
 alias awsid="aws sts get-caller-identity --query Account --output text"
 alias ytdl="yt-dlp -f \"bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best\""
