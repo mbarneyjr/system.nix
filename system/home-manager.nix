@@ -11,6 +11,7 @@ let
       (import ./overlays/cfn-transform.nix)
       (import ./overlays/former.nix)
       (import ./overlays/aws-whoami.nix)
+      (import ./overlays/amazon-q.nix)
     ];
   };
 in

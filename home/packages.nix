@@ -36,6 +36,7 @@
     pkgs.yt-dlp
     pkgs.bruno
     pkgs.claude-code
+    pkgs.amazon-q-cli
     pkgs.aws-sso-util
     pkgs.awscurl
     pkgs.rain # cfn tools
