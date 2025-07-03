@@ -28,7 +28,21 @@ let
       nix.enable = true;
       nix.package = pkgs.nix;
       nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
-      nix.settings.experimental-features = "nix-command flakes";
+      nix.settings = {
+        experimental-features = "nix-command flakes";
+        substituters = [
+          "https://nix.barney.dev/"
+          "https://cache.nixos.org/"
+        ];
+        trusted-public-keys = [
+          "nix.barney.dev-1:Wz6Nj2M/3PogEKI4/SRIdUm83QlC6zZN/0CCTS9oJ2o="
+          "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+        ];
+        trusted-users = [
+          "root"
+          "${username}"
+        ];
+      };
       nixpkgs.config = {
         allowUnfree = true;
       };
