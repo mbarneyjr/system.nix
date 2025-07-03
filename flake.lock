@@ -155,11 +155,11 @@
         "twoslash-queries-src": "twoslash-queries-src"
       },
       "locked": {
-        "lastModified": 1750966150,
-        "narHash": "sha256-b3jxWrL4O2K9TVgvysscKC6cXrKShz7Ka9dsbGZDYSg=",
+        "lastModified": 1751568871,
+        "narHash": "sha256-sqBC6Wh8jyx6qfq1Zk+4mhIaNAvlglo6O0ZpD5K/T7c=",
         "owner": "mbarneyjr",
         "repo": "mbnvim",
-        "rev": "f6ddf44495e4bafc233233bd3c25626d7b1b1685",
+        "rev": "7902ae889e7b28f25d737947e11e9f9adda07928",
         "type": "github"
       },
       "original": {
@@ -240,11 +240,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1748281391,
-        "narHash": "sha256-fTll03tzUcgBrrMvD6O06TittBG2Ae6m3iW7aunxwPY=",
+        "lastModified": 1751498133,
+        "narHash": "sha256-QWJ+NQbMU+NcU2xiyo7SNox1fAuwksGlQhpzBl76g1I=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "bdc995d3e97cec29eacc8fbe87e66edfea26b861",
+        "rev": "d55716bb59b91ae9d1ced4b1ccdea7a442ecbfdb",
         "type": "github"
       },
       "original": {
