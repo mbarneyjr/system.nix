@@ -36,6 +36,7 @@
     pkgs.yt-dlp
     pkgs.bruno
     pkgs.claude-code
+    pkgs.opencode
     pkgs.amazon-q-cli
     pkgs.aws-sso-util
     pkgs.awscurl

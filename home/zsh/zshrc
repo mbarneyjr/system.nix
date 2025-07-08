@@ -83,6 +83,7 @@ alias git-delete-branches="git-branches > /tmp/branches-raw && vi /tmp/branches-
 alias q="amazon-q";
 alias awsumer="awsume \${AWSUME_COMMAND}";
 alias awsumel="awsume --role-duration 43200";
+alias opencode="AWS_PROFILE=claude opencode";
 
 complete -C 'aws_completer' aws
 
