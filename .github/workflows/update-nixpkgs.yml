@@ -1,0 +1,74 @@
+name: update-nixpkgs
+
+on:
+  schedule:
+    # Runs every Monday at 6:00 AM EST (11:00 AM UTC)
+    - cron: '0 11 * * 1'
+  workflow_dispatch: {}
+
+jobs:
+  update-nixpkgs:
+    runs-on: macos-latest
+    permissions:
+      id-token: write
+      contents: write
+      pull-requests: write
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: assume role
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: us-east-2
+          role-to-assume: arn:aws:iam::792172458894:role/github-actions
+          role-session-name: GitHubActions-${{ github.run_id }}
+      - name: get signing key
+        run: |
+          secret=$(aws secretsmanager get-secret-value \
+            --secret-id /nix/cache/signing-key \
+            --query SecretString \
+            --output text)
+          private_key=$(echo "$secret" | jq -r '.privateKey')
+          public_key=$(echo "$secret" | jq -r '.publicKey')
+          echo "::add-mask::${private_key}"
+          echo "$private_key" > private-key
+          chmod 600 private-key
+          echo "PUBLIC_KEY=${public_key}" >> "$GITHUB_ENV"
+      - name: install nix
+        uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+          extra_nix_config: |
+            trusted-public-keys = ${{ env.PUBLIC_KEY }} cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
+            substituters = https://nix.barney.dev/ https://cache.nixos.org/
+      - name: update nixpkgs flake input
+        run: |
+          nix flake update nixpkgs
+          echo "NIXPKGS_REV=$(nix flake metadata --json | jq -r '.locks.nodes.nixpkgs.locked.rev')" >> "$GITHUB_ENV"
+      - name: build system.nix darwin configuration
+        run: |
+          nix build --quiet .#darwinConfigurations.aarch64.system
+      - name: assume role
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: us-east-2
+          role-to-assume: arn:aws:iam::792172458894:role/github-actions
+          role-session-name: GitHubActions-${{ github.run_id }}
+      - name: sign and upload to cache
+        run: |
+          nix store sign --verbose --key-file ./private-key --recursive ./result
+          nix copy --quiet --max-jobs auto --to "s3://nix.barney.dev?region=us-east-2" ./result
+      - name: create pull request
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          BRANCH_NAME="chore/update-nixpkgs-$(date +%Y%m%d)"
+          git checkout -b "$BRANCH_NAME"
+          git add flake.lock
+          git commit -m "Update nixpkgs to ${NIXPKGS_REV:0:7}"
+          git push origin "$BRANCH_NAME"
+          gh pr create \
+            --title "Update nixpkgs to ${NIXPKGS_REV:0:7}" \
+            --body "Update nixpkgs to ${NIXPKGS_REV}"
