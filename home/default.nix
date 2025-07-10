@@ -17,5 +17,6 @@
     ./ghostty
     ./awsume
     ./claude
+    ./opencode
   ];
 }
