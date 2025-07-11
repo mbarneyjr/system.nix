@@ -1,4 +1,9 @@
-{ pkgs, config, ... }:
+{
+  pkgs,
+  config,
+  username,
+  ...
+}:
 {
   # enable touch id for sudo
   environment.etc."pam.d/sudo_local".text = ''
@@ -78,7 +83,8 @@
       AppleShowAllFiles = true;
       _FXShowPosixPathInTitle = true;
       _FXSortFoldersFirst = true;
-      NewWindowTarget = "Home";
+      NewWindowTarget = "Other";
+      NewWindowTargetPath = "file:///Users/${username}/Downloads";
     };
     screensaver = {
       askForPassword = true;
