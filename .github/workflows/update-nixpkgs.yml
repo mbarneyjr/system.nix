@@ -41,13 +41,72 @@ jobs:
           extra_nix_config: |
             trusted-public-keys = ${{ env.PUBLIC_KEY }} cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
             substituters = https://nix.barney.dev/ https://cache.nixos.org/
+      - name: capture packages before update
+        run: |
+          nix build --quiet .#darwinConfigurations.aarch64.system --print-out-paths | xargs nix path-info -r | sed 's|/nix/store/[^-]*-||' | sort > packages-before.txt
       - name: update nixpkgs flake input
         run: |
           nix flake update nixpkgs
           echo "NIXPKGS_REV=$(nix flake metadata --json | jq -r '.locks.nodes.nixpkgs.locked.rev')" >> "$GITHUB_ENV"
-      - name: build system.nix darwin configuration
+      - name: capture packages after update
         run: |
-          nix build --quiet .#darwinConfigurations.aarch64.system
+          nix build --quiet .#darwinConfigurations.aarch64.system --print-out-paths | xargs nix path-info -r | sed 's|/nix/store/[^-]*-||' | sort > packages-after.txt
+      - name: generate package diff
+        run: |
+          {
+            echo "## Package Changes"
+            echo ""
+            echo "| Package | Before Version | After Version |"
+            echo "|---------|----------------|---------------|"
+          } > package-changes.md
+
+          # Create temporary files for processing
+          temp_before=$(mktemp)
+          temp_after=$(mktemp)
+
+          # Extract package names and versions from both files
+          if [[ -f "packages-before.txt" ]]; then
+              sed 's/^[0-9]*| //' packages-before.txt | grep -v '^$' > "$temp_before"
+          else
+              touch "$temp_before"
+          fi
+
+          if [[ -f "packages-after.txt" ]]; then
+              sed 's/^[0-9]*| //' packages-after.txt | grep -v '^$' > "$temp_after"
+          else
+              touch "$temp_after"
+          fi
+
+          # Get all unique package names (base names without versions)
+          all_packages=$(cat "$temp_before" "$temp_after" | sed 's/-[0-9].*//' | sort -u)
+
+          for package in $all_packages; do
+              # Find matching lines in both files
+              before_line=$(grep "^$package-" "$temp_before" | head -1)
+              after_line=$(grep "^$package-" "$temp_after" | head -1)
+
+              if [[ -n "$before_line" && -n "$after_line" ]]; then
+                  # Package exists in both - check if version changed
+                  if [[ "$before_line" != "$after_line" ]]; then
+                      before_version=${before_line#"$package-"}
+                      after_version=${after_line#"$package-"}
+                      echo "| $package | $before_version | $after_version |" >> package-changes.md
+                  fi
+              elif [[ -n "$before_line" && -z "$after_line" ]]; then
+                  # Package was removed
+                  before_version=${before_line#"${package}-"}
+                  echo "| $package | $before_version | X |" >> package-changes.md
+              elif [[ -z "$before_line" && -n "$after_line" ]]; then
+                  # Package was added
+                  after_version=${after_line#"${package}-"}
+                  echo "| $package |  | $after_version |" >> package-changes.md
+              fi
+          done
+
+          # Clean up temporary files
+          rm "$temp_before" "$temp_after"
+
+          echo "Package diff generated in package-changes.md"
       - name: assume role
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -71,4 +130,4 @@ jobs:
           git push origin "$BRANCH_NAME"
           gh pr create \
             --title "Update nixpkgs to ${NIXPKGS_REV:0:7}" \
-            --body "Update nixpkgs to ${NIXPKGS_REV}"
+            --body "Update nixpkgs to ${NIXPKGS_REV}\n\n$(cat package-changes.md)"
