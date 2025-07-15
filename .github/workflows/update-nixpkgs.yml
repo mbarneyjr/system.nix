@@ -25,9 +25,49 @@ jobs:
         run: |
           nix flake update nixpkgs
           echo "NIXPKGS_REV=$(nix flake metadata --json | jq -r '.locks.nodes.nixpkgs.locked.rev')" >> "$GITHUB_ENV"
+      - name: get gh token
+        env:
+          GITHUB_APP_APPID: ${{ secrets.GH_APP_APPID }}
+          GITHUB_APP_INSTALLATIONID: ${{ secrets.GH_APP_INSTALLATIONID }}
+          GITHUB_APP_PRIVATEKEY: ${{ secrets.GH_APP_PRIVATEKEY }}
+        run: |
+          b64enc() { openssl base64 | tr -d '=' | tr '/+' '_-' | tr -d '\n'; }
+
+          # Generate JWT that will be exchanged for access token
+          now=$(date +%s)
+          iat=$((now - 60))
+          exp=$((now + 600))
+          header_json='{
+              "typ":"JWT",
+              "alg":"RS256"
+          }'
+          payload_json='{
+            "iat":'${iat}',
+            "exp":'${exp}',
+            "iss":"'${GITHUB_APP_APPID}'"
+          }'
+          payload=$( echo -n "${payload_json}" | b64enc )
+          header=$( echo -n "${header_json}" | b64enc )
+          header_payload="${header}"."${payload}"
+          signature=$(
+              openssl dgst -sha256 -sign <(echo -n "${GITHUB_APP_PRIVATEKEY}") \
+              <(echo -n "${header_payload}") | b64enc
+          )
+          JWT="${header_payload}"."${signature}"
+
+          # Exchange JWT for access token
+          response=$(curl --request POST \
+            --url "https://api.github.com/app/installations/${GITHUB_APP_INSTALLATIONID}/access_tokens" \
+            --header "Accept: application/vnd.github+json" \
+            --header "Authorization: Bearer ${JWT}" \
+            --header "X-GitHub-Api-Version: 2022-11-28")
+          TOKEN=$(echo "${response}" | jq -r .token)
+          echo "exchanged GitHub App credentials for access token"
+          echo "::add-mask::${TOKEN}"
+          echo "GH_TOKEN=${TOKEN}" >> "$GITHUB_ENV"
       - name: create pull request
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ env.GH_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -39,9 +79,3 @@ jobs:
           gh pr create \
             --title "Update nixpkgs to ${NIXPKGS_REV:0:7}" \
             --body "Update nixpkgs to ${NIXPKGS_REV}"
-          echo "BRANCH_NAME=$BRANCH_NAME" >> "$GITHUB_ENV"
-      - name: trigger build-pr workflow
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh workflow run build-pr.yml --ref "$BRANCH_NAME"
