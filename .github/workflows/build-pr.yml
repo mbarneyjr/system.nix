@@ -1,6 +1,7 @@
 name: build-pr
 
 on:
+  workflow_dispatch: {}
   pull_request:
     types:
       - opened
@@ -46,11 +47,11 @@ jobs:
           extra_nix_config: |
             trusted-public-keys = ${{ env.PUBLIC_KEY }} cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
             substituters = https://nix.barney.dev/ https://cache.nixos.org/
-      - name: capture packages before (merge target)
+      - name: capture packages before (main)
         run: |
-          git checkout ${{ github.base_ref }}
+          git checkout main
           nix build --quiet .#darwinConfigurations.aarch64.system --print-out-paths | xargs nix path-info -r | sed 's|/nix/store/[^-]*-||' | sort > packages-before.txt
-      - name: capture packages after (prospective merge)
+      - name: capture packages after target
         run: |
           git checkout ${{ github.sha }}
           nix build --quiet .#darwinConfigurations.aarch64.system --print-out-paths | xargs nix path-info -r | sed 's|/nix/store/[^-]*-||' | sort > packages-after.txt
