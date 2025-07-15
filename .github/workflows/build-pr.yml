@@ -54,6 +54,11 @@ jobs:
         run: |
           git checkout ${{ github.sha }}
           nix build --quiet .#darwinConfigurations.aarch64.system --print-out-paths | xargs nix path-info -r | sed 's|/nix/store/[^-]*-||' | sort > packages-after.txt
+      - name: sign and upload to cache
+        run: |
+          nix store sign --verbose --key-file ./private-key --recursive ./result
+          nix copy --quiet --max-jobs auto --to "s3://nix.barney.dev?region=us-east-2" ./result
+          echo "successfully uploaded to cache at s3://nix.barney.dev"
       - name: generate package diff
         run: |
           {
