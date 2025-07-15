@@ -2,8 +2,12 @@ name: build-pr
 
 on:
   pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
     branches:
-      - main
+      - '*'
 
 jobs:
   build-pr:
