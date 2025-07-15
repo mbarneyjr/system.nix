@@ -48,10 +48,12 @@ jobs:
             substituters = https://nix.barney.dev/ https://cache.nixos.org/
       - name: capture packages before (main)
         run: |
+          set -euo pipefail
           git checkout main
           nix build --quiet .#darwinConfigurations.aarch64.system --print-out-paths | xargs nix path-info -r | sed 's|/nix/store/[^-]*-||' | sort > packages-before.txt
       - name: capture packages after target
         run: |
+          set -euo pipefail
           git checkout ${{ github.sha }}
           nix build --quiet .#darwinConfigurations.aarch64.system --print-out-paths | xargs nix path-info -r | sed 's|/nix/store/[^-]*-||' | sort > packages-after.txt
       - name: sign and upload to cache
@@ -61,6 +63,7 @@ jobs:
           echo "successfully uploaded to cache at s3://nix.barney.dev"
       - name: generate package diff
         run: |
+          set -euo pipefail
           {
             echo "## Package Changes"
             echo ""
