@@ -63,7 +63,7 @@ jobs:
           echo "successfully uploaded to cache at s3://nix.barney.dev"
       - name: generate package diff
         run: |
-          set -euo pipefail
+          set -x
           {
             echo "## Package Changes"
             echo ""
