@@ -1,5 +1,12 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "theme": "tokyonight",
-  "autoshare": false
+  "autoshare": false,
+  "keybinds": {
+    "messages_half_page_up": "ctrl+k",
+    "messages_half_page_down": "ctrl+j",
+    "messages_next": "ctrl+l",
+    "messages_previous": "ctrl+h",
+    "input_newline": "shift+enter"
+  }
 }
