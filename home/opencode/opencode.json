@@ -7,6 +7,6 @@
     "messages_half_page_down": "ctrl+j",
     "messages_next": "ctrl+l",
     "messages_previous": "ctrl+h",
-    "input_newline": "shift+enter"
+    "input_newline": "alt+enter"
   }
 }
