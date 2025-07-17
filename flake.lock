@@ -20,11 +20,11 @@
     "cfn-lsp-extra": {
       "flake": false,
       "locked": {
-        "lastModified": 1745660970,
-        "narHash": "sha256-XBdYn3XqE30lE7VZ/Hw1sSRKuSLdjoGcVWXYDFvFsLQ=",
+        "lastModified": 1752401482,
+        "narHash": "sha256-zCC2aP3Z4yrM+TrnNXo+3OACezgSGoQqEPS4QU8qVX8=",
         "owner": "LaurenceWarne",
         "repo": "cfn-lsp-extra",
-        "rev": "36b1eccc9ebe338c9e0de982c9e7e4437a1eca0c",
+        "rev": "539365e3a7e5cfe13b6889460872f38c736d3bfb",
         "type": "github"
       },
       "original": {
@@ -155,11 +155,11 @@
         "twoslash-queries-src": "twoslash-queries-src"
       },
       "locked": {
-        "lastModified": 1752772533,
-        "narHash": "sha256-JkPllou8W8ZrkuGY0ZeigHeehNpWHc1L7NF1Ocv6dyQ=",
+        "lastModified": 1752773630,
+        "narHash": "sha256-KNeV8khKBa9bAcr1jhVDutyu14rbe5o8fv3fk9+ApPg=",
         "owner": "mbarneyjr",
         "repo": "mbnvim",
-        "rev": "7f6238d3dede664da464c92a842a94f3df913d20",
+        "rev": "33c65b05043aadd0e9d2f91cbd7c7ca5384eaaea",
         "type": "github"
       },
       "original": {
