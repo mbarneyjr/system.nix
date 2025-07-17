@@ -27,14 +27,13 @@
     pkgs.docker
     pkgs.pipx
     pkgs.presenterm
-    # pkgs.ggshield
     pkgs.nixfmt-rfc-style
     pkgs.nix-tree
     pkgs.rainfrog
     pkgs.neofetch
     pkgs.speedtest-cli
     pkgs.yt-dlp
-    # pkgs.bruno
+    pkgs.bruno
     pkgs.claude-code
     pkgs.opencode
     pkgs.amazon-q-cli
