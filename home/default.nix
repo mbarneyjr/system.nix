@@ -16,6 +16,7 @@
     ./tmux
     ./ghostty
     ./awsume
+    ./awsuse
     ./claude
     ./opencode
   ];

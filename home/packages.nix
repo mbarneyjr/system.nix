@@ -34,6 +34,7 @@
     pkgs.neofetch
     pkgs.speedtest-cli
     pkgs.yt-dlp
+    pkgs.shellcheck
     # pkgs.bruno
     pkgs.claude-code
     pkgs.opencode
