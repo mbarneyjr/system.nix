@@ -74,7 +74,7 @@ awsuse-mfa () {
   )
 }
 
-awsuse-console () {
+awsconsole () {
 (
   set -e
   set -o pipefail
@@ -146,10 +146,10 @@ elif [[ -n "$BASH_VERSION" ]]; then
   complete -F _awsuse_completion awsuse
 fi
 
-# Shell completion for awsuse-console
+# Shell completion for awsconsole
 if [[ -n "$ZSH_VERSION" ]]; then
   # zsh completion
-  _awsuse_console_completion() {
+  _awsconsole_completion() {
     # shellcheck disable=SC2034
     local context state line
     _arguments \
@@ -171,10 +171,10 @@ if [[ -n "$ZSH_VERSION" ]]; then
         ;;
     esac
   }
-  compdef _awsuse_console_completion awsuse-console
+  compdef _awsconsole_completion awsconsole
 elif [[ -n "$BASH_VERSION" ]]; then
   # bash completion
-  _awsuse_console_completion() {
+  _awsconsole_completion() {
     local cur="${COMP_WORDS[COMP_CWORD]}"
 
     case $COMP_CWORD in
@@ -186,7 +186,8 @@ elif [[ -n "$BASH_VERSION" ]]; then
         ;;
     esac
   }
-  complete -F _awsuse_console_completion awsuse-console
+  complete -F _awsconsole_completion awsconsole
+fi
 
 # Shell completion for awsuse-mfa
 if [[ -n "$ZSH_VERSION" ]]; then
