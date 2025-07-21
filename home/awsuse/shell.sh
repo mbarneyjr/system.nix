@@ -187,4 +187,22 @@ elif [[ -n "$BASH_VERSION" ]]; then
     esac
   }
   complete -F _awsuse_console_completion awsuse-console
+
+# Shell completion for awsuse-mfa
+if [[ -n "$ZSH_VERSION" ]]; then
+  # zsh completion
+  _awsuse_mfa_completion() {
+    local -a profiles
+    # shellcheck disable=SC2296,SC2034
+    profiles=("${(@f)$(_awsuse-all-profiles)}")
+    _describe 'AWS profiles' profiles
+  }
+  compdef _awsuse_mfa_completion awsuse-mfa
+elif [[ -n "$BASH_VERSION" ]]; then
+  # bash completion
+  _awsuse_mfa_completion() {
+    local cur="${COMP_WORDS[COMP_CWORD]}"
+    mapfile -t COMPREPLY < <(compgen -W "$(_awsuse-all-profiles)" -- "$cur")
+  }
+  complete -F _awsuse_mfa_completion awsuse-mfa
 fi
