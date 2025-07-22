@@ -17,7 +17,6 @@ in
 inputs.home-manager.lib.homeManagerConfiguration {
   inherit pkgs;
   extraSpecialArgs = {
-    glimpse = inputs.glimpse.packages.${system}.default;
     mbnvim = inputs.mbnvim.packages.${system}.default;
     inherit inputs username;
   };

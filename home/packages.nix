@@ -1,7 +1,6 @@
 {
   pkgs,
   mbnvim,
-  glimpse,
   ...
 }:
 {
@@ -47,6 +46,5 @@
     pkgs.aws-whoami
     pkgs.mergiraf
     mbnvim
-    glimpse # get directory into llm
   ];
 }

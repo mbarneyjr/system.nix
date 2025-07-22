@@ -65,7 +65,6 @@ let
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.extraSpecialArgs = {
-        glimpse = inputs.glimpse.packages.${system}.default;
         mbnvim = inputs.mbnvim.packages.${system}.default;
       };
       home-manager.users.${username} = import ../home { inherit pkgs username; };

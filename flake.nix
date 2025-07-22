@@ -19,9 +19,6 @@
 
     mbnvim.url = "github:mbarneyjr/mbnvim";
     mbnvim.inputs.nixpkgs.follows = "nixpkgs";
-
-    glimpse.url = "github:seatedro/glimpse";
-    glimpse.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
