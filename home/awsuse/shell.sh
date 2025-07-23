@@ -24,16 +24,30 @@ awsuse () {
   profile=$1
   _awsuse-squishinate
 
-  if grep -q "${profile}\]" ${_awsuse_credentials_file} ${_awsuse_config_file}; then
-    export AWS_PROFILE=${profile}
-    export AWS_CONFIG_FILE=${_awsuse_config_file}
-    export AWS_SHARED_CREDENTIALS_FILE=${_awsuse_credentials_file}
+  if [[ ${profile} == arn:aws:iam::* ]]; then
+    role_arn=${profile}
+    session_name="$(whoami)"
+    temp_credentials=$(aws sts assume-role --role-arn "${role_arn}" --role-session-name "${session_name}" --output json)
+    awsunuse
+    AWS_ACCESS_KEY_ID=$(echo "${temp_credentials}" | jq -r '.Credentials.AccessKeyId')
+    AWS_SECRET_ACCESS_KEY=$(echo "${temp_credentials}" | jq -r '.Credentials.SecretAccessKey')
+    AWS_SESSION_TOKEN=$(echo "${temp_credentials}" | jq -r '.Credentials.SessionToken')
+    AWSUSE_PROFILE=$(echo "${temp_credentials}" | jq -r '.AssumedRoleUser.AssumedRoleId')
+    export AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN AWSUSE_PROFILE
   else
-    echo "Profile not found in config or credentials file"
+    if grep -q "${profile}\]" ${_awsuse_credentials_file} ${_awsuse_config_file}; then
+      export AWSUSE_PROFILE=${profile}
+      export AWS_PROFILE=${profile}
+      export AWS_CONFIG_FILE=${_awsuse_config_file}
+      export AWS_SHARED_CREDENTIALS_FILE=${_awsuse_credentials_file}
+    else
+      echo "Profile not found in config or credentials file"
+    fi
   fi
 }
 
 awsunuse() {
+  unset AWSUSE_PROFILE
   unset AWS_PROFILE
   unset AWS_DEFAULT_PROFILE
   unset AWS_REGION
@@ -95,7 +109,7 @@ awsconsole () {
   if [[ $service = http* ]]; then
     destination=$service
   else
-    destination_region=${AWS_REGION:-$(aws configure get region)}
+    destination_region=${AWS_REGION:-$(aws configure get region || echo "")}
     destination="https://console.aws.amazon.com/${service}/home?region=${destination_region:-us-east-1}"
   fi
 

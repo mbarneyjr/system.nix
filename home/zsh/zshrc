@@ -26,6 +26,8 @@ _aws_region() {
 _aws_profile() {
     if [ $AWS_PROFILE ]; then
         printf "%%F{blue}($AWS_PROFILE%%F{blue})"
+    elif [ $AWSUSE_PROFILE ]; then
+        printf "%%F{blue}($AWSUSE_PROFILE%%F{blue})"
     elif [ $AWSUME_PROFILE ]; then
         printf "%%F{blue}($AWSUME_PROFILE"
         if [ $AWSUME_EXPIRATION ]; then
