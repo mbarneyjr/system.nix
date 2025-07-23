@@ -58,6 +58,9 @@ awsunuse() {
   unset AWS_REGION
   unset AWS_CONFIG_FILE
   unset AWS_SHARED_CREDENTIALS_FILE
+  unset AWS_ACCESS_KEY_ID
+  unset AWS_SECRET_ACCESS_KEY
+  unset AWS_SESSION_TOKEN
 }
 
 awsuse-mfa () {
