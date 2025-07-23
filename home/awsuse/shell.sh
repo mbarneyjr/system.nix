@@ -24,6 +24,10 @@ awsuse () {
   profile=$1
   _awsuse-squishinate
 
+  if [[ ${profile} =~ ^[0-9]{12}:[a-zA-Z0-9+=,.@_-]+$ ]]; then
+    profile="arn:aws:iam::${profile%%:*}:role/${profile#*:}"
+  fi
+
   if [[ ${profile} == arn:aws:iam::* ]]; then
     role_arn=${profile}
     session_name="$(whoami)"
@@ -33,7 +37,8 @@ awsuse () {
     AWS_SECRET_ACCESS_KEY=$(echo "${temp_credentials}" | jq -r '.Credentials.SecretAccessKey')
     AWS_SESSION_TOKEN=$(echo "${temp_credentials}" | jq -r '.Credentials.SessionToken')
     AWSUSE_PROFILE=$(echo "${temp_credentials}" | jq -r '.AssumedRoleUser.AssumedRoleId')
-    export AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN AWSUSE_PROFILE
+    AWS_REGION=$(aws configure get region || echo "us-east-1")
+    export AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN AWSUSE_PROFILE AWS_REGION
   else
     if grep -q "${profile}\]" ${_awsuse_credentials_file} ${_awsuse_config_file}; then
       export AWSUSE_PROFILE=${profile}
