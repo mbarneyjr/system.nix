@@ -17,11 +17,48 @@ _awsuse-console-services () {
   cat "${_awsuse_console_services_file}"
 }
 
+_awsuse-all-regions () {
+  echo "us-east-1
+us-east-2
+us-west-1
+us-west-2
+af-south-1
+ap-east-1
+ap-south-2
+ap-southeast-3
+ap-southeast-5
+ap-southeast-4
+ap-south-1
+ap-northeast-3
+ap-northeast-2
+ap-southeast-1
+ap-southeast-2
+ap-east-2
+ap-southeast-7
+ap-northeast-1
+ca-central-1
+ca-west-1
+eu-central-1
+eu-west-1
+eu-west-2
+eu-south-1
+eu-west-3
+eu-south-2
+eu-north-1
+eu-central-2
+il-central-1
+mx-central-1
+me-south-1
+me-central-1
+sa-east-1"
+}
+
 # porcelain commands
 
 awsuse () {
   local profile
   profile=$1
+  region=$2
   _awsuse-squishinate
 
   if [[ ${profile} =~ ^[0-9]{12}:[a-zA-Z0-9+=,.@_-]+$ ]]; then
@@ -37,14 +74,15 @@ awsuse () {
     AWS_SECRET_ACCESS_KEY=$(echo "${temp_credentials}" | jq -r '.Credentials.SecretAccessKey')
     AWS_SESSION_TOKEN=$(echo "${temp_credentials}" | jq -r '.Credentials.SessionToken')
     AWSUSE_PROFILE=$(echo "${temp_credentials}" | jq -r '.AssumedRoleUser.AssumedRoleId')
-    AWS_REGION=$(aws configure get region || echo "us-east-1")
-    export AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN AWSUSE_PROFILE AWS_REGION
+    export AWS_REGION=${region:-"us-east-1"}
+    export AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN AWSUSE_PROFILE
   else
     if grep -q "${profile}\]" ${_awsuse_credentials_file} ${_awsuse_config_file}; then
       export AWSUSE_PROFILE=${profile}
       export AWS_PROFILE=${profile}
       export AWS_CONFIG_FILE=${_awsuse_config_file}
       export AWS_SHARED_CREDENTIALS_FILE=${_awsuse_credentials_file}
+      export AWS_REGION=${region:-"us-east-1"}
     else
       echo "Profile not found in config or credentials file"
     fi
@@ -102,8 +140,9 @@ awsconsole () {
   set -o pipefail
   service=${1:-console}
   profile=${2:-}
-  if [ -n "$2" ]; then
-    awsuse "$2"
+  region=${3:-}
+  if [ -n "$profile" ]; then
+    awsuse "$profile" "$region"
   fi
 
   json_temp_credentials=$(aws configure export-credentials --format process | jq -c '{sessionId: .AccessKeyId, sessionKey: .SecretAccessKey, sessionToken: .SessionToken}')
@@ -117,8 +156,8 @@ awsconsole () {
   if [[ $service = http* ]]; then
     destination=$service
   else
-    destination_region=${AWS_REGION:-$(aws configure get region || echo "")}
-    destination="https://console.aws.amazon.com/${service}/home?region=${destination_region:-us-east-1}"
+    destination_region=${region:-${AWS_REGION:-$(aws configure get region || echo "us-east-1")}}
+    destination="https://console.aws.amazon.com/${service}/home?region=${destination_region}"
   fi
 
   urlencode_many_printf () {
@@ -153,17 +192,41 @@ awsconsole () {
 if [[ -n "$ZSH_VERSION" ]]; then
   # zsh completion
   _awsuse_completion() {
-    local -a profiles
-    # shellcheck disable=SC2296,SC2034
-    profiles=("${(@f)$(_awsuse-all-profiles)}")
-    _describe 'AWS profiles' profiles
+    # shellcheck disable=SC2034
+    local context state line
+    _arguments \
+      '1:profile:->profiles' \
+      '2:region:->regions'
+
+    case $state in
+      profiles)
+        local -a profiles
+        # shellcheck disable=SC2296,SC2034
+        profiles=("${(@f)$(_awsuse-all-profiles)}")
+        _describe 'AWS profiles' profiles
+        ;;
+      regions)
+        local -a regions
+        # shellcheck disable=SC2296,SC2034
+        regions=("${(@f)$(_awsuse-all-regions)}")
+        _describe 'AWS regions' regions
+        ;;
+    esac
   }
   compdef _awsuse_completion awsuse
 elif [[ -n "$BASH_VERSION" ]]; then
   # bash completion
   _awsuse_completion() {
     local cur="${COMP_WORDS[COMP_CWORD]}"
-    mapfile -t COMPREPLY < <(compgen -W "$(_awsuse-all-profiles)" -- "$cur")
+
+    case $COMP_CWORD in
+      1)
+        mapfile -t COMPREPLY < <(compgen -W "$(_awsuse-all-profiles)" -- "$cur")
+        ;;
+      2)
+        mapfile -t COMPREPLY < <(compgen -W "$(_awsuse-all-regions)" -- "$cur")
+        ;;
+    esac
   }
   complete -F _awsuse_completion awsuse
 fi
@@ -176,7 +239,8 @@ if [[ -n "$ZSH_VERSION" ]]; then
     local context state line
     _arguments \
       '1:service:->services' \
-      '2:profile:->profiles'
+      '2:profile:->profiles' \
+      '3:region:->regions'
 
     case $state in
       services)
@@ -190,6 +254,12 @@ if [[ -n "$ZSH_VERSION" ]]; then
         # shellcheck disable=SC2296,SC2034
         profiles=("${(@f)$(_awsuse-all-profiles)}")
         _describe 'AWS profiles' profiles
+        ;;
+      regions)
+        local -a regions
+        # shellcheck disable=SC2296,SC2034
+        regions=("${(@f)$(_awsuse-all-regions)}")
+        _describe 'AWS regions' regions
         ;;
     esac
   }
@@ -205,6 +275,9 @@ elif [[ -n "$BASH_VERSION" ]]; then
         ;;
       2)
         mapfile -t COMPREPLY < <(compgen -W "$(_awsuse-all-profiles)" -- "$cur")
+        ;;
+      3)
+        mapfile -t COMPREPLY < <(compgen -W "$(_awsuse-all-regions | cut -d: -f1)" -- "$cur")
         ;;
     esac
   }
