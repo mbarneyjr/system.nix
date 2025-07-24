@@ -78,6 +78,7 @@ awsuse () {
     export AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN AWSUSE_PROFILE
   else
     if grep -q "${profile}\]" ${_awsuse_credentials_file} ${_awsuse_config_file}; then
+      awsunuse
       export AWSUSE_PROFILE=${profile}
       export AWS_PROFILE=${profile}
       export AWS_CONFIG_FILE=${_awsuse_config_file}
