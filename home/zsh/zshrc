@@ -77,11 +77,6 @@ alias awsumel="source awsume --role-duration 43200"
 alias icat="kitten icat --align left"
 alias idot="dot -Tsvg | kitten icat --align left"
 alias flush-mac-dns="sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
-alias git-branches="git for-each-ref --sort=committerdate refs/heads/ --format='%(align:40)%(refname:short)%(end) # %(authorname) %(committerdate:relative)'"
-alias gdb-exclude="git-branches | grep -v \"\$(cat /tmp/branches-raw)\" > /tmp/branches-raw"
-alias gdb-cleanup="sed 's/#.*//g' /tmp/branches-raw > /tmp/branches"
-alias gdb-execute="xargs git branch -D < /tmp/branches"
-alias git-delete-branches="git-branches > /tmp/branches-raw && vi /tmp/branches-raw && gdb-exclude && gdb-cleanup && gdb-execute"
 alias q="amazon-q";
 alias awsumer="awsume \${AWSUME_COMMAND}";
 alias awsumel="awsume --role-duration 43200";

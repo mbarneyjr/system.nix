@@ -15,6 +15,12 @@
     source = ./git-claude-commit;
     target = ".local/bin/git-claude-commit";
   };
+  home.file.git-delete-branches = {
+    enable = true;
+    executable = true;
+    source = ./git-delete-branches;
+    target = ".local/bin/git-delete-branches";
+  };
   programs.git = {
     enable = true;
     package = pkgs.gitFull;
