@@ -27,6 +27,7 @@
     pkgs.pipx
     pkgs.uv
     pkgs.presenterm
+    pkgs.sketchybar-app-font
     # pkgs.ggshield
     pkgs.nixfmt-rfc-style
     pkgs.nix-tree

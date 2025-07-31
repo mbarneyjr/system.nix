@@ -1,0 +1,117 @@
+#!/usr/bin/env bash
+
+PLUGIN_DIR="$CONFIG_DIR/plugins"
+
+sketchybar --bar \
+  color=0x40000040 \
+  position=top \
+  height=40 \
+  blur_radius=30 \
+  shadow=true \
+
+default=(
+  icon.font="SauceCodePro Nerd Font:Bold:16.0"
+  label.font="SauceCodePro Nerd Font:Bold:16.0"
+  icon.color=0xffffffff
+  label.color=0xffffffff
+  icon.padding_left=4
+  icon.padding_right=4
+  label.padding_left=4
+  label.padding_right=4
+)
+sketchybar --default "${default[@]}"
+
+##### Adding Left Items #####
+
+sketchybar --add event aerospace_workspace_change
+for workspace_id in $(aerospace list-workspaces --all); do
+  sketchybar \
+    --add item "space.$workspace_id" left \
+    --subscribe "space.$workspace_id" aerospace_workspace_change \
+    --set "space.$workspace_id" \
+      drawing=off \
+      background.drawing=off \
+      background.color=0xff000020 \
+      background.corner_radius=4 \
+      background.height=32 \
+      width=32 \
+      icon.drawing=off \
+      label.padding_right=0 \
+      label.padding_left=11 \
+      label="$workspace_id" \
+      click_script="aerospace workspace $workspace_id" \
+      script="$CONFIG_DIR/plugins/aerospace.sh $workspace_id"
+
+  if [[ -n "$(aerospace list-windows --workspace "$workspace_id")" ]]; then
+    sketchybar --set "space.$workspace_id" drawing=on
+  fi
+done
+
+sketchybar \
+  --add item separator1 left \
+  --set separator1 icon=
+
+sketchybar \
+  --add item front_app left \
+  --set front_app \
+    background.color=0x80000040 \
+    background.height=32 \
+    background.corner_radius=4 \
+    label.padding_right=8 \
+    icon.padding_left=8 \
+    icon.font="sketchybar-app-font:Regular:16.0" \
+    script="$PLUGIN_DIR/front_app.sh" \
+  --subscribe front_app front_app_switched
+
+##### Adding Right Items #####
+
+sketchybar \
+  --add item clock right \
+  --set clock \
+    background.color=0x80000040 \
+    background.height=32 \
+    background.corner_radius=4 \
+    background.padding_left=4 \
+    label.padding_right=8 \
+    icon.padding_left=8 \
+  --set clock update_freq=1 icon=  script="$PLUGIN_DIR/clock.sh"
+sketchybar \
+  --add item volume right \
+  --set volume \
+    script="$PLUGIN_DIR/volume.sh" \
+    background.color=0x80000040 \
+    background.height=32 \
+    background.corner_radius=4 \
+    background.padding_right=4 \
+    background.padding_left=4 \
+    label.padding_right=8 \
+    icon.padding_left=8 \
+  --subscribe volume volume_change
+sketchybar \
+  --add item battery right \
+  --set battery \
+    update_freq=120 \
+    script="$PLUGIN_DIR/battery.sh" \
+    background.color=0x80000040 \
+    background.height=32 \
+    background.corner_radius=4 \
+    background.padding_right=4 \
+    background.padding_left=4 \
+    label.padding_right=8 \
+    icon.padding_left=8 \
+  --subscribe battery system_woke power_source_change
+sketchybar \
+  --add item cpu right \
+  --set cpu \
+    update_freq=2 \
+    icon= \
+    script="$PLUGIN_DIR/cpu.sh" \
+    background.color=0x80000040 \
+    background.height=32 \
+    background.corner_radius=4 \
+    background.padding_right=4 \
+    background.padding_left=4 \
+    label.padding_right=8 \
+    icon.padding_left=8 \
+
+sketchybar --update

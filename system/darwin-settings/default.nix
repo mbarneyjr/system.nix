@@ -33,7 +33,7 @@
       KeyRepeat = 1;
       "com.apple.sound.beep.feedback" = 1;
       "com.apple.trackpad.forceClick" = false;
-      _HIHideMenuBar = false;
+      _HIHideMenuBar = true;
     };
     SoftwareUpdate = {
       AutomaticallyInstallMacOSUpdates = true;

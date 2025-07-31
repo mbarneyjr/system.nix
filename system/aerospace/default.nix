@@ -21,9 +21,22 @@
       inner.vertical = 0;
       outer.left = 0;
       outer.bottom = 0;
-      outer.top = 0;
+      outer.top = [
+        # we don't need a gap on notched displays
+        { monitor."built-in" = 0; }
+        40
+      ];
       outer.right = 0;
     };
+    exec-on-workspace-change = [
+      "${pkgs.bash}/bin/bash"
+      "-c"
+      ''
+        ${pkgs.sketchybar}/bin/sketchybar \
+          --trigger aerospace_workspace_change \
+            FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE
+      ''
+    ];
     mode.main.binding = {
       alt-slash = "layout tiles horizontal vertical";
       alt-comma = "layout accordion horizontal vertical";
