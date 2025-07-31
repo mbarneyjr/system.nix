@@ -83,6 +83,7 @@ inputs.nix-darwin.lib.darwinSystem {
     ./darwin-settings
     ./homebrew
     ./aerospace
+    ./sketchybar
     ./fonts
     inputs.nix-homebrew.darwinModules.nix-homebrew
     inputs.home-manager.darwinModules.home-manager
