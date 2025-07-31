@@ -25,6 +25,7 @@
     pkgs.aws-sam-cli
     pkgs.docker
     pkgs.pipx
+    pkgs.uv
     pkgs.presenterm
     # pkgs.ggshield
     pkgs.nixfmt-rfc-style
