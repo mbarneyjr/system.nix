@@ -213,6 +213,7 @@ swf/v2
 systems-manager
 systems-manager/appconfig
 systems-manager/incidents
+systems-manager/parameters
 textract
 timestream
 tnb

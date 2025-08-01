@@ -74,8 +74,12 @@ awsuse () {
     AWS_SECRET_ACCESS_KEY=$(echo "${temp_credentials}" | jq -r '.Credentials.SecretAccessKey')
     AWS_SESSION_TOKEN=$(echo "${temp_credentials}" | jq -r '.Credentials.SessionToken')
     AWSUSE_PROFILE=$(echo "${temp_credentials}" | jq -r '.AssumedRoleUser.AssumedRoleId')
-    export AWS_REGION=${region:-"us-east-1"}
-    export AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN AWSUSE_PROFILE
+    if [[ -n "${region}" ]]; then
+      AWS_REGION=${region}
+    else
+      AWS_REGION="$(aws configure get region || echo "us-east-1")"
+    fi
+    export AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN AWS_REGION AWSUSE_PROFILE
   else
     if grep -q "${profile}\]" ${_awsuse_credentials_file} ${_awsuse_config_file}; then
       awsunuse
@@ -83,7 +87,12 @@ awsuse () {
       export AWS_PROFILE=${profile}
       export AWS_CONFIG_FILE=${_awsuse_config_file}
       export AWS_SHARED_CREDENTIALS_FILE=${_awsuse_credentials_file}
-      export AWS_REGION=${region:-"us-east-1"}
+      if [[ -n "${region}" ]]; then
+        AWS_REGION=${region}
+      else
+        AWS_REGION="$(aws configure get region || echo "us-east-1")"
+      fi
+      export AWS_REGION
     else
       echo "Profile not found in config or credentials file"
     fi
@@ -157,7 +166,7 @@ awsconsole () {
   if [[ $service = http* ]]; then
     destination=$service
   else
-    destination_region=${region:-${AWS_REGION:-$(aws configure get region || echo "us-east-1")}}
+    destination_region=${region:-$(aws configure get region || echo "us-east-1")}
     destination="https://console.aws.amazon.com/${service}/home?region=${destination_region}"
   fi
 
