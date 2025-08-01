@@ -61,6 +61,10 @@
       orientation = "left";
       tilesize = 32;
       mru-spaces = false;
+      wvous-bl-corner = 1;
+      wvous-br-corner = 1;
+      wvous-tl-corner = 1;
+      wvous-tr-corner = 1;
       persistent-apps = [
         "/System/Applications/Launchpad.app"
         "/System/Applications/System Settings.app"
