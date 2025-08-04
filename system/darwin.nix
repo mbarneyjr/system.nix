@@ -27,6 +27,14 @@ let
       nix.enable = true;
       nix.package = pkgs.nix;
       nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+      nix.gc = {
+        automatic = true;
+        interval = [
+          {
+            Minute = 23;
+          }
+        ];
+      };
       nix.settings = {
         experimental-features = "nix-command flakes";
         substituters = [
