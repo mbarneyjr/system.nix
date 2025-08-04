@@ -26,12 +26,21 @@ let
       # nix configuration
       nix.enable = true;
       nix.package = pkgs.nix;
+      nix.checkConfig = true;
       nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
       nix.gc = {
         automatic = true;
         interval = [
           {
-            Minute = 23;
+            Hour = 0;
+          }
+        ];
+      };
+      nix.optimise = {
+        automatic = true;
+        interval = [
+          {
+            Hour = 0;
           }
         ];
       };
