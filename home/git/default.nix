@@ -23,7 +23,7 @@
   };
   programs.git = {
     enable = true;
-    package = pkgs.gitFull;
+    package = pkgs.git;
     aliases = {
       ls = "log --graph --abbrev-commit --color --pretty=format:'%C(yellow)%h%Creset -%Cred%d%Creset %s %Cgreen(%cr) %C(blue)[%an]%Creset'";
     };
