@@ -65,7 +65,7 @@
       user.signingkey = "0383630977773772";
       commit.gpgsign = true;
       core = {
-        editor = "nvim -es";
+        editor = "nvim";
       };
       init = {
         defaultBranch = "main";
