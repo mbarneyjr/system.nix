@@ -15,6 +15,7 @@
     pkgs.ripgrep
     pkgs.jq
     pkgs.yq
+    pkgs.delta
     pkgs.gnupg
     pkgs.ffmpeg
     pkgs.graphviz
@@ -28,6 +29,9 @@
     pkgs.uv
     pkgs.presenterm
     pkgs.sketchybar-app-font
+    pkgs.nixpkgs-review
+    pkgs.nix-output-monitor
+    pkgs.glow
     # pkgs.ggshield
     pkgs.nixfmt-rfc-style
     pkgs.nix-tree
