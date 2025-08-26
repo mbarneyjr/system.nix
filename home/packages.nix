@@ -33,6 +33,7 @@
     pkgs.nix-output-monitor
     pkgs.glow
     # pkgs.ggshield
+    pkgs.okta-aws-cli
     pkgs.nixfmt-rfc-style
     pkgs.nix-tree
     pkgs.rainfrog
