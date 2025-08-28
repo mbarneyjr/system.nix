@@ -24,6 +24,7 @@ let
       # nix-darwin version
       system.stateVersion = 6;
       # nix configuration
+      # nix.settings.sandbox = true;
       nix.enable = true;
       nix.package = pkgs.nix;
       nix.checkConfig = true;
