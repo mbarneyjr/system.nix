@@ -12,6 +12,7 @@
     pkgs.fd # find
     pkgs.fswatch
     pkgs.fzf
+    pkgs.tree
     pkgs.ripgrep
     pkgs.jq
     pkgs.yq
