@@ -33,6 +33,8 @@
     pkgs.nixpkgs-review
     pkgs.nix-output-monitor
     pkgs.glow
+    pkgs.trufflehog
+    pkgs.aws-vault
     # pkgs.ggshield
     pkgs.okta-aws-cli
     pkgs.nixfmt-rfc-style
