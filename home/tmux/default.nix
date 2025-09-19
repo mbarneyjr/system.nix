@@ -10,12 +10,17 @@
     customPaneNavigationAndResize = true;
     plugins = [
     ];
-    extraConfig =
-      ''
-        set-option -gu default-command
-        set-option -g default-shell ${pkgs.zsh}/bin/zsh
-      ''
-      + builtins.readFile ./tmux.conf;
+    extraConfig = ''
+      set-option -gu default-command
+      set-option -g default-shell ${pkgs.zsh}/bin/zsh
+    ''
+    + builtins.readFile ./tmux.conf;
+  };
+  home.file.tmux-resizer = {
+    enable = true;
+    executable = true;
+    source = ./tmux-resizer.sh;
+    target = ".local/bin/tmux-resizer.sh";
   };
   home.file.tmux-new-session = {
     enable = true;
