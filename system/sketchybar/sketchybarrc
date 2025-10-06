@@ -76,6 +76,16 @@ sketchybar \
     icon.padding_left=8 \
   --set clock update_freq=1 icon=  script="$PLUGIN_DIR/clock.sh"
 sketchybar \
+  --add item utc_clock right \
+  --set utc_clock \
+    background.color=0x80000040 \
+    background.height=32 \
+    background.corner_radius=4 \
+    background.padding_right=4 \
+    label.padding_right=8 \
+    icon.padding_left=8 \
+  --set utc_clock update_freq=5 icon=  script="$PLUGIN_DIR/utc_clock.sh"
+sketchybar \
   --add item volume right \
   --set volume \
     script="$PLUGIN_DIR/volume.sh" \
