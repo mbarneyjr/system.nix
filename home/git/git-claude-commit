@@ -4,8 +4,13 @@ TYPE=${1:-}
 SCOPE=${2:-}
 
 claude -p "
-Look at the staged git changes and create a summarizing git commit title.
+Look at only the staged git changes and create a summarizing git commit title.
+You must not look at changes that are not staged.
 Only respond with the title and no affirmation.
+You MUST respond with only one line of text.
+You MUST NOT respond with anything other than the one line of text.
+You MUST NOT respond with any empty lines.
+The one line of text you respond with should not be longer than 80 characters.
 You should use the conventional commits specification, and ALWAYS include the scope.
 Including a scope in the resulting output is not optional, even if the user did not supply a scope or supplied an inappropriate scope.
 The following is the conventional commit specification:
@@ -32,4 +37,4 @@ The following is a user-supplied type and scope.
 You may ignore these if the user-supplied type and scope are not appropriate:
 <type>${TYPE}</type>
 <scope>${SCOPE}</scope>
-"
+" | grep -v '^$'
