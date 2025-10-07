@@ -126,7 +126,7 @@ awsuse-mfa () {
     fi
     echo "MFA Device ARN: ${mfa_device_arn}"
 
-    target_credentials_file=~/.aws/awsuse_mfa-credentials
+    target_credentials_file=~/.aws/credentials.awsuse
     profile=${1:-PROFILE_NAME}
     echo -n "Enter MFA token: "
     read -r mfa_token
