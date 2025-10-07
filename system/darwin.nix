@@ -12,7 +12,6 @@ let
       allowUnfree = true;
     };
     overlays = [
-      (import ./overlays/claude-code)
       (import ./overlays/awscurl.nix)
       (import ./overlays/cfn-transform.nix)
       (import ./overlays/former.nix)

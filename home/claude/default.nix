@@ -4,7 +4,7 @@
     target = ".claude/settings.json";
     text = builtins.toJSON {
       includeCoAuthoredBy = false;
-      # awsAuthRefresh = "aws sso login --profile claude";
+      awsAuthRefresh = "aws sso login --profile claude";
       env = {
         AWS_PROFILE = "claude";
         CLAUDE_CODE_USE_BEDROCK = 1;
