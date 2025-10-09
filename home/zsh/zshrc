@@ -48,9 +48,17 @@ _aws_profile() {
         printf "%%F{blue})"
     fi
 }
+_exit_status() {
+    if [ $? -eq 0 ]; then
+        printf "%%F{green}✔%%f"
+    else
+        printf "%%F{red}✘ $?%%f"
+    fi
+}
 NEWLINE=$'\n'
 PROMPT='%F{yellow}➜'
 PROMPT+=' %F{cyan}%*'
+PROMPT+=' $(_exit_status)'
 PROMPT+=' $(_aws_region)'
 PROMPT+='$(_aws_profile)'
 PROMPT+='$(_git_branch)'
