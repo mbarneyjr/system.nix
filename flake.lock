@@ -20,11 +20,11 @@
     "cfn-lsp-extra": {
       "flake": false,
       "locked": {
-        "lastModified": 1758973113,
-        "narHash": "sha256-kuBe+JUtdVat7h3WYGDD1sl5C3R0h6aEoMDCTQPEbls=",
+        "lastModified": 1759589961,
+        "narHash": "sha256-b+mEdPDXqc6Tt9HiRhp11SMuJ3Cyl3gkH6UDs/w8/Ak=",
         "owner": "LaurenceWarne",
         "repo": "cfn-lsp-extra",
-        "rev": "e6483c9dd9140c5348fa0d77abb966866e9ffe38",
+        "rev": "0fd5f2690fa2d44062e556fe3630333ba6cf7639",
         "type": "github"
       },
       "original": {
@@ -38,11 +38,11 @@
         "nixpkgs-lib": "nixpkgs-lib"
       },
       "locked": {
-        "lastModified": 1756770412,
-        "narHash": "sha256-+uWLQZccFHwqpGqr2Yt5VsW/PbeJVTn9Dk6SHWhNRPw=",
+        "lastModified": 1760948891,
+        "narHash": "sha256-TmWcdiUUaWk8J4lpjzu4gCGxWY6/Ok7mOK4fIFfBuU4=",
         "owner": "hercules-ci",
         "repo": "flake-parts",
-        "rev": "4524271976b625a4a605beefd893f270620fd751",
+        "rev": "864599284fc7c0ba6357ed89ed5e2cd5040f0c04",
         "type": "github"
       },
       "original": {
@@ -115,11 +115,11 @@
         "twoslash-queries-src": "twoslash-queries-src"
       },
       "locked": {
-        "lastModified": 1760723901,
-        "narHash": "sha256-jU41K6jYhM2XDehcXRti81pVL8pPKSYPqVaAhSdxKU0=",
+        "lastModified": 1761317467,
+        "narHash": "sha256-8E52ZwEhlT9/AAR8YJjt64zDR1lfq52viJLSDw0Is/U=",
         "owner": "mbarneyjr",
         "repo": "mbnvim",
-        "rev": "43164595024967246a3cb40c905a6165fe0461d8",
+        "rev": "46918e61b595f931119435321f81f864f3c4f4af",
         "type": "github"
       },
       "original": {
