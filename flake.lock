@@ -17,22 +17,6 @@
         "type": "github"
       }
     },
-    "cfn-lsp-extra": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1759589961,
-        "narHash": "sha256-b+mEdPDXqc6Tt9HiRhp11SMuJ3Cyl3gkH6UDs/w8/Ak=",
-        "owner": "LaurenceWarne",
-        "repo": "cfn-lsp-extra",
-        "rev": "0fd5f2690fa2d44062e556fe3630333ba6cf7639",
-        "type": "github"
-      },
-      "original": {
-        "owner": "LaurenceWarne",
-        "repo": "cfn-lsp-extra",
-        "type": "github"
-      }
-    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": "nixpkgs-lib"
@@ -106,20 +90,17 @@
     },
     "mbnvim": {
       "inputs": {
-        "cfn-lsp-extra": "cfn-lsp-extra",
         "flake-parts": "flake-parts",
         "nixpkgs": [
           "nixpkgs"
-        ],
-        "ts-error-translator-src": "ts-error-translator-src",
-        "twoslash-queries-src": "twoslash-queries-src"
+        ]
       },
       "locked": {
-        "lastModified": 1761686071,
-        "narHash": "sha256-mCOBWk84i5WjX+cgk3z2mm19UKAWGZHmNBGTiFnhtaQ=",
+        "lastModified": 1761694768,
+        "narHash": "sha256-MIS9Wu6nhdAEA/nR14lQer12FTcC2XkrerAHYoHu65U=",
         "owner": "mbarneyjr",
         "repo": "mbnvim",
-        "rev": "0eaa68e7d8d5c2a060e317a24dce07fbc2ba2a1e",
+        "rev": "ef1a723a9bffe6631797414f8efe36f308946570",
         "type": "github"
       },
       "original": {
@@ -207,38 +188,6 @@
         "nix-darwin": "nix-darwin",
         "nix-homebrew": "nix-homebrew",
         "nixpkgs": "nixpkgs"
-      }
-    },
-    "ts-error-translator-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1731721659,
-        "narHash": "sha256-fi68jJVNTL2WlTehcl5Q8tijAeu2usjIsWXjcuixkCM=",
-        "owner": "dmmulroy",
-        "repo": "ts-error-translator.nvim",
-        "rev": "47e5ba89f71b9e6c72eaaaaa519dd59bd6897df4",
-        "type": "github"
-      },
-      "original": {
-        "owner": "dmmulroy",
-        "repo": "ts-error-translator.nvim",
-        "type": "github"
-      }
-    },
-    "twoslash-queries-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1758891454,
-        "narHash": "sha256-btmSEZ1rTIcp3bOxoY8UakC5A9rHErnnQTiCKAaXiwE=",
-        "owner": "marilari88",
-        "repo": "twoslash-queries.nvim",
-        "rev": "1262c20cad5abd6e89995dc4bc0eaab0e2e4e0b9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "marilari88",
-        "repo": "twoslash-queries.nvim",
-        "type": "github"
       }
     }
   },
