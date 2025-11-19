@@ -70,6 +70,7 @@ export LESS="-F -X -R"
 export PYTHONDONTWRITEBYTECODE=1
 export PIPENV_VENV_IN_PROJECT=true
 export EDITOR=nvim
+export ZLE_REMOVE_SUFFIX_CHARS="" # stop zsh from eating space before |
 
 alias back="cd -"
 alias ls="eza"
