@@ -18,6 +18,5 @@
     ./awsume
     ./awsuse
     ./claude
-    ./opencode
   ];
 }

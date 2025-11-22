@@ -89,7 +89,6 @@ alias flush-mac-dns="sudo dscacheutil -flushcache && sudo killall -HUP mDNSRespo
 alias q="amazon-q";
 alias awsumer="awsume \${AWSUME_COMMAND}";
 alias awsumel="awsume --role-duration 43200";
-alias opencode="AWS_PROFILE=claude opencode";
 
 complete -C 'aws_completer' aws
 
