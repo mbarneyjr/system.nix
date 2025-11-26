@@ -30,7 +30,7 @@
     user.name = "Michael Barney, Jr";
     user.signingkey = "0383630977773772";
     commit.gpgsign = true;
-    aliases = {
+    alias = {
       ls = "log --graph --abbrev-commit --color --pretty=format:'%C(yellow)%h%Creset -%Cred%d%Creset %s %Cgreen(%cr) %C(blue)[%an]%Creset'";
     };
     difftastic = {
