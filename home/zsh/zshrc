@@ -2,6 +2,7 @@
 
 setopt share_history
 setopt inc_append_history
+setopt prompt_subst
 
 bindkey "^[[1;3C" forward-word
 bindkey "^[[1;3D" backward-word
@@ -49,11 +50,15 @@ _aws_profile() {
     fi
 }
 _exit_status() {
-    if [ $? -eq 0 ]; then
+    if [ $EXIT_STATUS -eq 0 ]; then
         printf "%%F{green}✔%%f"
     else
-        printf "%%F{red}✘ $?%%f"
+        printf "%%F{red}✘ $EXIT_STATUS%%f"
     fi
+}
+
+precmd() {
+    EXIT_STATUS=$?
 }
 NEWLINE=$'\n'
 PROMPT='%F{yellow}➜'
@@ -90,6 +95,21 @@ alias q="amazon-q";
 alias awsumer="awsume \${AWSUME_COMMAND}";
 alias awsumel="awsume --role-duration 43200";
 
-complete -C 'aws_completer' aws
+# Lazy load AWS completions
+aws() {
+    unfunction aws
+    complete -C 'aws_completer' aws
+    aws "$@"
+}
 
-source <(fzf --zsh)
+# Lazy load fzf
+if [[ ! "$PATH" == *$HOME/.fzf/bin* ]]; then
+  export PATH="${PATH:+${PATH}:}$HOME/.fzf/bin"
+fi
+
+# Load fzf on first use
+fzf() {
+    unfunction fzf
+    eval "$(command fzf --zsh)"
+    fzf "$@"
+}

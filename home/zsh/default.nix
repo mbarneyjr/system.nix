@@ -4,6 +4,15 @@
     enable = true;
     dotDir = "${config.xdg.configHome}/zsh";
     enableCompletion = true;
+    completionInit = ''
+      # Only regenerate compdump once per day
+      autoload -Uz compinit
+      if [ "$(find ~/.config/zsh/.zcompdump -mtime +1 2>/dev/null)" ]; then
+        compinit
+      else
+        compinit -C
+      fi
+    '';
     initContent = pkgs.lib.mkMerge [
       (builtins.readFile ./zshrc)
       (pkgs.lib.mkBefore ''
@@ -15,9 +24,6 @@
       PATH = "$HOME/.local/bin:$PATH";
       CLAUDE_CODE_USE_BEDROCK = "1";
       SHELL_SESSIONS_DISABLE = "1";
-    };
-    oh-my-zsh = {
-      enable = true;
     };
   };
 }
