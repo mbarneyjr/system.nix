@@ -25,7 +25,6 @@
     pkgs.gh
     pkgs.awscli2
     pkgs.aws-sam-cli
-    pkgs.docker
     pkgs.pipx
     pkgs.uv
     pkgs.presenterm

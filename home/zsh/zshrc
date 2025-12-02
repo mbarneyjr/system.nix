@@ -92,6 +92,7 @@ alias awsumer="source awsume \${AWSUME_COMMAND}";
 alias icat="kitten icat --align left"
 alias idot="dot -Tsvg | kitten icat --align left"
 alias flush-mac-dns="sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
+alias docker="finch"
 
 complete -C 'aws_completer' aws
 

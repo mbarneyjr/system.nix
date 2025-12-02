@@ -37,6 +37,8 @@ keybase pgp export -s|gpg --allow-secret-key-import --import -
 
 ## Troubleshooting
 
+### com.apple.universalaccess
+
 If you get the following error:
 
 ```
@@ -46,3 +48,9 @@ could not write domain com.apple.universalaccess
 Open System Preferences -> Security & Privacy -> Full Disk Access.
 Find "Terminal" (or whatever terminal emulator you're using) and check the box next to it.
 Then retry the `darwin-rebuild switch` command.
+
+### Brew bundle always removing the same cask
+
+If every build removes the same cask, even if it isn't found, make sure it doesn't come up in `brew list`.
+If it does, there may be a `.metadata` file left in `/opt/homebrew/Caskroom/...`.
+Remove that file, and the build should no longer always remove the same cask.
