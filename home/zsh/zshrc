@@ -88,28 +88,11 @@ alias tms="~/.local/bin/tmux-sessionizer.sh"
 alias tmn="~/.local/bin/tmux-new-session.sh"
 alias awsume="source awsume"
 alias awsumel="source awsume --role-duration 43200"
+alias awsumer="source awsume \${AWSUME_COMMAND}";
 alias icat="kitten icat --align left"
 alias idot="dot -Tsvg | kitten icat --align left"
 alias flush-mac-dns="sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
-alias q="amazon-q";
-alias awsumer="awsume \${AWSUME_COMMAND}";
-alias awsumel="awsume --role-duration 43200";
 
-# Lazy load AWS completions
-aws() {
-    unfunction aws
-    complete -C 'aws_completer' aws
-    aws "$@"
-}
+complete -C 'aws_completer' aws
 
-# Lazy load fzf
-if [[ ! "$PATH" == *$HOME/.fzf/bin* ]]; then
-  export PATH="${PATH:+${PATH}:}$HOME/.fzf/bin"
-fi
-
-# Load fzf on first use
-fzf() {
-    unfunction fzf
-    eval "$(command fzf --zsh)"
-    fzf "$@"
-}
+eval "$(command fzf --zsh)"
