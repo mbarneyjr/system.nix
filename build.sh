@@ -1,3 +1,5 @@
+# shellcheck disable=SC2068
+
 if [[ "$(uname -m)" == "x86_64" ]]; then
   ARCH="x86-64"
 elif [[ "$(uname -m)" == "aarch64" ]]; then
@@ -14,7 +16,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
   sudo -H nix run \
     --extra-experimental-features 'nix-command flakes' \
     nix-darwin/master#darwin-rebuild -- \
-    switch --flake ~/system.nix#${ARCH}
+    switch --flake ~/system.nix#${ARCH} ${@}
 fi
 
 if [[ "$(uname)" == "Linux" ]]; then
@@ -22,7 +24,7 @@ if [[ "$(uname)" == "Linux" ]]; then
   nix run \
     --extra-experimental-features 'nix-command flakes' \
     home-manager/release-24.11 -- \
-    switch --flake ~/system.nix#${ARCH}
+    switch --flake ~/system.nix#${ARCH} ${@}
 fi
 
 # todo, nixOS
