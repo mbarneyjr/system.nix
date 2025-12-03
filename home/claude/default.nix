@@ -17,6 +17,18 @@
         command = ./statusline.sh;
         padding = 0;
       };
+      hooks = {
+        Notification = [
+          {
+            hooks = [
+              {
+                type = "command";
+                command = "say 'claude needs input'";
+              }
+            ];
+          }
+        ];
+      };
     };
   };
 }
