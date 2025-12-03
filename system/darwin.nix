@@ -12,11 +12,12 @@ let
       allowUnfree = true;
     };
     overlays = [
+      (import ./overlays/aws-sam-cli.nix)
+      (import ./overlays/aws-whoami.nix)
+      (import ./overlays/awscli2.nix)
       (import ./overlays/awscurl.nix)
       (import ./overlays/cfn-transform.nix)
-      (import ./overlays/aws-sam-cli.nix)
       (import ./overlays/former.nix)
-      (import ./overlays/aws-whoami.nix)
     ];
   };
   defaultConfiguration =
