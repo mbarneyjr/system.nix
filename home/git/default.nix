@@ -21,6 +21,12 @@
     source = ./git-delete-branches;
     target = ".local/bin/git-delete-branches";
   };
+  home.file.git-new-worktree = {
+    enable = true;
+    executable = true;
+    source = ./git-new-worktree;
+    target = ".local/bin/git-new-worktree";
+  };
   programs.git = {
     enable = true;
   };
@@ -92,6 +98,7 @@
     ".nvim.lua"
     ".envrc"
     ".direnv"
+    ".worktree"
     "*.barneylocal"
     "*.barneylocal.*"
   ];

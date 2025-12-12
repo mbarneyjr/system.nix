@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+BRANCH_NAME=${1:-}
+
+if [[ -z "$BRANCH_NAME" ]]; then
+  echo "Usage: $0 <branch-name>"
+  exit 1
+fi
+
+if git show-branch "$BRANCH_NAME" >/dev/null 2>&1; then
+  git worktree add "./.worktree/${BRANCH_NAME}" "${BRANCH_NAME}"
+else
+  git worktree add "./.worktree/${BRANCH_NAME}" -b "${BRANCH_NAME}"
+fi
+
+CURRENT_TMUX_SESSION=$(tmux display-message -p '#S' 2>/dev/null || echo "")
+
+tmux new-session -s "${CURRENT_TMUX_SESSION}/${BRANCH_NAME}" -c "./.worktree/${BRANCH_NAME}" -d
+tmux switch-client -t "${CURRENT_TMUX_SESSION}/${BRANCH_NAME}"
