@@ -34,8 +34,8 @@
     pkgs.glow
     pkgs.trufflehog
     pkgs.aws-vault
-    # pkgs.ggshield
     pkgs.okta-aws-cli
+    pkgs.hyperfine
     pkgs.nixfmt-rfc-style
     pkgs.nix-tree
     pkgs.rainfrog
@@ -43,7 +43,6 @@
     pkgs.speedtest-cli
     pkgs.yt-dlp
     pkgs.shellcheck
-    # pkgs.bruno
     pkgs.claude-code
     pkgs.aws-sso-util
     pkgs.awscurl
