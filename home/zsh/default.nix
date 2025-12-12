@@ -5,13 +5,13 @@
     dotDir = "${config.xdg.configHome}/zsh";
     enableCompletion = true;
     completionInit = ''
-      # Only regenerate compdump once per day
       autoload -Uz compinit
       if [ "$(find ~/.config/zsh/.zcompdump -mtime +1 2>/dev/null)" ]; then
         compinit
       else
         compinit -C
       fi
+      source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
     '';
     initContent = pkgs.lib.mkMerge [
       (builtins.readFile ./zshrc)
