@@ -7,13 +7,16 @@ if [[ -z "$BRANCH_NAME" ]]; then
   exit 1
 fi
 
+ROOT=$(git rev-parse --show-toplevel)
+WORKTREE_DIR="${ROOT}/.worktree/${BRANCH_NAME}"
+
 if git show-branch "$BRANCH_NAME" >/dev/null 2>&1; then
-  git worktree add "./.worktree/${BRANCH_NAME}" "${BRANCH_NAME}"
+  git worktree add "${WORKTREE_DIR}" "${BRANCH_NAME}"
 else
-  git worktree add "./.worktree/${BRANCH_NAME}" -b "${BRANCH_NAME}"
+  git worktree add "${WORKTREE_DIR}" -b "${BRANCH_NAME}"
 fi
 
 CURRENT_TMUX_SESSION=$(tmux display-message -p '#S' 2>/dev/null || echo "")
 
-tmux new-session -s "${CURRENT_TMUX_SESSION}/${BRANCH_NAME}" -c "./.worktree/${BRANCH_NAME}" -d
+tmux new-session -s "${CURRENT_TMUX_SESSION}/${BRANCH_NAME}" -c "${WORKTREE_DIR}" -d
 tmux switch-client -t "${CURRENT_TMUX_SESSION}/${BRANCH_NAME}"
