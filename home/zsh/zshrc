@@ -1,5 +1,9 @@
 #!/usr/bin/env zsh
 
+for file in ~/.config/zsh/custom/*(N); do
+  [ -f "$file" ] && source "$file" 2>/dev/null
+done
+
 setopt share_history
 setopt inc_append_history
 setopt prompt_subst

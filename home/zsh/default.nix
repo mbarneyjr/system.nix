@@ -13,13 +13,7 @@
       fi
       source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
     '';
-    initContent = pkgs.lib.mkMerge [
-      (builtins.readFile ./zshrc)
-      (pkgs.lib.mkBefore ''
-        fpath=(~/.awsume/zsh-autocomplete/ $fpath)
-        setopt no_nomatch && source ~/.config/zsh/* > /dev/null 2>&1 || true && setopt nomatch
-      '')
-    ];
+    initContent = builtins.readFile ./zshrc;
     sessionVariables = {
       PATH = "$HOME/.local/bin:$PATH";
       CLAUDE_CODE_USE_BEDROCK = "1";
