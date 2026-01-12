@@ -28,7 +28,6 @@
     pkgs.pipx
     pkgs.uv
     pkgs.presenterm
-    pkgs.sketchybar-app-font
     pkgs.nixpkgs-review
     pkgs.nix-output-monitor
     pkgs.glow
