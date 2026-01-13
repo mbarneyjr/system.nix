@@ -35,7 +35,7 @@
     pkgs.aws-vault
     pkgs.okta-aws-cli
     pkgs.hyperfine
-    pkgs.nixfmt-rfc-style
+    pkgs.nixfmt
     pkgs.nix-tree
     pkgs.rainfrog
     pkgs.neofetch
