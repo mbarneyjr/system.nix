@@ -42,7 +42,6 @@
     pkgs.speedtest-cli
     pkgs.yt-dlp
     pkgs.shellcheck
-    pkgs.claude-code
     pkgs.aws-sso-util
     pkgs.awscurl
     pkgs.rain # cfn tools

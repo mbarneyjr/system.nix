@@ -16,7 +16,6 @@
     initContent = builtins.readFile ./zshrc;
     sessionVariables = {
       PATH = "$HOME/.local/bin:$PATH";
-      CLAUDE_CODE_USE_BEDROCK = "1";
       SHELL_SESSIONS_DISABLE = "1";
     };
   };

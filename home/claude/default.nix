@@ -1,4 +1,15 @@
 {
+  pkgs,
+  ...
+}:
+{
+  home.packages = [
+    pkgs.claude-code
+    (pkgs.writeShellScriptBin "claude-code-bedrock" ''
+      export CLAUDE_CODE_USE_BEDROCK=1
+      exec ${pkgs.claude-code}/bin/claude "$@"
+    '')
+  ];
   home.file.claude-settings = {
     enable = true;
     target = ".claude/settings.json";
@@ -10,7 +21,6 @@
       ];
       env = {
         AWS_PROFILE = "claude";
-        CLAUDE_CODE_USE_BEDROCK = 1;
       };
       statusLine = {
         type = "command";
