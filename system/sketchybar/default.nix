@@ -1,7 +1,6 @@
 {
   pkgs,
   config,
-  username,
   ...
 }:
 {
@@ -10,7 +9,4 @@
     CONFIG_DIR=${./.}
     ${builtins.readFile ./sketchybarrc}
   '';
-  home-manager.users.${username}.home.packages = [
-    pkgs.sketchybar-app-font
-  ];
 }
