@@ -36,6 +36,7 @@ let
             Hour = 0;
           }
         ];
+        options = "--delete-older-than 30d";
       };
       nix.optimise = {
         automatic = true;
