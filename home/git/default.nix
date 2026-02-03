@@ -105,9 +105,16 @@
 
   programs.git.includes = [
     {
-      condition = "gitdir:~/dev/work/";
+      condition = "gitdir:~/dev/work/trek10/";
       contents = {
         user.email = "mbarney@trek10.com";
+        user.name = "Michael Barney";
+      };
+    }
+    {
+      condition = "gitdir:~/dev/work/caylent/";
+      contents = {
+        user.email = "michael.barney@caylent.com";
         user.name = "Michael Barney";
       };
     }

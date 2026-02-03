@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
 # Prompt user for the project directory
-read -r -p "Enter the project directory (start with 'work', 'personal', or 'temp'): " input_dir
+read -r -p "Enter the project directory (start with 'work/<company>', 'personal', or 'temp'): " input_dir
 
 # validate that input_dir starts with 'work', 'personal', or 'temp'
 if [[ ! $input_dir =~ ^(work|personal|temp) ]]; then
-  echo "Invalid project directory. Please start with 'work', 'personal', or 'temp'."
+  echo "Invalid project directory. Please start with 'work/*', 'personal', or 'temp'."
   exit 1
 fi
 

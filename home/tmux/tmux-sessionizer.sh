@@ -5,7 +5,7 @@ static_directories="$HOME/system.nix"
 if [[ $# -eq 1 ]]; then
   selected=$1
 else
-  selected=$(echo -e "${static_directories}\n$(find ~/dev/temp ~/dev/personal ~/dev/work/* -mindepth 1 -maxdepth 1 -type d 2>/dev/null)" | fzf)
+  selected=$(echo -e "${static_directories}\n$(find ~/dev/temp ~/dev/personal ~/dev/work/*/* -mindepth 1 -maxdepth 1 -type d 2>/dev/null)" | fzf)
 fi
 
 if [[ -z $selected ]]; then
