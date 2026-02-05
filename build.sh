@@ -1,7 +1,7 @@
 # shellcheck disable=SC2068
 
 if [[ "$(uname -m)" == "x86_64" ]]; then
-  ARCH="x86-64"
+  ARCH="x86_64"
 elif [[ "$(uname -m)" == "aarch64" ]]; then
   ARCH="aarch64"
 elif [[ "$(uname -m)" == "arm64" ]]; then
@@ -24,7 +24,9 @@ if [[ "$(uname)" == "Linux" ]]; then
   nix run \
     --extra-experimental-features 'nix-command flakes' \
     home-manager/release-24.11 -- \
-    switch --flake ~/system.nix#${ARCH} ${@}
+    switch --flake ~/system.nix#${ARCH} \
+    --extra-experimental-features 'nix-command flakes' \
+    ${@}
 fi
 
 # todo, nixOS
