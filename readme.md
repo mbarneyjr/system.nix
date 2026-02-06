@@ -21,6 +21,12 @@ Then, install nix.
 sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install)
 ```
 
+## Cloning
+
+```sh
+nix --extra-experimental-features 'nix-command flakes' run nixpkgs#git clone https://github.com/mbarneyjr/system.nix.git
+```
+
 ## Running
 
 ### First-Time Setup

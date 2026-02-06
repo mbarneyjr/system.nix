@@ -11,21 +11,34 @@ else
   exit 1
 fi
 
-NIX_FLAGS=( \
-  --extra-experimental-features 'nix-command flakes' \
-  --extra-substituters 'https://nix.barney.dev/ https://cache.nixos.org/' \
-  --extra-trusted-public-keys 'nix.barney.dev-1:Wz6Nj2M/3PogEKI4/SRIdUm83QlC6zZN/0CCTS9oJ2o= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=' \
+NIX_FLAGS=(
+  --extra-experimental-features 'nix-command flakes'
+  --extra-substituters 'https://nix.barney.dev/ https://cache.nixos.org/'
+  --extra-trusted-public-keys 'nix.barney.dev-1:Wz6Nj2M/3PogEKI4/SRIdUm83QlC6zZN/0CCTS9oJ2o= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY='
 )
 
-if [[ "$(uname)" == "Darwin" ]]; then
+if [[ -d /etc/nixos ]]; then
+  SYSTEM=${1:-$(cat /etc/system.nix/system 2>/dev/null)}
+  if [[ -z "${SYSTEM}" ]]; then
+    echo "When building for NixOS you must provide a system to build."
+    exit 1
+  fi
+  REBOOT=${REBOOT:-}
+  if [[ -z "${REBOOT}" ]]; then
+    COMMAND="switch"
+  else
+    COMMAND="boot"
+  fi
+  echo "Building system.nix for NixOS system ${SYSTEM}..."
+  sudo nixos-rebuild ${COMMAND} --flake "$HOME/system.nix#${SYSTEM}" ${@:2}
+  exit 0
+elif [[ "$(uname)" == "Darwin" ]]; then
   echo "Building system.nix for macOS on ${ARCH}..."
   sudo -H nix run \
     "${NIX_FLAGS[@]}" \
     nix-darwin/master#darwin-rebuild -- \
     switch --flake ~/system.nix#${ARCH} ${@}
-fi
-
-if [[ "$(uname)" == "Linux" ]]; then
+elif [[ "$(uname)" == "Linux" ]]; then
   echo "Building system.nix for Linux on ${ARCH}..."
   nix run \
     "${NIX_FLAGS[@]}" \
@@ -33,6 +46,7 @@ if [[ "$(uname)" == "Linux" ]]; then
     switch --flake ~/system.nix#${ARCH} \
     "${NIX_FLAGS[@]}" \
     ${@}
+else
+  echo "Unsupported operating system: $(uname)"
+  exit 1
 fi
-
-# todo, nixOS
