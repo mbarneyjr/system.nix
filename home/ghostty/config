@@ -1,8 +1,8 @@
 font-family = "SourceCodePro Nerd Font Mono"
 font-family = "Berkeley Mono"
 font-feature = -calt
-font-size = 20
+font-size = 16
 background-opacity = 0.9
 macos-titlebar-style = "transparent"
 confirm-close-surface = false
-theme = dark:TokyoNight,light:TokyoNight Day
+theme = TokyoNight

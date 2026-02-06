@@ -99,6 +99,7 @@ alias idot="dot -Tsvg | kitten icat --align left"
 alias flush-mac-dns="sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
 alias docker="finch"
 
+autoload -Uz bashcompinit && bashcompinit
 complete -C 'aws_completer' aws
 
 eval "$(command fzf --zsh)"

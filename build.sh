@@ -11,15 +11,28 @@ else
   exit 1
 fi
 
-if [[ "$(uname)" == "Darwin" ]]; then
+if [[ -d /etc/nixos ]]; then
+  SYSTEM=${1:-$(cat /etc/system.nix/system 2>/dev/null)}
+  if [[ -z "${SYSTEM}" ]]; then
+    echo "When building for NixOS you must provide a system to build."
+    exit 1
+  fi
+  REBOOT=${REBOOT:-}
+  if [[ -z "${REBOOT}" ]]; then
+    COMMAND="switch"
+  else
+    COMMAND="boot"
+  fi
+  echo "Building system.nix for NixOS system ${SYSTEM}..."
+  sudo nixos-rebuild ${COMMAND} --flake "$HOME/system.nix#${SYSTEM}" ${@:2}
+  exit 0
+elif [[ "$(uname)" == "Darwin" ]]; then
   echo "Building system.nix for macOS on ${ARCH}..."
   sudo -H nix run \
     --extra-experimental-features 'nix-command flakes' \
     nix-darwin/master#darwin-rebuild -- \
     switch --flake ~/system.nix#${ARCH} ${@}
-fi
-
-if [[ "$(uname)" == "Linux" ]]; then
+elif [[ "$(uname)" == "Linux" ]]; then
   echo "Building system.nix for Linux on ${ARCH}..."
   nix run \
     --extra-experimental-features 'nix-command flakes' \
@@ -27,6 +40,7 @@ if [[ "$(uname)" == "Linux" ]]; then
     switch --flake ~/system.nix#${ARCH} \
     --extra-experimental-features 'nix-command flakes' \
     ${@}
+else
+  echo "Unsupported operating system: $(uname)"
+  exit 1
 fi
-
-# todo, nixOS

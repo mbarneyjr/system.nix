@@ -87,10 +87,7 @@ in
 inputs.nix-darwin.lib.darwinSystem {
   inherit system inputs pkgs;
   specialArgs = {
-    inherit
-      system
-      username
-      ;
+    inherit system username;
   };
   modules = [
     defaultConfiguration
