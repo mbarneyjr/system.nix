@@ -20,13 +20,17 @@ if [[ "$(uname)" == "Darwin" ]]; then
 fi
 
 if [[ "$(uname)" == "Linux" ]]; then
-  echo "Building system.nix for Linux on ${ARCH}..."
-  nix run \
-    --extra-experimental-features 'nix-command flakes' \
-    home-manager/release-24.11 -- \
-    switch --flake ~/system.nix#${ARCH} \
-    --extra-experimental-features 'nix-command flakes' \
-    ${@}
+  # Check if this is NixOS
+  if [[ -f /etc/NIXOS ]] || grep -q "ID=nixos" /etc/os-release 2>/dev/null; then
+    echo "Building system.nix for NixOS on ${ARCH}..."
+    sudo nixos-rebuild switch --flake ~/system.nix#${ARCH} --impure ${@}
+  else
+    echo "Building system.nix for Linux on ${ARCH}..."
+    nix run \
+      --extra-experimental-features 'nix-command flakes' \
+      home-manager/release-24.11 -- \
+      switch --flake ~/system.nix#${ARCH} \
+      --extra-experimental-features 'nix-command flakes' \
+      ${@}
+  fi
 fi
-
-# todo, nixOS

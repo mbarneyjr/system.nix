@@ -20,6 +20,12 @@ If using the Determinate Systems nix installer, be sure to choose the nixos.org 
 $ curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
 ```
 
+## Cloning
+
+```sh
+nix --extra-experimental-features 'nix-command flakes' run nixpkgs#git clone https://github.com/mbarneyjr/system.nix.git
+```
+
 ## Running
 
 ```sh

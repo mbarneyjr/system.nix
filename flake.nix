@@ -1,6 +1,17 @@
 {
   description = "nix-darwin system flake";
 
+  nixConfig = {
+    extra-substituters = [
+      "https://nix.barney.dev/"
+      "https://cache.nixos.org/"
+    ];
+    extra-trusted-public-keys = [
+      "nix.barney.dev-1:Wz6Nj2M/3PogEKI4/SRIdUm83QlC6zZN/0CCTS9oJ2o="
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+    ];
+  };
+
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
@@ -22,11 +33,12 @@
   };
 
   outputs =
-    inputs@{ self, ... }:
+    inputs@{ self, nixpkgs, ... }:
     let
       username = "mbarney";
       darwin-system = import ./system/darwin.nix { inherit username inputs; };
       home = import ./system/home-manager.nix { inherit username inputs; };
+      nixos = import ./system/nixos.nix { inherit username inputs; };
     in
     {
       darwinConfigurations = {
@@ -36,6 +48,10 @@
       homeConfigurations = {
         x86_64 = home { system = "x86_64-linux"; };
         aarch64 = home { system = "aarch64-linux"; };
+      };
+      nixosConfigurations = {
+        x86_64 = nixos { system = "x86_64-linux"; };
+        aarch64 = nixos { system = "aarch64-linux"; };
       };
     };
 }
