@@ -14,6 +14,7 @@
     enable = true;
     target = ".claude/settings.json";
     text = builtins.toJSON {
+      model = "opus";
       includeCoAuthoredBy = false;
       awsAuthRefresh = builtins.concatStringsSep "; " [
         "rm -rf ~/.aws/cli/cache/* 2>/dev/null"
