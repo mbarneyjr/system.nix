@@ -31,6 +31,7 @@
     pkgs.nixpkgs-review
     pkgs.nix-output-monitor
     pkgs.glow
+    pkgs.gonzo
     pkgs.trufflehog
     pkgs.aws-vault
     pkgs.okta-aws-cli
