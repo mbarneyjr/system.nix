@@ -3,7 +3,7 @@
 TYPE=${1:-}
 SCOPE=${2:-}
 
-claude -p "
+claude --model haiku -p "
 Look at only the staged git changes and create a summarizing git commit title.
 You must not look at changes that are not staged.
 Only respond with the title and no affirmation.
