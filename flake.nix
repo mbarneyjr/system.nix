@@ -25,8 +25,8 @@
     inputs@{ self, ... }:
     let
       username = "mbarney";
-      darwin-system = import ./system/darwin.nix { inherit username inputs; };
-      home = import ./system/home-manager.nix { inherit username inputs; };
+      darwin-system = import ./system/darwin { inherit username inputs; };
+      home = import ./system/home-manager { inherit username inputs; };
     in
     {
       darwinConfigurations = {

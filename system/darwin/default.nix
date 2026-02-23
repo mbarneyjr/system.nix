@@ -11,12 +11,7 @@ let
     config = {
       allowUnfree = true;
     };
-    overlays = [
-      (import ./overlays/aws-whoami.nix)
-      (import ./overlays/awscurl.nix)
-      (import ./overlays/cfn-transform.nix)
-      (import ./overlays/former.nix)
-    ];
+    overlays = import ../../nix/overlays;
   };
   defaultConfiguration =
     { pkgs, config, ... }:
@@ -86,7 +81,7 @@ let
       home-manager.extraSpecialArgs = {
         mbnvim = inputs.mbnvim.packages.${system}.default;
       };
-      home-manager.users.${username} = import ../home { inherit pkgs username; };
+      home-manager.users.${username} = import ../../home { inherit pkgs username; };
     };
 in
 inputs.nix-darwin.lib.darwinSystem {

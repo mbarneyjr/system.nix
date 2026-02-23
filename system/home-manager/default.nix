@@ -6,12 +6,7 @@ let
     config = {
       allowUnfree = true;
     };
-    overlays = [
-      (import ./overlays/awscurl.nix)
-      (import ./overlays/cfn-transform.nix)
-      (import ./overlays/former.nix)
-      (import ./overlays/aws-whoami.nix)
-    ];
+    overlays = import ../../nix/overlays;
   };
 in
 inputs.home-manager.lib.homeManagerConfiguration {
@@ -21,6 +16,6 @@ inputs.home-manager.lib.homeManagerConfiguration {
     inherit inputs username;
   };
   modules = [
-    ../home
+    ../../home
   ];
 }
