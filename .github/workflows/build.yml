@@ -65,6 +65,12 @@ jobs:
           aws-region: us-east-2
           role-to-assume: arn:aws:iam::792172458894:role/github-actions
           role-session-name: GitHubActions-${{ github.run_id }}
+      - name: assume role
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: us-east-2
+          role-to-assume: arn:aws:iam::792172458894:role/github-actions
+          role-session-name: GitHubActions-${{ github.run_id }}
       - name: sign and upload to cache
         run: |
           nix store sign --verbose --key-file ./private-key --recursive ./result
