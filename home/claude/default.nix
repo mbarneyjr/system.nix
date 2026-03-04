@@ -1,19 +1,18 @@
 {
   pkgs,
+  mbnvim,
   ...
 }:
 {
   home.packages = [
-    pkgs.claude-code
     (pkgs.writeShellScriptBin "claude-code-bedrock" ''
       export CLAUDE_CODE_USE_BEDROCK=1
       exec ${pkgs.claude-code}/bin/claude "$@"
     '')
   ];
-  home.file.claude-settings = {
+  programs.claude-code = {
     enable = true;
-    target = ".claude/settings.json";
-    text = builtins.toJSON {
+    settings = {
       model = "opus";
       includeCoAuthoredBy = false;
       awsAuthRefresh = builtins.concatStringsSep "; " [
@@ -28,6 +27,11 @@
         command = ./statusline.sh;
         padding = 0;
       };
+      permissions = {
+        allow = [
+          "mcp__review_nvim"
+        ];
+      };
       hooks = {
         Notification = [
           {
@@ -40,6 +44,14 @@
           }
         ];
       };
+    };
+    mcpServers = {
+      "review.nvim" = {
+        command = "${mbnvim}/bin/review-nvim-mcp";
+      };
+    };
+    skills = {
+      nvim-review = ./skills/nvim-review.md;
     };
   };
 }
