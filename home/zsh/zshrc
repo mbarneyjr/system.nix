@@ -12,15 +12,12 @@ bindkey "^[[1;3C" forward-word
 bindkey "^[[1;3D" backward-word
 
 _git_branch() {
-  local git_status="$(git status 2> /dev/null)"
-  if [ -z "$git_status" ]; then return 0; fi
-  local branchname="$(git branch 2> /dev/null | sed -n -e 's/^\* \(.*\)/\1/p')"
-  if [ ! -z "$(git status --porcelain 2> /dev/null)" ]; then
-    printf "%%F{red}($branchname ✘)"
-  elif [ ! -z "$(git log origin/$branchname..$branchname 2> /dev/null)" ]; then
-    printf "%%F{yellow}($branchname ?)"
-  else
+  local branchname
+  branchname="$(git --no-optional-locks rev-parse --abbrev-ref HEAD 2>/dev/null)" || return 0
+  if [ -z "$(git --no-optional-locks status --porcelain --untracked-files=normal 2>/dev/null | head -1)" ]; then
     printf "%%F{green}($branchname ✔)"
+  else
+    printf "%%F{red}($branchname ✘)"
   fi
 }
 _aws_region() {
