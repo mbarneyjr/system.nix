@@ -41,7 +41,7 @@
     pkgs.rainfrog
     pkgs.neofetch
     pkgs.speedtest-cli
-    pkgs._1password-cli
+    # pkgs._1password-cli
     pkgs.shellcheck
     pkgs.aws-sso-util
     pkgs.awscurl
