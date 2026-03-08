@@ -24,7 +24,7 @@
     pkgs.kitty # mainly for kitten icat
     pkgs.gh
     pkgs.awscli2
-    pkgs.aws-sam-cli
+    # pkgs.aws-sam-cli
     pkgs.pipx
     pkgs.uv
     pkgs.presenterm
