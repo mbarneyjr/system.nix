@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+profile="${1:?Usage: awsuse-sso <profile-name>}"
+aws_config="${AWS_CONFIG_FILE:-$HOME/.aws/config}"
+
+# pull out a given property of a config section/profile
+cfg() {
+  awk -v section="$1" -v key="$2" '
+    /^\[/ { gsub(/^[[:space:]]*\[|][[:space:]]*$/, ""); found = ($0 == section); next }
+    found && $0 ~ "^[[:space:]]*" key "[[:space:]]*=" { sub(/^[^=]*=[[:space:]]*/, ""); sub(/[[:space:]]*$/, ""); print; exit }
+  ' "$aws_config"
+}
+
+sso_session=$(cfg "profile $profile" "awsuse_sso_session")
+sso_account_id=$(cfg "profile $profile" "awsuse_sso_account_id")
+sso_role_name=$(cfg "profile $profile" "awsuse_sso_role_name")
+sso_start_url=$(cfg "sso-session $sso_session" "sso_start_url")
+sso_region=$(cfg "sso-session $sso_session" "sso_region")
+
+find_token() {
+  local now
+  now=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+  for f in "$HOME"/.aws/sso/cache/*.json; do
+    [[ -f "$f" ]] || continue
+    read -r url token expires < <(
+      jq -r '[(.startUrl // ""), (.accessToken // ""), (.expiresAt // "")] | @tsv' "$f" 2>/dev/null
+    ) || continue
+    [[ "$url" == "$sso_start_url" && -n "$token" && -n "$expires" && "$expires" > "$now" ]] && echo "$token" && return
+  done
+  return 1
+}
+
+access_token=$(find_token) || {
+  aws sso login --sso-session "$sso_session" </dev/null >&2 2>&1
+  access_token=$(find_token) || {
+    echo "Error: SSO login did not produce a valid token" >&2
+    exit 1
+  }
+}
+
+creds=$(
+  unset AWS_PROFILE AWS_DEFAULT_PROFILE AWS_CONFIG_FILE AWS_SHARED_CREDENTIALS_FILE
+  aws sso get-role-credentials \
+    --account-id "$sso_account_id" \
+    --role-name "$sso_role_name" \
+    --access-token "$access_token" \
+    --region "$sso_region" \
+    --output json
+)
+
+jq '{
+  Version: 1,
+  AccessKeyId: .roleCredentials.accessKeyId,
+  SecretAccessKey: .roleCredentials.secretAccessKey,
+  SessionToken: .roleCredentials.sessionToken,
+  Expiration: (.roleCredentials.expiration / 1000 | strftime("%Y-%m-%dT%H:%M:%SZ"))
+}' <<<"$creds"
