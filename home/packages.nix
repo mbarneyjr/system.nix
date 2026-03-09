@@ -39,7 +39,7 @@
     pkgs.nixfmt
     pkgs.nix-tree
     pkgs.rainfrog
-    pkgs.neofetch
+    pkgs.fastfetch
     pkgs.speedtest-cli
     pkgs._1password-cli
     pkgs.shellcheck
