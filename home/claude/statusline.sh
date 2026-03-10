@@ -28,7 +28,15 @@
 
 input=$(cat)
 version=$(echo "$input" | jq -r '.version')
-model_id=$(echo "$input" | jq -r '.model.id')
+model_id=$(echo "$input" | jq -r '.model.display_name')
 cost=$(echo "$input" | jq -r '.cost.total_cost_usd')
+context=$(echo "$input" | jq -r '.context_window.used_percentage // 0' | cut -d. -f1)
+# Build progress bar: printf creates spaces, tr replaces with blocks
+bar_width=10
+filled=$((context * bar_width / 100))
+empty=$((bar_width - filled))
+bar=""
+[ "$filled" -gt 0 ] && bar=$(printf "%${filled}s" | tr ' ' '#')
+[ "$empty" -gt 0 ] && bar="${bar}$(printf "%${empty}s" | tr ' ' '.')"
 
-echo "Claude Code ${version} | Model: $model_id | Cost: $cost USD"
+echo "Claude Code ${version} | Model: $model_id | Context: [$bar] $context% | Cost: $cost USD"
