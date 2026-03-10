@@ -18,22 +18,75 @@ sso_role_name=$(cfg "profile $profile" "awsuse_sso_role_name")
 sso_start_url=$(cfg "sso-session $sso_session" "sso_start_url")
 sso_region=$(cfg "sso-session $sso_session" "sso_region")
 
-find_token() {
-  local now
-  now=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+# Find the cache file for this SSO start URL
+find_cache_file() {
   for f in "$HOME"/.aws/sso/cache/*.json; do
     [[ -f "$f" ]] || continue
-    read -r url token expires < <(
-      jq -r '[(.startUrl // ""), (.accessToken // ""), (.expiresAt // "")] | @tsv' "$f" 2>/dev/null
-    ) || continue
-    [[ "$url" == "$sso_start_url" && -n "$token" && -n "$expires" && "$expires" > "$now" ]] && echo "$token" && return
+    local url
+    url=$(jq -r '.startUrl // empty' "$f" 2>/dev/null) || continue
+    [[ "$url" == "$sso_start_url" ]] && echo "$f" && return
   done
   return 1
 }
 
-access_token=$(find_token) || {
+# Get a valid access token: use cached, refresh if expired, or login as last resort
+get_access_token() {
+  local cache_file now token expires
+  cache_file=$(find_cache_file) || return 1
+
+  now=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+  read -r token expires < <(jq -r '[(.accessToken // ""), (.expiresAt // "")] | @tsv' "$cache_file") || return 1
+  [[ -n "$token" ]] || return 1
+
+  # Token still valid
+  if [[ -n "$expires" && "$expires" > "$now" ]]; then
+    echo "$token"
+    return
+  fi
+
+  # Token expired — try refreshing with the refresh token
+  local refresh_token client_id client_secret
+  read -r refresh_token client_id client_secret < <(
+    jq -r '[(.refreshToken // ""), (.clientId // ""), (.clientSecret // "")] | @tsv' "$cache_file"
+  ) || return 1
+
+  if [[ -n "$refresh_token" && -n "$client_id" && -n "$client_secret" ]]; then
+    local refresh_result new_token new_expires new_refresh
+    refresh_result=$(
+      unset AWS_PROFILE AWS_DEFAULT_PROFILE AWS_CONFIG_FILE AWS_SHARED_CREDENTIALS_FILE
+      aws sso-oidc create-token \
+        --client-id "$client_id" \
+        --client-secret "$client_secret" \
+        --grant-type refresh_token \
+        --refresh-token "$refresh_token" \
+        --region "$sso_region" \
+        --output json 2>/dev/null
+    ) || return 1
+
+    new_token=$(jq -r '.accessToken // empty' <<<"$refresh_result")
+    new_expires=$(jq -r '(.expiresIn // 0)' <<<"$refresh_result")
+    new_refresh=$(jq -r '.refreshToken // empty' <<<"$refresh_result")
+    [[ -n "$new_token" ]] || return 1
+
+    # Update the cache file with the new token
+    local new_expires_at
+    new_expires_at=$(date -u -d "+${new_expires} seconds" +"%Y-%m-%dT%H:%M:%SZ" 2>/dev/null ||
+                     date -u -v+"${new_expires}"S +"%Y-%m-%dT%H:%M:%SZ" 2>/dev/null)
+
+    jq --arg t "$new_token" --arg e "$new_expires_at" --arg r "$new_refresh" '
+      .accessToken = $t | .expiresAt = $e | (if $r != "" then .refreshToken = $r else . end)
+    ' "$cache_file" > "$cache_file.tmp" && mv "$cache_file.tmp" "$cache_file"
+
+    echo "$new_token"
+    return
+  fi
+
+  return 1
+}
+
+access_token=$(get_access_token) || {
   aws sso login --sso-session "$sso_session" </dev/null >&2 2>&1
-  access_token=$(find_token) || {
+  access_token=$(get_access_token) || {
     echo "Error: SSO login did not produce a valid token" >&2
     exit 1
   }
