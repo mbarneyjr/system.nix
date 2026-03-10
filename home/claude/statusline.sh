@@ -32,7 +32,7 @@ model_id=$(echo "$input" | jq -r '.model.display_name')
 cost=$(echo "$input" | jq -r '.cost.total_cost_usd')
 context=$(echo "$input" | jq -r '.context_window.used_percentage // 0' | cut -d. -f1)
 # Build progress bar: printf creates spaces, tr replaces with blocks
-bar_width=10
+bar_width=20
 filled=$((context * bar_width / 100))
 empty=$((bar_width - filled))
 bar=""
