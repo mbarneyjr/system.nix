@@ -137,4 +137,11 @@ sketchybar \
     label.padding_right=8 \
     icon.padding_left=8
 
+sketchybar \
+  --add item display_watcher e \
+  --set display_watcher \
+    drawing=off \
+    script="pkill -x sketchybar" \
+  --subscribe display_watcher display_change system_woke
+
 sketchybar --update
