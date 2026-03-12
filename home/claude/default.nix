@@ -51,7 +51,7 @@
       };
     };
     skills = {
-      nvim-review = ./skills/nvim-review.md;
+      nvim-review = builtins.readFile "${mbnvim}/skills/nvim-review/SKILL.md";
     };
   };
 }
