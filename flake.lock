@@ -145,20 +145,46 @@
         "type": "github"
       }
     },
+    "iam-legend-lsp": {
+      "inputs": {
+        "flake-parts": [
+          "mbnvim",
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "mbnvim",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1773343005,
+        "narHash": "sha256-3rU1knmtrQprbQGtyo9CGpFhJalcGa95uTbPkXwCbQk=",
+        "owner": "mbarneyjr",
+        "repo": "iam-legend-lsp",
+        "rev": "08b84fd5e494ef7cec6ebab4dc581ca586096088",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mbarneyjr",
+        "repo": "iam-legend-lsp",
+        "type": "github"
+      }
+    },
     "mbnvim": {
       "inputs": {
         "fff-nvim": "fff-nvim",
         "flake-parts": "flake-parts",
+        "iam-legend-lsp": "iam-legend-lsp",
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1773325015,
-        "narHash": "sha256-4R+ARcIN50sRKiMLhIw6aRXgtotMeQolheYQXdMOLJI=",
+        "lastModified": 1773343470,
+        "narHash": "sha256-npfq56yu7bt4JB9v02W59UfsKMoqhYa79KgBVMctJK0=",
         "owner": "mbarneyjr",
         "repo": "mbnvim",
-        "rev": "b29ec074784d61042f5c20cb4369dac7c696f64e",
+        "rev": "01d7a92aa6d00f8a06e3d43ac13f52468ccfa373",
         "type": "github"
       },
       "original": {

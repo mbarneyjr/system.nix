@@ -66,9 +66,21 @@ awsuse () {
   fi
 
   if [[ ${profile} == arn:aws:iam::* ]]; then
+    policy_document=$3
+    if [[ -n "${policy_document}" && ${policy_document} != \{* ]]; then
+      if [[ ! -f "${policy_document}" ]]; then
+        echo "Policy document file not found: ${policy_document}"
+        return 1
+      fi
+      policy_document=$(cat "${policy_document}")
+    fi
     role_arn=${profile}
     session_name="$(whoami)"
-    temp_credentials=$(aws sts assume-role --role-arn "${role_arn}" --role-session-name "${session_name}" --output json)
+    local -a assume_args=(--role-arn "${role_arn}" --role-session-name "${session_name}" --output json)
+    if [[ -n "${policy_document}" ]]; then
+      assume_args+=(--policy "${policy_document}")
+    fi
+    temp_credentials=$(aws sts assume-role "${assume_args[@]}")
     awsunuse
     AWS_ACCESS_KEY_ID=$(echo "${temp_credentials}" | jq -r '.Credentials.AccessKeyId')
     AWS_SECRET_ACCESS_KEY=$(echo "${temp_credentials}" | jq -r '.Credentials.SecretAccessKey')
