@@ -7,28 +7,54 @@ Nix flake for macOS and Linux via nix-darwin, NixOS, or Home Manager.
 You may need to install rosetta and the xcode command-line tools with the following command:
 
 ```sh
-$ softwareupdate --install-rosetta
-$ xcode-select --install
+softwareupdate --install-rosetta
+xcode-select --install
 ```
 
 Then, install nix.
-The [`nix-installer`](https://github.com/DeterminateSystems/nix-installer) is the most convenient option.
-It enables `nix-command` and `flake` experimental features by default and provides an uninstaller.
-If using the Determinate Systems nix installer, be sure to choose the nixos.org install option.
+
+<!-- The [`nix-installer`](https://github.com/DeterminateSystems/nix-installer) is the most convenient option. -->
+<!-- It enables `nix-command` and `flake` experimental features by default and provides an uninstaller. -->
+<!-- If using the Determinate Systems nix installer, be sure to choose the nixos.org install option. -->
 
 ```sh
-$ curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install)
 ```
 
 ## Running
 
+### First-Time Setup
+
+Clone:
+
 ```sh
-$ ./build.sh
+nix run --extra-experimental-features 'nix-command flakes' nixpkgs#git clone https://github.com/mbarneyjr/system.nix ~/system.nix
+```
+
+Move login files for nix-darwin:
+
+```sh
+sudo mv /etc/bashrc /etc/bashrc.before-nix-darwin
+sudo mv /etc/zshrc /etc/zshrc.before-nix-darwin
+```
+
+### Build
+
+```sh
+./build.sh
 ```
 
 ## Post-Setup
 
 ### Keybase GPG
+
+First, login:
+
+```sh
+keybase login
+```
+
+Then, import the keys:
 
 ```sh
 keybase pgp export|gpg --import -
