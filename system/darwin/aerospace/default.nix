@@ -116,6 +116,10 @@
         "if".app-id = "com.mitchellh.ghostty";
         run = "move-node-to-workspace 3";
       }
+      {
+        "if".app-id = "com.apple.backup.launcher";
+        run = "layout floating";
+      }
     ];
   };
 }
