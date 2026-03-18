@@ -97,6 +97,9 @@
       closeViewScrollWheelToggle = true;
       reduceMotion = true;
     };
+    WindowManager = {
+      EnableStandardClickToShowDesktop = false;
+    };
   };
   system.keyboard = {
     enableKeyMapping = true;
