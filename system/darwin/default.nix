@@ -18,31 +18,10 @@ let
     {
       # nix-darwin version
       system.stateVersion = 6;
-      # nix configuration
-      # nix.settings.sandbox = true;
-      nix.enable = true;
-      nix.package = pkgs.nix;
-      nix.checkConfig = true;
+      # nix configuration (managed by determinate nix module)
+      determinateNix.enable = true;
       nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
-      nix.gc = {
-        automatic = true;
-        interval = [
-          {
-            Hour = 0;
-          }
-        ];
-        options = "--delete-older-than 30d";
-      };
-      nix.optimise = {
-        automatic = true;
-        interval = [
-          {
-            Hour = 0;
-          }
-        ];
-      };
       nix.settings = {
-        experimental-features = "nix-command flakes";
         substituters = [
           "https://nix.barney.dev/"
           "https://cache.nixos.org/"
@@ -99,6 +78,7 @@ inputs.nix-darwin.lib.darwinSystem {
     ./aerospace
     ./sketchybar
     ./fonts
+    inputs.determinate.darwinModules.default
     inputs.nix-homebrew.darwinModules.nix-homebrew
     inputs.home-manager.darwinModules.home-manager
     homeManagerConfig

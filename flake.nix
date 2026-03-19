@@ -17,6 +17,9 @@
     homebrew-cask.url = "github:homebrew/homebrew-cask";
     homebrew-cask.flake = false;
 
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
+    determinate.inputs.nixpkgs.follows = "nixpkgs";
+
     mbnvim.url = "github:mbarneyjr/mbnvim";
     mbnvim.inputs.nixpkgs.follows = "nixpkgs";
   };
