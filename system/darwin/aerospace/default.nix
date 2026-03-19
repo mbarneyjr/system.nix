@@ -68,8 +68,10 @@
       alt-shift-6 = "move-node-to-workspace 6";
       alt-shift-7 = "move-node-to-workspace 7";
       alt-shift-8 = "move-node-to-workspace 8";
-      alt-shift-leftSquareBracket = "move-workspace-to-monitor --wrap-around next";
-      alt-shift-rightSquareBracket = "move-workspace-to-monitor --wrap-around prev";
+      alt-ctrl-j = "move-workspace-to-monitor --wrap-around down";
+      alt-ctrl-k = "move-workspace-to-monitor --wrap-around up";
+      alt-ctrl-h = "move-workspace-to-monitor --wrap-around left";
+      alt-ctrl-l = "move-workspace-to-monitor --wrap-around right";
       alt-shift-semicolon = "mode service";
       alt-shift-f = "fullscreen";
     };
