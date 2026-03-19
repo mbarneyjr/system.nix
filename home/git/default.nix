@@ -43,10 +43,16 @@
       enable = true;
     };
     "credential \"https://github.com\"" = {
-      helper = "!${pkgs.gh}/bin/gh auth git-credential";
+      helper = [
+        ""
+        "!${pkgs.gh}/bin/gh auth git-credential"
+      ];
     };
     "credential \"https://gist.github.com\"" = {
-      helper = "!${pkgs.gh}/bin/gh auth git-credential";
+      helper = [
+        ""
+        "!${pkgs.gh}/bin/gh auth git-credential"
+      ];
     };
     core = {
       editor = "nvim";
