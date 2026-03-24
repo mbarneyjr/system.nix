@@ -66,7 +66,6 @@
       wvous-tl-corner = 1;
       wvous-tr-corner = 1;
       persistent-apps = [
-        "/System/Applications/Launchpad.app"
         "/System/Applications/System Settings.app"
         "/System/Applications/Messages.app"
         "/System/Applications/Notes.app"
