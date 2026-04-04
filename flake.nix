@@ -4,6 +4,9 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    import-tree.url = "github:vic/import-tree";
+
     nix-darwin.url = "github:LnL7/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -21,21 +24,8 @@
     mbnvim.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs =
-    inputs@{ self, ... }:
-    let
-      username = "mbarney";
-      darwin-system = import ./system/darwin { inherit username inputs; };
-      home = import ./system/home-manager { inherit username inputs; };
-    in
-    {
-      darwinConfigurations = {
-        x86_64 = darwin-system { system = "x86_64-darwin"; };
-        aarch64 = darwin-system { system = "aarch64-darwin"; };
-      };
-      homeConfigurations = {
-        x86_64 = home { system = "x86_64-linux"; };
-        aarch64 = home { system = "aarch64-linux"; };
-      };
+  outputs = inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [ (inputs.import-tree ./modules) ];
     };
 }
