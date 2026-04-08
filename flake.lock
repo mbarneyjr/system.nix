@@ -12,11 +12,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1775613450,
-        "narHash": "sha256-r+wJkqlLwUq3Ap/s/QgeMo23W0hv2UZ6L1viexYlQUs=",
+        "lastModified": 1775660548,
+        "narHash": "sha256-kpfmVMf2nlmvStRbzcDymHFQKif6GmtLblpoJPDwSN4=",
         "owner": "mbarneyjr",
         "repo": "aws-iam-language-server",
-        "rev": "b9155f9afad5e3bb79d4ef965d6ce31cef84a039",
+        "rev": "0f7cc008583d2763803b56b19a0d498254c3e6fc",
         "type": "github"
       },
       "original": {
@@ -213,11 +213,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1775613472,
-        "narHash": "sha256-vYtCiaKKxFuucPKkShg57TvA/2K17SK4oQwjl8Th+08=",
+        "lastModified": 1775660619,
+        "narHash": "sha256-FmJbdo2PgYLBvM7E/JnuNb5sWWLAK08SGRQn12Fz15E=",
         "owner": "mbarneyjr",
         "repo": "mbnvim",
-        "rev": "da263d2b38bfd84f7355e55ede8d7d13e5af1729",
+        "rev": "20b07cb523bc63f55d1a1a2e54eabee54dd36d6e",
         "type": "github"
       },
       "original": {
