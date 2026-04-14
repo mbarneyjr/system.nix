@@ -25,6 +25,23 @@
         "type": "github"
       }
     },
+    "awscli2": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1776177116,
+        "narHash": "sha256-Du1K1479jTE0vNeUw++VLtR5ykV49pGY+Yo+8GM3Hoc=",
+        "owner": "aws",
+        "repo": "aws-cli",
+        "rev": "4f879de3c77375b3bdbf38111ee067fe1c691bc0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "aws",
+        "ref": "v2",
+        "repo": "aws-cli",
+        "type": "github"
+      }
+    },
     "brew-src": {
       "flake": false,
       "locked": {
@@ -313,6 +330,7 @@
     },
     "root": {
       "inputs": {
+        "awscli2": "awscli2",
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
         "homebrew-cask": "homebrew-cask",

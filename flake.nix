@@ -22,9 +22,13 @@
 
     mbnvim.url = "github:mbarneyjr/mbnvim";
     mbnvim.inputs.nixpkgs.follows = "nixpkgs";
+
+    awscli2.url = "github:aws/aws-cli/v2";
+    awscli2.flake = false;
   };
 
-  outputs = inputs:
+  outputs =
+    inputs:
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [ (inputs.import-tree ./modules) ];
     };

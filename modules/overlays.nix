@@ -1,6 +1,13 @@
-{ ... }:
+{ inputs, ... }:
 let
   overlayList = [
+    (final: prev: {
+      awscli2 = prev.awscli2.overridePythonAttrs (old: {
+        version = "unstable-${inputs.awscli2.shortRev}";
+        src = inputs.awscli2;
+        doCheck = false;
+      });
+    })
     (final: prev: {
       aws-whoami = prev.python3Packages.buildPythonPackage rec {
         pname = "aws-whoami";
