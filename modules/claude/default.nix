@@ -54,6 +54,9 @@
         };
         skills = {
           nvim-review = builtins.readFile "${mbnvim}/skills/nvim-review/SKILL.md";
+          caveman = ./skills/caveman;
+          caveman-commit = ./skills/caveman-commit;
+          caveman-review = ./skills/caveman-review;
         };
       };
     };
