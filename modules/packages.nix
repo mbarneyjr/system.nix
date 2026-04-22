@@ -5,6 +5,7 @@
     {
       home.packages = [
         inputs.mbnvim.packages.${pkgs.system}.default
+        inputs.gcalsync.packages.${pkgs.system}.default
         pkgs.coreutils
         pkgs.eza
         pkgs.bat

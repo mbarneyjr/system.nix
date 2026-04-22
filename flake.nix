@@ -23,6 +23,9 @@
     mbnvim.url = "github:mbarneyjr/mbnvim";
     mbnvim.inputs.nixpkgs.follows = "nixpkgs";
 
+    gcalsync.url = "github:mbarneyjr/gcalsync";
+    gcalsync.inputs.nixpkgs.follows = "nixpkgs";
+
     awscli2.url = "github:aws/aws-cli/v2";
     awscli2.flake = false;
   };

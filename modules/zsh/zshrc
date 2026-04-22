@@ -97,6 +97,7 @@ alias flush-mac-dns="sudo dscacheutil -flushcache && sudo killall -HUP mDNSRespo
 alias docker="finch"
 
 complete -C 'aws_completer' aws
+eval "$(command gcalsync completion zsh)"
 
 eval "$(command fzf --zsh)"
 autoload -Uz edit-command-line
