@@ -40,7 +40,7 @@
                 hooks = [
                   {
                     type = "command";
-                    command = "say 'claude needs input'";
+                    command = "say '[[volm 0.2]] claude needs input'";
                   }
                 ];
               }
