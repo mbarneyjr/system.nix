@@ -4,7 +4,7 @@ let
 in
 {
   configurations.darwin = {
-    aarch64.module = {
+    aarch64-public.module = {
       imports = [
         darwin.overlays
         darwin.nix-settings
@@ -17,8 +17,7 @@ in
 
         inputs.home-manager.darwinModules.home-manager
         {
-          proprietary.berkeleyMono.enable = true;
-          proprietary.berkeleyMono.rev = "cefdbcc46656894441902c8e64712e83420a9fa4";
+          proprietary.berkeleyMono.enable = false;
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.${config.user.name} = {

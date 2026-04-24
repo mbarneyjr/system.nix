@@ -51,12 +51,12 @@ jobs:
         run: |
           set -euo pipefail
           git checkout main
-          nix build --quiet .#darwinConfigurations.aarch64.system --print-out-paths | xargs nix path-info -r | sed 's|/nix/store/[^-]*-||' | sort > packages-before.txt
+          nix build --quiet .#darwinConfigurations.aarch64-public.system --print-out-paths | xargs nix path-info -r | sed 's|/nix/store/[^-]*-||' | sort > packages-before.txt
       - name: capture packages after target
         run: |
           set -euo pipefail
           git checkout ${{ github.sha }}
-          nix build --quiet .#darwinConfigurations.aarch64.system --print-out-paths | xargs nix path-info -r | sed 's|/nix/store/[^-]*-||' | sort > packages-after.txt
+          nix build --quiet .#darwinConfigurations.aarch64-public.system --print-out-paths | xargs nix path-info -r | sed 's|/nix/store/[^-]*-||' | sort > packages-after.txt
       - name: assume role
         uses: aws-actions/configure-aws-credentials@v4
         with:
