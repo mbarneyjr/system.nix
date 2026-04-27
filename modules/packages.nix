@@ -51,6 +51,7 @@
         pkgs.former
         pkgs.aws-whoami
         pkgs.mergiraf
+        pkgs.git-remote-codecommit
       ];
     };
 }
