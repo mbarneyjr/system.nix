@@ -1,10 +1,10 @@
 { ... }:
 {
   flake.modules.homeManager.direnv =
-    { pkgs, ... }:
+    { pkgs, lib, ... }:
     {
       programs.direnv = {
-        package = pkgs.direnv;
+        package = lib.warn "direnv: doCheck disabled — remove override once nixpkgs cache catches up" (pkgs.direnv.overrideAttrs { doCheck = false; });
         enable = true;
         enableBashIntegration = true;
         enableZshIntegration = true;
