@@ -125,6 +125,9 @@ awsunuse() {
 
 awsuse-mfa () {
   (
+    _awsuse-squishinate
+    export AWS_CONFIG_FILE=${_awsuse_config_file}
+    export AWS_SHARED_CREDENTIALS_FILE=${_awsuse_credentials_file}
     profile=${1}
     if [ -z "${profile}" ]; then
       echo "Usage: awsuse-mfa PROFILE_NAME"
