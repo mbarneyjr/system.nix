@@ -45,6 +45,7 @@
         pkgs._1password-cli
         pkgs.shellcheck
         pkgs.aws-sso-util
+        pkgs.ssm-session-manager-plugin
         pkgs.awscurl
         pkgs.rain
         pkgs.cfn-transform
