@@ -1,16 +1,33 @@
 #!/bin/bash
-_awsuse_config_file=~/.aws/awsuse/config
-_awsuse_credentials_file=~/.aws/awsuse/credentials
+_awsuse_config_file=~/.aws/config
+_awsuse_credentials_file=~/.aws/credentials
 _awsuse_console_services_file=${_awsuse_console_services_file:-~/system.nix/home/awsuse/services.txt}
-mkdir -p ~/.aws/awsuse
+mkdir -p ~/.aws
 
 _awsuse-all-profiles () {
-  sed -n -r 's/^\[(profile )?([-A-z0-9]+)\]$/\2/p' ~/.aws/*config* ~/.aws/*credentials* | sort
+  sed -n -r 's/^\[(profile )?([-A-z0-9]+)\]$/\2/p' ~/.aws/*config* ~/.aws/*credentials* 2>/dev/null | sort -u
 }
 
 _awsuse-squishinate () {
-  cat ~/.aws/*config* > ${_awsuse_config_file}
-  cat ~/.aws/*credentials* > ${_awsuse_credentials_file}
+  local tmp_config tmp_credentials f
+  tmp_config=$(mktemp)
+  tmp_credentials=$(mktemp)
+  while IFS= read -r f; do
+    command cat "$f" >> "${tmp_config}"
+  done < <(find ~/.aws -maxdepth 1 -type f -name '*config*' ! -name 'config' | sort)
+  while IFS= read -r f; do
+    command cat "$f" >> "${tmp_credentials}"
+  done < <(find ~/.aws -maxdepth 1 -type f -name '*credentials*' ! -name 'credentials' | sort)
+  if [[ -s "${tmp_config}" ]]; then
+    mv "${tmp_config}" ${_awsuse_config_file}
+  else
+    rm -f "${tmp_config}"
+  fi
+  if [[ -s "${tmp_credentials}" ]]; then
+    mv "${tmp_credentials}" ${_awsuse_credentials_file}
+  else
+    rm -f "${tmp_credentials}"
+  fi
 }
 
 _awsuse-console-services () {
@@ -97,8 +114,6 @@ awsuse () {
       awsunuse
       export AWSUSE_PROFILE=${profile}
       export AWS_PROFILE=${profile}
-      export AWS_CONFIG_FILE=${_awsuse_config_file}
-      export AWS_SHARED_CREDENTIALS_FILE=${_awsuse_credentials_file}
       if [[ -n "${region}" ]]; then
         AWS_REGION=${region}
       else
@@ -126,8 +141,6 @@ awsunuse() {
 awsuse-mfa () {
   (
     _awsuse-squishinate
-    export AWS_CONFIG_FILE=${_awsuse_config_file}
-    export AWS_SHARED_CREDENTIALS_FILE=${_awsuse_credentials_file}
     profile=${1}
     if [ -z "${profile}" ]; then
       echo "Usage: awsuse-mfa PROFILE_NAME"
