@@ -21,9 +21,6 @@
             "rm -rf ~/.aws/cli/cache/* 2>/dev/null"
             "aws sts get-caller-identity --profile claude || aws sso login --profile claude"
           ];
-          env = {
-            AWS_PROFILE = "claude";
-          };
           statusLine = {
             type = "command";
             command = ./statusline.sh;
@@ -32,6 +29,13 @@
           permissions = {
             allow = [
               "mcp__review_nvim"
+              "mcp__aws-mcp__aws___read_documentation"
+              "mcp__aws-mcp__aws___search_documentation"
+              "mcp__aws-mcp__aws___get_regional_availability"
+              "mcp__aws-mcp__aws___get_tasks"
+              "mcp__aws-mcp__aws___list_regions"
+              "mcp__aws-mcp__aws___recommend"
+              "mcp__aws-mcp__aws___suggest_aws_commands"
             ];
           };
           hooks = {
@@ -50,6 +54,13 @@
         mcpServers = {
           "review.nvim" = {
             command = "${mbnvim}/bin/review-nvim-mcp";
+          };
+          aws-mcp = {
+            command = "uvx";
+            args = [
+              "mcp-proxy-for-aws@latest"
+              "https://aws-mcp.us-east-1.api.aws/mcp"
+            ];
           };
         };
         skills = {
