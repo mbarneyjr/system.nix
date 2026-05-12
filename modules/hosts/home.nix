@@ -16,6 +16,7 @@ let
       homeManager.awsuse
       homeManager.claude
       homeManager.ssh
+      homeManager.npm
     ];
   };
 in
