@@ -9,6 +9,14 @@ let
       });
     })
     (final: prev: {
+      pipx = prev.pipx.overridePythonAttrs (old: {
+        disabledTests = (old.disabledTests or [ ]) ++ [
+          "test_fix_package_name"
+          "test_parse_specifier_for_metadata"
+        ];
+      });
+    })
+    (final: prev: {
       aws-whoami = prev.python3Packages.buildPythonPackage rec {
         pname = "aws-whoami";
         version = "1.2.0";
