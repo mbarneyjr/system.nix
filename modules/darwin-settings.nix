@@ -96,6 +96,9 @@
         WindowManager = {
           EnableStandardClickToShowDesktop = false;
         };
+        CustomUserPreferences = {
+          NSGlobalDomain.SLSMenuBarUseBlurredAppearance = true;
+        };
       };
       system.keyboard = {
         enableKeyMapping = true;
