@@ -3,7 +3,7 @@
   flake.modules.homeManager.claude =
     { pkgs, ... }:
     let
-      mbnvim = inputs.mbnvim.packages.${pkgs.system}.default;
+      mbnvim = inputs.mbnvim.packages.${pkgs.stdenv.hostPlatform.system}.default;
     in
     {
       home.packages = [

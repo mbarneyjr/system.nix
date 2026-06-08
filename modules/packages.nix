@@ -4,8 +4,8 @@
     { pkgs, ... }:
     {
       home.packages = [
-        inputs.mbnvim.packages.${pkgs.system}.default
-        inputs.gcalsync.packages.${pkgs.system}.default
+        inputs.mbnvim.packages.${pkgs.stdenv.hostPlatform.system}.default
+        inputs.gcalsync.packages.${pkgs.stdenv.hostPlatform.system}.default
         pkgs.coreutils
         pkgs.eza
         pkgs.bat
