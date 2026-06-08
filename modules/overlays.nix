@@ -6,6 +6,13 @@ let
         version = "unstable-${inputs.awscli2.shortRev}";
         src = inputs.awscli2;
         doCheck = false;
+        postPatch = (old.postPatch or "") + ''
+          for f in $(grep -rl "awscrt[=<>]" .); do
+            substituteInPlace "$f" \
+              --replace-quiet "awscrt==0.32.2" "awscrt>=0" \
+              --replace-quiet "awscrt>=0.32.2" "awscrt>=0"
+          done
+        '';
       });
     })
     (final: prev: {
