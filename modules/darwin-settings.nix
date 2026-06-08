@@ -1,7 +1,10 @@
 { config, ... }:
+let
+  flakeConfig = config;
+in
 {
   flake.modules.darwin.darwin-settings =
-    { pkgs, ... }:
+    { config, pkgs, ... }:
     {
       # enable touch id for sudo
       environment.etc."pam.d/sudo_local".text = ''
@@ -30,7 +33,7 @@
           KeyRepeat = 1;
           "com.apple.sound.beep.feedback" = 1;
           "com.apple.trackpad.forceClick" = false;
-          _HIHideMenuBar = true;
+          _HIHideMenuBar = config.services.sketchybar.enable;
         };
         SoftwareUpdate = {
           AutomaticallyInstallMacOSUpdates = true;
@@ -84,7 +87,7 @@
           _FXShowPosixPathInTitle = true;
           _FXSortFoldersFirst = true;
           NewWindowTarget = "Other";
-          NewWindowTargetPath = "file:///Users/${config.user.name}/Downloads";
+          NewWindowTargetPath = "file:///Users/${flakeConfig.user.name}/Downloads";
         };
         screensaver = {
           askForPassword = true;

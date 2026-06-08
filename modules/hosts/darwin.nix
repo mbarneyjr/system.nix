@@ -17,6 +17,7 @@ in
 
         inputs.home-manager.darwinModules.home-manager
         {
+          services.sketchybar.enable = false;
           proprietary.berkeleyMono.enable = true;
           proprietary.berkeleyMono.rev = "cefdbcc46656894441902c8e64712e83420a9fa4";
           home-manager.useGlobalPkgs = true;

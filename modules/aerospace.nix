@@ -1,7 +1,7 @@
 { ... }:
 {
   flake.modules.darwin.aerospace =
-    { pkgs, ... }:
+    { config, lib, pkgs, ... }:
     {
       services.aerospace.enable = true;
       services.aerospace.package = pkgs.aerospace;
@@ -20,13 +20,13 @@
           inner.vertical = 0;
           outer.left = 0;
           outer.bottom = 0;
-          outer.top = [
+          outer.top = if config.services.sketchybar.enable then [
             { monitor."built-in" = 0; }
             40
-          ];
+          ] else 0;
           outer.right = 0;
         };
-        exec-on-workspace-change = [
+        exec-on-workspace-change = lib.optionals config.services.sketchybar.enable [
           "${pkgs.bash}/bin/bash"
           "-c"
           ''

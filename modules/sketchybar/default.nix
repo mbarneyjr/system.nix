@@ -1,10 +1,11 @@
 { ... }:
 {
-  flake.modules.darwin.sketchybar = {
-    services.sketchybar.enable = true;
-    services.sketchybar.config = ''
-      CONFIG_DIR=${./.}
-      ${builtins.readFile ./sketchybarrc}
-    '';
-  };
+  flake.modules.darwin.sketchybar =
+    { lib, config, ... }:
+    {
+      services.sketchybar.config = lib.mkIf config.services.sketchybar.enable ''
+        CONFIG_DIR=${./.}
+        ${builtins.readFile ./sketchybarrc}
+      '';
+    };
 }
