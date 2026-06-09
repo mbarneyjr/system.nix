@@ -195,11 +195,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1776884656,
-        "narHash": "sha256-kfFjsadpJTFxMq8tQmKM7ZHI64rO0l3ETYsIyzET0oM=",
+        "lastModified": 1781034483,
+        "narHash": "sha256-npr6L5wehUF9EkM5wn5BqMRK9b802uneH7qJqvwP1qM=",
         "owner": "mbarneyjr",
         "repo": "gcalsync",
-        "rev": "c522e87ec9f35524a860e6cfdcaa5acfbdb805a9",
+        "rev": "49c69fbd0c6e56e6c6b9c93e24d3ddd38287ecd9",
         "type": "github"
       },
       "original": {
