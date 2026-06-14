@@ -15,7 +15,7 @@
       programs.claude-code = {
         enable = true;
         settings = {
-          model = "opus";
+          model = "opusplan";
           includeCoAuthoredBy = false;
           awsAuthRefresh = builtins.concatStringsSep "; " [
             "rm -rf ~/.aws/cli/cache/* 2>/dev/null"
