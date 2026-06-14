@@ -21,6 +21,13 @@
           PATH = "$HOME/.local/bin:$PATH";
           SHELL_SESSIONS_DISABLE = "1";
         };
+        plugins = [
+          {
+            name = "zsh-claudecode-completion";
+            src = ./claudecode-completion;
+            # completions = [ "." ];
+          }
+        ];
       };
     };
 }
