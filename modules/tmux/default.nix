@@ -22,26 +22,22 @@
         config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/system.nix/modules/tmux/tmux.conf";
       home.file.tmux-resizer = {
         enable = true;
-        executable = true;
-        source = ./tmux-resizer.sh;
+        source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/system.nix/modules/tmux/tmux-resizer.sh";
         target = ".local/bin/tmux-resizer.sh";
       };
       home.file.tmux-new-session = {
         enable = true;
-        executable = true;
-        source = ./tmux-new-session.sh;
+        source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/system.nix/modules/tmux/tmux-new-session.sh";
         target = ".local/bin/tmux-new-session.sh";
       };
       home.file.tmux-list-sessions = {
         enable = true;
-        executable = true;
-        source = ./tmux-list-sessions.sh;
+        source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/system.nix/modules/tmux/tmux-list-sessions.sh";
         target = ".local/bin/tmux-list-sessions.sh";
       };
       home.file.tmux-sessionizer = {
         enable = true;
-        executable = true;
-        source = ./tmux-sessionizer.sh;
+        source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/system.nix/modules/tmux/tmux-sessionizer.sh";
         target = ".local/bin/tmux-sessionizer.sh";
       };
     };
