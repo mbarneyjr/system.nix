@@ -1,7 +1,7 @@
 { ... }:
 {
   flake.modules.homeManager.tmux =
-    { pkgs, ... }:
+    { pkgs, config, ... }:
     {
       programs.tmux = {
         package = pkgs.tmux;
@@ -15,9 +15,11 @@
         extraConfig = ''
           set-option -gu default-command
           set-option -g default-shell ${pkgs.zsh}/bin/zsh
-        ''
-        + builtins.readFile ./tmux.conf;
+          source-file ${config.xdg.configHome}/tmux/tmux.local.conf
+        '';
       };
+      xdg.configFile."tmux/tmux.local.conf".source =
+        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/system.nix/modules/tmux/tmux.conf";
       home.file.tmux-resizer = {
         enable = true;
         executable = true;
