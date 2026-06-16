@@ -286,11 +286,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1781063155,
-        "narHash": "sha256-eCqtZMtwRdHgAM2J3IQUVHQfCD3X2gWl9udxloYyHSc=",
+        "lastModified": 1781633352,
+        "narHash": "sha256-1jqErfn5F/kjiiV/G/R+zQjZWI2dWnqb0TAV2SqKzaE=",
         "owner": "mbarneyjr",
         "repo": "mbnvim",
-        "rev": "06839290b6e68dba8bd9a8474a65915980dfafd9",
+        "rev": "cd6dc92406987615157f635cde987a74c5ebbf01",
         "type": "github"
       },
       "original": {
