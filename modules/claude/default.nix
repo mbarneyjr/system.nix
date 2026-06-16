@@ -7,7 +7,7 @@
     in
     {
       home.packages = [
-        (pkgs.writeShellScriptBin "claude-code-bedrock" ''
+        (pkgs.writeShellScriptBin "claude-bedrock" ''
           export CLAUDE_CODE_USE_BEDROCK=1
           exec ${pkgs.claude-code}/bin/claude "$@"
         '')
@@ -17,10 +17,6 @@
         settings = {
           model = "opusplan";
           includeCoAuthoredBy = false;
-          awsAuthRefresh = builtins.concatStringsSep "; " [
-            "rm -rf ~/.aws/cli/cache/* 2>/dev/null"
-            "aws sts get-caller-identity --profile claude || aws sso login --profile claude"
-          ];
           statusLine = {
             type = "command";
             command = ./statusline.sh;
