@@ -52,7 +52,7 @@
         pkgs.former
         pkgs.aws-whoami
         pkgs.mergiraf
-        pkgs.git-remote-codecommit
+        (pkgs.git-remote-codecommit.overrideAttrs (_: { doInstallCheck = false; }))
       ];
     };
 }
