@@ -96,6 +96,23 @@ alias idot="dot -Tsvg | kitten icat --align left"
 alias flush-mac-dns="sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
 alias docker="finch"
 
+# Isolated Homebrew for testing taps/formulae without touching the
+# nix-managed prefix at /opt/homebrew. Clones a throwaway brew on first use.
+testbrew() {
+  local prefix="$HOME/.testbrew"
+  if [[ ! -x "$prefix/bin/brew" ]]; then
+    echo "testbrew: bootstrapping isolated Homebrew at $prefix ..." >&2
+    git clone --depth=1 https://github.com/Homebrew/brew "$prefix" || return 1
+  fi
+  HOMEBREW_PREFIX="$prefix" \
+  HOMEBREW_CELLAR="$prefix/Cellar" \
+  HOMEBREW_REPOSITORY="$prefix" \
+  HOMEBREW_CACHE="$prefix/cache" \
+  HOMEBREW_NO_AUTO_UPDATE=1 \
+  HOMEBREW_NO_ANALYTICS=1 \
+  "$prefix/bin/brew" "$@"
+}
+
 complete -C 'aws_completer' aws
 eval "$(command gcalsync completion zsh)"
 
