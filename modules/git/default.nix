@@ -82,7 +82,7 @@
         };
         fetch = {
           prune = true;
-          pruneTabs = true;
+          pruneTags = true;
           recurseSubmodules = true;
         };
         push = {

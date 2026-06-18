@@ -51,8 +51,14 @@
           "review.nvim" = {
             command = "${mbnvim}/bin/review-nvim-mcp";
           };
+          nixos = {
+            command = "${pkgs.uv}/bin/uvx";
+            args = [
+              "mcp-nixos"
+            ];
+          };
           aws-mcp = {
-            command = "uvx";
+            command = "${pkgs.uv}/bin/uvx";
             args = [
               "mcp-proxy-for-aws@latest"
               "https://aws-mcp.us-east-1.api.aws/mcp"

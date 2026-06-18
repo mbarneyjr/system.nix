@@ -7,8 +7,6 @@ in
     { pkgs, ... }:
     {
       system.stateVersion = 6;
-      nix.enable = true;
-      nix.package = pkgs.nix;
       nix.checkConfig = true;
       nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
       nix.gc = {
