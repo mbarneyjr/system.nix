@@ -36,6 +36,7 @@ in
               homeManager.claude
               homeManager.ssh
               homeManager.npm
+              homeManager.tampermonkey
             ];
           };
         }
