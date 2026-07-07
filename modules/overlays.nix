@@ -8,9 +8,7 @@ let
         doCheck = false;
         postPatch = (old.postPatch or "") + ''
           for f in $(grep -rl "awscrt[=<>]" .); do
-            substituteInPlace "$f" \
-              --replace-quiet "awscrt==0.32.2" "awscrt>=0" \
-              --replace-quiet "awscrt>=0.32.2" "awscrt>=0"
+            sed -i 's/awscrt[0-9=<>!~. ]*/awscrt>=0/g' "$f"
           done
         '';
       });
