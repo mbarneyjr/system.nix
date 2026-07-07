@@ -14,6 +14,7 @@
       ];
       programs.claude-code = {
         enable = true;
+        context = ./CLAUDE.md;
         settings = {
           model = "opusplan";
           includeCoAuthoredBy = false;
