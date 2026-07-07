@@ -373,11 +373,11 @@
         "tree-sitter-tmux": "tree-sitter-tmux"
       },
       "locked": {
-        "lastModified": 1783366570,
-        "narHash": "sha256-8BhhCAOF972AuGI9tT4bFZISwd7zNzlj2uooD3vS65o=",
+        "lastModified": 1783451352,
+        "narHash": "sha256-ZWJ7AKItBNOx7pqp09kaMf528c21zBBrBxAliC3AjXs=",
         "owner": "mbarneyjr",
         "repo": "mbnvim",
-        "rev": "d0ef8944cffa6aa601b58e6a17bfab074ae4706e",
+        "rev": "b1c82b1f263bd6831863806a88e396ac9cd611ff",
         "type": "github"
       },
       "original": {
