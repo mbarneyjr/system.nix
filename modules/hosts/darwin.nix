@@ -14,6 +14,7 @@ in
         darwin.sketchybar
         darwin.fonts
         darwin.user
+        darwin.agents
 
         inputs.home-manager.darwinModules.home-manager
         {
@@ -33,7 +34,7 @@ in
               homeManager.ghostty
               homeManager.awsume
               homeManager.awsuse
-              homeManager.claude
+              homeManager.agents
               homeManager.ssh
               homeManager.npm
               homeManager.tampermonkey

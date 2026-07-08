@@ -14,7 +14,7 @@ let
       homeManager.ghostty
       homeManager.awsume
       homeManager.awsuse
-      homeManager.claude
+      homeManager.agents
       homeManager.ssh
       homeManager.npm
     ];

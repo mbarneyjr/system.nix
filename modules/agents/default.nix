@@ -1,9 +1,43 @@
 { inputs, ... }:
+let
+  agentConfig = pkgs: rec {
+    mbnvim = inputs.mbnvim.packages.${pkgs.stdenv.hostPlatform.system}.default;
+
+    context = ./AGENTS.md;
+
+    skills = {
+      nvim-review = builtins.readFile "${mbnvim}/skills/nvim-review/SKILL.md";
+      stop-slop = ./skills/stop-slop;
+      caveman = ./skills/caveman;
+      caveman-commit = ./skills/caveman-commit;
+      caveman-review = ./skills/caveman-review;
+    };
+
+    mcpServers = {
+      review-nvim = {
+        command = "${mbnvim}/bin/review-nvim-mcp";
+      };
+      nixos = {
+        command = "${pkgs.uv}/bin/uvx";
+        args = [
+          "mcp-nixos"
+        ];
+      };
+      aws-mcp = {
+        command = "${pkgs.uv}/bin/uvx";
+        args = [
+          "mcp-proxy-for-aws@latest"
+          "https://aws-mcp.us-east-1.api.aws/mcp"
+        ];
+      };
+    };
+  };
+in
 {
-  flake.modules.homeManager.claude =
+  flake.modules.homeManager.agents =
     { pkgs, ... }:
     let
-      mbnvim = inputs.mbnvim.packages.${pkgs.stdenv.hostPlatform.system}.default;
+      cfg = agentConfig pkgs;
     in
     {
       home.packages = [
@@ -12,9 +46,10 @@
           exec ${pkgs.claude-code}/bin/claude "$@"
         '')
       ];
+
       programs.claude-code = {
         enable = true;
-        context = ./CLAUDE.md;
+        inherit (cfg) context skills mcpServers;
         settings = {
           model = "opusplan";
           includeCoAuthoredBy = false;
@@ -48,30 +83,23 @@
             ];
           };
         };
-        mcpServers = {
-          "review.nvim" = {
-            command = "${mbnvim}/bin/review-nvim-mcp";
-          };
-          nixos = {
-            command = "${pkgs.uv}/bin/uvx";
-            args = [
-              "mcp-nixos"
-            ];
-          };
-          aws-mcp = {
-            command = "${pkgs.uv}/bin/uvx";
-            args = [
-              "mcp-proxy-for-aws@latest"
-              "https://aws-mcp.us-east-1.api.aws/mcp"
-            ];
-          };
-        };
-        skills = {
-          nvim-review = builtins.readFile "${mbnvim}/skills/nvim-review/SKILL.md";
-          caveman = ./skills/caveman;
-          caveman-commit = ./skills/caveman-commit;
-          caveman-review = ./skills/caveman-review;
-        };
+      };
+
+      programs.codex = {
+        enable = true;
+        inherit (cfg) context skills;
+      };
+    };
+
+  flake.modules.darwin.agents =
+    { pkgs, ... }:
+    let
+      cfg = agentConfig pkgs;
+      tomlFormat = pkgs.formats.toml { };
+    in
+    {
+      environment.etc."codex/managed_config.toml".source = tomlFormat.generate "codex-managed-config" {
+        mcp_servers = cfg.mcpServers;
       };
     };
 }
