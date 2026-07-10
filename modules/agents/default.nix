@@ -24,11 +24,8 @@ let
         ];
       };
       aws-mcp = {
-        command = "${pkgs.uv}/bin/uvx";
-        args = [
-          "mcp-proxy-for-aws@latest"
-          "https://aws-mcp.us-east-1.api.aws/mcp"
-        ];
+        type = "http";
+        url = "https://aws-mcp.us-east-1.api.aws/mcp";
       };
     };
   };
@@ -68,6 +65,11 @@ in
               "mcp__aws-mcp__aws___list_regions"
               "mcp__aws-mcp__aws___recommend"
               "mcp__aws-mcp__aws___suggest_aws_commands"
+              "mcp__plugin_claude-code-home-manager_aws-mcp__aws___call_aws"
+              "mcp__plugin_claude-code-home-manager_aws-mcp__aws___get_presigned_url"
+              "mcp__plugin_claude-code-home-manager_aws-mcp__aws___get_tasks"
+              "mcp__plugin_claude-code-home-manager_aws-mcp__aws___run_script"
+              "mcp__plugin_claude-code-home-manager_aws-mcp__aws___get_regional_availability"
             ];
           };
           hooks = {
