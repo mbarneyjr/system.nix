@@ -8,6 +8,7 @@ let
     skills = {
       nvim-review = builtins.readFile "${mbnvim}/skills/nvim-review/SKILL.md";
       stop-slop = ./skills/stop-slop;
+      rubber-duck = ./skills/rubber-duck;
       caveman = ./skills/caveman;
       caveman-commit = ./skills/caveman-commit;
       caveman-review = ./skills/caveman-review;
