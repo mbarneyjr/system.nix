@@ -76,6 +76,7 @@ in
           };
           env = {
             CLAUDE_ENV_FILE = pkgs.writeText "claude-env.sh" ''
+              export DIRENV_LOG_FORMAT=
               eval "$(direnv export bash)"
               cd() {
                 builtin cd "$@" && eval "$(direnv export bash)"
