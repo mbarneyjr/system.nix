@@ -74,6 +74,14 @@ in
               "mcp__plugin_claude-code-home-manager_aws-mcp__aws___get_regional_availability"
             ];
           };
+          env = {
+            CLAUDE_ENV_FILE = pkgs.writeText "claude-env.sh" ''
+              eval "$(direnv export bash)"
+              cd() {
+                builtin cd "$@" && eval "$(direnv export bash)"
+              }
+            '';
+          };
           hooks = {
             Notification = [
               {
