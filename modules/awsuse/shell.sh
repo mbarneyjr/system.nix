@@ -120,6 +120,8 @@ awsuse () {
         AWS_REGION="$(aws configure get region || echo "us-east-1")"
       fi
       export AWS_REGION
+      # For pure SSO profiles, make sure a valid token is cached; no-op for non-sso profiles.
+      awsuse-sso --ensure-token "${profile}" || true
     else
       echo "Profile not found in config or credentials file"
     fi
