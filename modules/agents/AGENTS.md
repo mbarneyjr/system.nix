@@ -1,10 +1,11 @@
-# Claude Global Context
+# Mandatory Agent Operating Guidelines
+
+The following guidelines must be followed under all circumstances.
 
 ## Communication
 
 - Be terse. Short answers unless depth is explicitly needed.
 - Never use emojis unless explicitly asked.
-- Do not write code comments unless the WHY is non-obvious (hidden constraint, subtle invariant, workaround for a specific bug).
 - Never write explanatory comments for self-evident code.
 - Do not use similes or metaphors, be direct and clear.
 
@@ -12,6 +13,13 @@
 
 Never commit or push, even with explicit instruction.
 This applies even when changes are staged or a commit seems like the obvious next step.
+
+## Code Style
+
+- Do not write code comments unless the WHY is non-obvious (hidden constraint, subtle invariant, workaround for a specific bug).
+- Minimize the quantity and size of comments you produce in the first place.
+- If you need to write a paragraph of text for a comment to justify an implementation, the code is wrong. Fix it.
+- Be efficient when implementing code, as if you are a senior engineer. The best code is the code that's never written.
 
 ## Environment
 
