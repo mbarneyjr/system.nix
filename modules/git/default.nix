@@ -39,6 +39,9 @@
         alias = {
           ls = "log --graph --abbrev-commit --color --pretty=format:'%C(yellow)%h%Creset -%Cred%d%Creset %s %Cgreen(%cr) %C(blue)[%an]%Creset'";
         };
+        color = {
+          ui = "auto";
+        };
         difftastic = {
           enable = true;
         };
