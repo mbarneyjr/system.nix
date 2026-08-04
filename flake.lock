@@ -256,6 +256,22 @@
         "type": "github"
       }
     },
+    "gh-review-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1785604569,
+        "narHash": "sha256-+aZfWAgG4QETbTiiu+VHp7jgaubRqctv+86HxVjwMNA=",
+        "owner": "gh-tui-tools",
+        "repo": "gh-review.nvim",
+        "rev": "e4626457657902a94e14656ae34c32a0aee359d6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gh-tui-tools",
+        "repo": "gh-review.nvim",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -363,6 +379,7 @@
         "cloudformation-languageserver": "cloudformation-languageserver",
         "fff-nvim": "fff-nvim",
         "flake-parts": "flake-parts_3",
+        "gh-review-nvim": "gh-review-nvim",
         "import-tree": "import-tree_2",
         "lsplinks-nvim": "lsplinks-nvim",
         "nixpkgs": [
@@ -373,11 +390,11 @@
         "tree-sitter-tmux": "tree-sitter-tmux"
       },
       "locked": {
-        "lastModified": 1783451352,
-        "narHash": "sha256-ZWJ7AKItBNOx7pqp09kaMf528c21zBBrBxAliC3AjXs=",
+        "lastModified": 1785807925,
+        "narHash": "sha256-VybO9RkwrsuXwZguNYn0ZoPsuZS7NbzAum9C9OZ9GXo=",
         "owner": "mbarneyjr",
         "repo": "mbnvim",
-        "rev": "b1c82b1f263bd6831863806a88e396ac9cd611ff",
+        "rev": "84538dfea3b5f4973b8d2b5a0593ae50e26588ec",
         "type": "github"
       },
       "original": {
