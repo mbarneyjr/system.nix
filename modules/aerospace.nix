@@ -2,7 +2,24 @@
 {
   flake.modules.darwin.aerospace =
     { config, lib, pkgs, ... }:
+    let
+      centerWindowJs = ./aerospace-center-window.js;
+      centerToggle = pkgs.writeShellScriptBin "aerospace-center-toggle" ''
+        set -eu
+        aerospace=${pkgs.aerospace}/bin/aerospace
+
+        if [ "$($aerospace list-windows --focused --format '%{window-parent-container-layout}')" = floating ]; then
+          exec $aerospace layout tiling
+        fi
+
+        screen=$($aerospace list-windows --focused --format '%{monitor-appkit-nsscreen-screens-id}')
+        pid=$($aerospace list-windows --focused --format '%{app-pid}')
+        $aerospace layout floating
+        /usr/bin/osascript -l JavaScript ${centerWindowJs} "$screen" "$pid"
+      '';
+    in
     {
+      environment.systemPackages = [ centerToggle ];
       services.aerospace.enable = true;
       services.aerospace.package = pkgs.aerospace;
       services.aerospace.settings = {
@@ -72,6 +89,7 @@
           alt-ctrl-l = "move-workspace-to-monitor --wrap-around right";
           alt-shift-semicolon = "mode service";
           alt-shift-f = "fullscreen";
+          alt-shift-c = "exec-and-forget ${centerToggle}/bin/aerospace-center-toggle";
         };
         mode.service.binding = {
           esc = [
