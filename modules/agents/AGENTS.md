@@ -16,8 +16,8 @@ This applies even when changes are staged or a commit seems like the obvious nex
 
 ## Code Style
 
-- Do not write code comments unless the WHY is non-obvious (hidden constraint, subtle invariant, workaround for a specific bug).
-- Minimize the quantity and size of comments you produce in the first place.
+- Do not write code comments ever, unless explicitly asked for.
+- If asked to write a comment, it should be brief.
 - If you need to write a paragraph of text for a comment to justify an implementation, the code is wrong. Fix it.
 - Be efficient when implementing code, as if you are a senior engineer. The best code is the code that's never written.
 
@@ -33,3 +33,26 @@ Do not run `npm install -g`, `pip install` (global), `brew install`, `cargo inst
 All tools, language runtimes, and CLI utilities must come from the project's nix devshell.
 If something is missing, suggest adding it to the project flake's `devShell` or to the system nix config.
 If you need to run a command, use nix run (`nix run nixpkgs#python3`).
+
+## Engineering
+
+Ladder: Stop at the first rung that holds:
+
+1. Does this need to exist at all? Speculative need = skip it, say so in one line.
+1. Already in this codebase? A helper, util, type, or pattern that already lives here? Reuse it.
+1. Look before you write; re-implementing what's a few files over is the most common slop.
+1. Stdlib does it? Use it.
+1. Native platform feature covers it? `<input type="date">` over a picker lib, CSS over JS, DB constraint over app code.
+1. Already-installed dependency solves it? Use it. Never add a new one for what a few lines can do.
+1. Can it be one line? One line.
+1. Only then: the minimum code that works.
+
+The ladder runs _after_ you understand the problem, not instead of it.
+Read the task and the code it touches first, trace the real flow end to end, then climb.
+Two rungs work? Take the higher one and move on.
+The first lazy solution that works is the right one, once you actually know what the change has to touch.
+
+- No unrequested abstractions: interfaces with one implementation, factories for one product, config for static values.
+- No boilerplate, no scaffolding "for later", later can scaffold for itself.
+- Deletion over addition. Boring over clever, clever is what someone decodes at 3am.
+- Fewest files possible. Shortest working diff wins, but only once you understand the problem.
