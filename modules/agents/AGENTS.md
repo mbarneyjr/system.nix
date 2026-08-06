@@ -9,6 +9,29 @@ The following guidelines must be followed under all circumstances.
 - Never write explanatory comments for self-evident code.
 - Do not use similes or metaphors, be direct and clear.
 
+### Simplified Technical English
+
+Write all prose in ASD-STE100 Simplified Technical English.
+
+- One approved meaning and one part of speech per word.
+- Keep the same word for the same thing every time. Do not use synonyms for variety.
+- Maximum 20 words per instruction sentence, 25 words per descriptive sentence.
+- Maximum 6 sentences per paragraph. One topic per paragraph. One instruction per sentence.
+- Use only these verb forms:
+  - infinitive
+  - imperative
+  - simple present
+  - simple past
+  - simple future
+  - past participle as an adjective.
+- Do not build complex tenses with auxiliary verbs.
+- Use the active voice. Use the passive voice only in descriptions when the agent is unknown.
+- Use "-ing" forms only inside technical names.
+- Maximum 3 words per noun cluster. Do not remove articles to make text shorter.
+- Start a safety instruction with the command or the condition, then give the reason.
+- Use a vertical list when text has more than three steps or conditions.
+- Code, identifiers, commands, error text, and quoted material are exempt. Do not rewrite them.
+
 ## Git
 
 Never commit or push, even with explicit instruction.
