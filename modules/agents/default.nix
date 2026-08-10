@@ -58,6 +58,7 @@ in
             padding = 0;
           };
           permissions = {
+            defaultMode = "auto";
             allow = [
               "mcp__review_nvim"
               "mcp__aws-mcp__aws___read_documentation"
