@@ -44,6 +44,16 @@ This applies even when changes are staged or a commit seems like the obvious nex
 - If you need to write a paragraph of text for a comment to justify an implementation, the code is wrong. Fix it.
 - Be efficient when implementing code, as if you are a senior engineer. The best code is the code that's never written.
 
+## Documentation
+
+- When writing documentation, be concise and clear.
+- Do not include responses to conversation you have with humans in documentation.
+- Documentation should be written in a way that is agnostic of any given conversation or session you're working in.
+- Write for a maintainer who cannot access the task conversation.
+- Keep research notes, failed checks, and task history out of repository files.
+- Describe the required repository state. Do not record the state found during inspection.
+- Review each changed document without conversation context. Remove content that depends on that context.
+
 ## Environment
 
 This machine is managed with Nix (nix-darwin + home-manager).
