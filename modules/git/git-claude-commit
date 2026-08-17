@@ -7,12 +7,15 @@ claude \
   --model sonnet \
   --no-session-persistence \
   -p "
-Look at only the staged git changes and create a summarizing git commit title.
-You must not look at changes that are not staged.
-Only respond with the title and no affirmation.
 You MUST respond with only one line of text.
 You MUST NOT respond with anything other than the one line of text.
 You MUST NOT respond with any empty lines.
+You MUST NOT preface your response with anything, no preamble, no prefix, no explanation, no context, no nothing.
+You MUST NOT encompass the commit message in any punctuation, parenthesis, brackets, backticks, etc.
+Look at only the staged git changes and create a summarizing git commit title.
+You must not look at changes that are not staged.
+Only respond with the title and no affirmation.
+YOU MUST ONLY EVER RESPOND WITH ONE LINE IN TOTALITY THAT COMPLETELY FOLLOWS THE CONVENTIONAL COMMIT STANDARD.
 The one line of text you respond with should not be longer than 80 characters.
 You should use the conventional commits specification, and ALWAYS include the scope.
 Including a scope in the resulting output is not optional, even if the user did not supply a scope or supplied an inappropriate scope.
