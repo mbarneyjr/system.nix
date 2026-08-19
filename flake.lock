@@ -91,22 +91,6 @@
         "type": "github"
       }
     },
-    "cloudformation-languageserver": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1778696343,
-        "narHash": "sha256-Oh9fuA3cDd9XWT0FaD4Anadx0CFTL6ggryYhP5pUAKk=",
-        "owner": "aws-cloudformation",
-        "repo": "cloudformation-languageserver",
-        "rev": "4336efa310429dd1355d7d30ae779d06462dea7c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "aws-cloudformation",
-        "repo": "cloudformation-languageserver",
-        "type": "github"
-      }
-    },
     "crane": {
       "locked": {
         "lastModified": 1773857772,
@@ -376,7 +360,6 @@
         "actions-languageservices": "actions-languageservices",
         "aws-iam-language-server": "aws-iam-language-server",
         "cedar": "cedar",
-        "cloudformation-languageserver": "cloudformation-languageserver",
         "fff-nvim": "fff-nvim",
         "flake-parts": "flake-parts_3",
         "gh-review-nvim": "gh-review-nvim",
@@ -390,11 +373,11 @@
         "tree-sitter-tmux": "tree-sitter-tmux"
       },
       "locked": {
-        "lastModified": 1786987453,
-        "narHash": "sha256-vAQHMYgArH1K6G4qp2g1ZLWrXRQPhFhkvlLvX3+VFTU=",
+        "lastModified": 1787170806,
+        "narHash": "sha256-u9lf8+1xKZAC+7rvOaAzy/woezazZ7CAl77wMUrqUko=",
         "owner": "mbarneyjr",
         "repo": "mbnvim",
-        "rev": "9b93c12afa517c240b37cd81128fddb09dd4c6cb",
+        "rev": "87628a548eccce409f5a080f1954a3aed7b50bc4",
         "type": "github"
       },
       "original": {
