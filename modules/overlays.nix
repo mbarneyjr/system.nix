@@ -100,6 +100,11 @@ let
       };
     })
     (final: prev: {
+      tmux = prev.tmux.overrideAttrs (old: {
+        configureFlags = (old.configureFlags or [ ]) ++ [ "--disable-jemalloc" ];
+      });
+    })
+    (final: prev: {
       former = prev.python3Packages.buildPythonApplication {
         pname = "former";
         version = "0.2.8";
