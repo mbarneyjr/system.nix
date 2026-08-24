@@ -4,6 +4,7 @@
 // @version      1.0
 // @description  Automatically selects the Light text theme on AWS documentation pages
 // @match        https://docs.aws.amazon.com/*
+// @run-at       document-idle
 // @grant        none
 // @updateURL    file:///Users/mbarney/.config/tampermonkey/aws-docs-light-mode.user.js
 // @downloadURL  file:///Users/mbarney/.config/tampermonkey/aws-docs-light-mode.user.js
@@ -15,17 +16,15 @@
   }
 
   function forceLightTheme() {
-    if (isLightMode()) return; // Already light — nothing to do
+    if (isLightMode()) return;
 
-    // Find the Preferences link in the header
     const prefsLink = Array.from(document.querySelectorAll("a")).find(
       (a) => a.textContent.trim() === "Preferences",
     );
     if (!prefsLink) return;
 
-    prefsLink.click(); // Open the preferences panel
+    prefsLink.click();
 
-    // Wait for the radio buttons to be rendered into the DOM
     const observer = new MutationObserver(() => {
       const lightRadios = document.querySelectorAll(
         'input[type="radio"][value="light"]',
@@ -34,20 +33,37 @@
 
       observer.disconnect();
 
-      // Click the first "light" radio (Text theme)
       if (!lightRadios[0].checked) {
         lightRadios[0].click();
       }
 
-      // Close the panel
       document.dispatchEvent(
         new KeyboardEvent("keydown", { key: "Escape", bubbles: true }),
       );
     });
 
     observer.observe(document.body, { childList: true, subtree: true });
+
+    observer.takeRecords();
+    const already = document.querySelectorAll(
+      'input[type="radio"][value="light"]',
+    );
+    if (already.length > 0) {
+      observer.disconnect();
+      if (!already[0].checked) already[0].click();
+      document.dispatchEvent(
+        new KeyboardEvent("keydown", { key: "Escape", bubbles: true }),
+      );
+    }
   }
 
-  // Delay slightly to allow React hydration to finish
-  window.addEventListener("load", () => setTimeout(forceLightTheme, 500));
+  function run() {
+    setTimeout(forceLightTheme, 500);
+  }
+
+  if (document.readyState === "complete") {
+    run();
+  } else {
+    window.addEventListener("load", run);
+  }
 })();

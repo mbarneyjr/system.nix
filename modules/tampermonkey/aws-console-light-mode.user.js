@@ -4,6 +4,7 @@
 // @version      1.0
 // @description  Automatically selects the Light visual mode on the AWS Management Console
 // @match        https://*.console.aws.amazon.com/*
+// @run-at       document-idle
 // @grant        none
 // @updateURL    file:///Users/mbarney/.config/tampermonkey/aws-console-light-mode.user.js
 // @downloadURL  file:///Users/mbarney/.config/tampermonkey/aws-console-light-mode.user.js
@@ -14,39 +15,65 @@
     return document.body.classList.contains("awsui-polaris-dark-mode");
   }
 
-  function forceLightTheme() {
-    if (!isDarkMode()) return; // Already light (or default light) — nothing to do
+  function findLightRadio() {
+    return Array.from(document.querySelectorAll('input[type="radio"]')).find(
+      (r) => r.value === "light",
+    );
+  }
 
-    // Click the Settings (cog) button in the top nav
+  function pollFor(checkFn, { interval = 150, timeout = 6000 } = {}) {
+    return new Promise((resolve, reject) => {
+      const start = Date.now();
+      const tick = () => {
+        const result = checkFn();
+        if (result) return resolve(result);
+        if (Date.now() - start >= timeout) {
+          return reject(new Error("Timed out waiting for condition"));
+        }
+        setTimeout(tick, interval);
+      };
+      tick();
+    });
+  }
+
+  async function forceLightTheme() {
+    if (!isDarkMode()) return; // Already light — nothing to do
+
     const settingsBtn = document.querySelector(
       '[data-testid="more-menu__awsc-nav-quick-settings-button"]',
     );
-    if (!settingsBtn) return;
+    if (!settingsBtn) {
+      console.warn("[LightTheme] Settings button not found");
+      return;
+    }
 
     settingsBtn.click();
 
-    // Wait for the radio buttons to be rendered into the DOM
-    const observer = new MutationObserver(() => {
-      const lightRadio = Array.from(
-        document.querySelectorAll('input[type="radio"]'),
-      ).find((r) => r.value === "light");
-      if (!lightRadio) return;
-
-      observer.disconnect();
+    try {
+      const lightRadio = await pollFor(findLightRadio);
 
       if (!lightRadio.checked) {
         lightRadio.click();
       }
 
-      // Close the panel
       document.dispatchEvent(
         new KeyboardEvent("keydown", { key: "Escape", bubbles: true }),
       );
-    });
-
-    observer.observe(document.body, { childList: true, subtree: true });
+    } catch (e) {
+      console.warn("[LightTheme] Failed to switch theme:", e);
+      document.dispatchEvent(
+        new KeyboardEvent("keydown", { key: "Escape", bubbles: true }),
+      );
+    }
   }
 
-  // Delay to allow the console app to fully hydrate
-  window.addEventListener("load", () => setTimeout(forceLightTheme, 500));
+  function run() {
+    setTimeout(forceLightTheme, 500);
+  }
+
+  if (document.readyState === "complete") {
+    run();
+  } else {
+    window.addEventListener("load", run);
+  }
 })();
