@@ -104,16 +104,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1787355766,
-        "narHash": "sha256-1JrvsYUnM78cSfcYQi83ZUqdyxJ398OOU+H7o2tNaII=",
+        "lastModified": 1787581205,
+        "narHash": "sha256-lixllzBc5T0EqI1tDoOMUUKFSRoFAedig65GgOiH0VA=",
         "owner": "mbarneyjr",
         "repo": "cfn.nvim",
-        "rev": "c2e5c419ac9d0f618b9c8455c1582a82971e1917",
+        "rev": "aedef8b373cc229468ef5de44ec91e77e562dcb7",
         "type": "github"
       },
       "original": {
         "owner": "mbarneyjr",
-        "ref": "v0.0.3",
+        "ref": "v0.0.4",
         "repo": "cfn.nvim",
         "type": "github"
       }
@@ -416,11 +416,11 @@
         "tree-sitter-tmux": "tree-sitter-tmux"
       },
       "locked": {
-        "lastModified": 1787368891,
-        "narHash": "sha256-4+Om24T1xT0f+jjAbTaNZeOmdVvuXBg2F5b2L9NwSgU=",
+        "lastModified": 1787581267,
+        "narHash": "sha256-A+JDQWcNod1Ny+KuENsFAe6OZ42UzviuD5iWOvDx/ZU=",
         "owner": "mbarneyjr",
         "repo": "mbnvim",
-        "rev": "7b63430bcc1007e376038bbb681e9567161baf49",
+        "rev": "08f2700782c3386c785273bd9e9efdf923f8219d",
         "type": "github"
       },
       "original": {
