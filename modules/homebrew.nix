@@ -20,7 +20,6 @@ in
       enable = true;
       user = username;
       onActivation.cleanup = "zap";
-      caskArgs.no_quarantine = true;
       global.brewfile = true;
       taps = builtins.attrNames darwinArgs.config.nix-homebrew.taps;
       casks = [
@@ -38,6 +37,7 @@ in
         "parallels"
         "ticktick"
         "ghostty"
+        "utm"
       ];
     };
   };
