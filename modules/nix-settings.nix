@@ -1,6 +1,21 @@
 { config, inputs, ... }:
 let
   username = config.user.name;
+  nixSettings = {
+    experimental-features = "nix-command flakes";
+    substituters = [
+      "https://nix.barney.dev/"
+      "https://cache.nixos.org/"
+    ];
+    trusted-public-keys = [
+      "nix.barney.dev-1:Wz6Nj2M/3PogEKI4/SRIdUm83QlC6zZN/0CCTS9oJ2o="
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+    ];
+    trusted-users = [
+      "root"
+      username
+    ];
+  };
 in
 {
   flake.modules.darwin.nix-settings =
@@ -9,6 +24,9 @@ in
       system.stateVersion = 6;
       nix.checkConfig = true;
       nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+      nix.linux-builder.enable = true;
+      nix.linux-builder.config.virtualisation.cores = 8;
+      nix.linux-builder.config.virtualisation.darwin-builder.memorySize = 8192;
       nix.gc = {
         automatic = true;
         interval = [
@@ -26,20 +44,6 @@ in
           }
         ];
       };
-      nix.settings = {
-        experimental-features = "nix-command flakes";
-        substituters = [
-          "https://nix.barney.dev/"
-          "https://cache.nixos.org/"
-        ];
-        trusted-public-keys = [
-          "nix.barney.dev-1:Wz6Nj2M/3PogEKI4/SRIdUm83QlC6zZN/0CCTS9oJ2o="
-          "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-        ];
-        trusted-users = [
-          "root"
-          username
-        ];
-      };
+      nix.settings = nixSettings;
     };
 }
