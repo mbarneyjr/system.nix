@@ -6,7 +6,7 @@ in
 {
   flake.modules.homeManager.tampermonkey =
     { config, pkgs, ... }:
-    lib.mkIf pkgs.stdenv.isDarwin {
+    lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
       programs.google-chrome = {
         enable = true;
         # Chrome is the Homebrew cask
