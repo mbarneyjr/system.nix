@@ -38,6 +38,7 @@ in
         "ticktick"
         "ghostty"
         "utm"
+        "codexbar"
       ];
     };
   };
