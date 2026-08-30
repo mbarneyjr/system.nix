@@ -1,12 +1,13 @@
 { inputs, ... }:
 let
   agentConfig = pkgs: rec {
-    mbnvim = inputs.mbnvim.packages.${pkgs.stdenv.hostPlatform.system}.default;
+    reviewNvimClaudePlugin =
+      inputs.mbnvim.packages.${pkgs.stdenv.hostPlatform.system}.review-nvim-claude-plugin;
 
     context = ./AGENTS.md;
 
     skills = {
-      nvim-review = builtins.readFile "${mbnvim}/skills/nvim-review/SKILL.md";
+      nvim-review = builtins.readFile "${reviewNvimClaudePlugin}/skills/nvim-review/SKILL.md";
       i-have-adhd = ./skills/i-have-adhd;
       stop-slop = ./skills/stop-slop;
       rubber-duck = ./skills/rubber-duck;
@@ -17,7 +18,7 @@ let
 
     mcpServers = {
       review-nvim = {
-        command = "${mbnvim}/bin/review-nvim-mcp";
+        command = "${reviewNvimClaudePlugin}/bin/review-nvim-mcp";
       };
       nixos = {
         command = "${pkgs.uv}/bin/uvx";
