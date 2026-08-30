@@ -37,8 +37,8 @@ in
         "parallels"
         "ticktick"
         "ghostty"
-        "utm"
         "codexbar"
+        "utm@beta"
       ];
     };
   };
