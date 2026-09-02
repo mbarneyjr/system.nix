@@ -44,11 +44,11 @@
     "awscli2": {
       "flake": false,
       "locked": {
-        "lastModified": 1787602206,
-        "narHash": "sha256-uiFERsF9cCP5fcL/jcfaWjAff/aqw5292se4Lvvi7z4=",
+        "lastModified": 1788286192,
+        "narHash": "sha256-ooPQVsi9OueI2XWcwlnMGxCanpxuqoPaQ8ynOwbvp6s=",
         "owner": "aws",
         "repo": "aws-cli",
-        "rev": "ad621f27ee08c2788ae6fb07cc5317f4944d7a0f",
+        "rev": "a791cc414e26ed9c6999dc8f582bb9796722be91",
         "type": "github"
       },
       "original": {
