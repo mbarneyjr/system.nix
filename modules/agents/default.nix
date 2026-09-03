@@ -14,6 +14,7 @@ let
       caveman = ./skills/caveman;
       caveman-commit = ./skills/caveman-commit;
       caveman-review = ./skills/caveman-review;
+      show-me = ./skills/show-me;
     };
 
     mcpServers = {
