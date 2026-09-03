@@ -35,7 +35,7 @@ let
 in
 {
   flake.modules.homeManager.agents =
-    { pkgs, ... }:
+    { pkgs, lib, ... }:
     let
       cfg = agentConfig pkgs;
     in
@@ -45,6 +45,8 @@ in
           export CLAUDE_CODE_USE_BEDROCK=1
           exec ${pkgs.claude-code}/bin/claude "$@"
         '')
+      ] ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
+        pkgs.openusage
       ];
 
       programs.claude-code = {
