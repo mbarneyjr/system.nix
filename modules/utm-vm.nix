@@ -22,6 +22,8 @@ in
       ];
       image.modules.qemu-efi.virtualisation.diskSize = 20480;
 
+      time.timeZone = "America/Indianapolis";
+
       boot.kernelParams = [ "video=Virtual-1:2560x1600" ];
       boot.loader.timeout = 0;
       boot.loader.systemd-boot.enable = true;

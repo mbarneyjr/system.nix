@@ -30,6 +30,7 @@ in
             homeManager.tmux
             homeManager.ghostty
             homeManager.hyprland
+            homeManager.quickshell
             homeManager.awsume
             homeManager.awsuse
             homeManager.agents
