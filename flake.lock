@@ -133,6 +133,22 @@
         "type": "github"
       }
     },
+    "dark-text": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1759077178,
+        "narHash": "sha256-Srq69c9mCdTCJGDjMuv7XR1WyZfPXfla8zOWEK8wCQI=",
+        "owner": "vimjoyer",
+        "repo": "dark-text",
+        "rev": "e8b0a42d316e92bffa2ec644b6fd62a2fdcaba7c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "vimjoyer",
+        "repo": "dark-text",
+        "type": "github"
+      }
+    },
     "fff-nvim": {
       "inputs": {
         "crane": "crane",
@@ -548,6 +564,7 @@
     "root": {
       "inputs": {
         "awscli2": "awscli2",
+        "dark-text": "dark-text",
         "flake-parts": "flake-parts",
         "gcalsync": "gcalsync",
         "home-manager": "home-manager",

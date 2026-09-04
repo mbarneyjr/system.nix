@@ -28,6 +28,9 @@
 
     awscli2.url = "github:aws/aws-cli/v2";
     awscli2.flake = false;
+
+    dark-text.url = "github:vimjoyer/dark-text";
+    dark-text.flake = false;
   };
 
   outputs =

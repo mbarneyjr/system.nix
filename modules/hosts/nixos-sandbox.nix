@@ -31,6 +31,7 @@ in
             homeManager.ghostty
             homeManager.hyprland
             homeManager.quickshell
+            homeManager.dark-text
             homeManager.awsume
             homeManager.awsuse
             homeManager.agents
