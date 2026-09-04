@@ -18,7 +18,6 @@ in
       inputs.home-manager.darwinModules.home-manager
       {
         services.sketchybar.enable = false;
-        proprietary.berkeleyMono.enable = false;
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
         home-manager.users.${config.user.name} = {

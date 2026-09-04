@@ -13,6 +13,8 @@ in
       nixos.overlays
       nixos.nix-settings
       nixos.user
+      nixos.fonts
+      nixos.berkeley-mono
       nixos.hyprland
       nixos.utm-vm
 
