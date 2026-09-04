@@ -57,7 +57,7 @@ in
         { pkgs, ... }:
         {
           wayland.windowManager.hyprland.extraLuaFiles.monitor = ''
-            hl.monitor({ output = "", mode = "2560x1600@60", position = "auto", scale = 1 })
+            hl.monitor({ output = "", mode = "1800x1169@60", position = "auto", scale = 1 })
           '';
 
           # fix copy/paste between guest and host

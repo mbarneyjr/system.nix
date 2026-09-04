@@ -15,14 +15,14 @@ ShellRoot {
                 right: true
             }
 
-            height: 48
+            height: 32
             color: "black"
 
             Text {
                 anchors.centerIn: parent
                 color: "white"
                 font.family: "Berkeley Mono"
-                font.pixelSize: 24
+                font.pixelSize: 16
                 text: Qt.formatDateTime(clock.date, "ddd MMM dd hh:mm:ss AP")
             }
 
