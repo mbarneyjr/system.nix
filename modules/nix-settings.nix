@@ -28,6 +28,8 @@ in
       nix.linux-builder.config.virtualisation.cores = 8;
       nix.linux-builder.config.virtualisation.darwin-builder.memorySize = 8192;
       nix.linux-builder.config.virtualisation.darwin-builder.diskSize = 81920;
+      nix.linux-builder.config.virtualisation.darwin-builder.min-free = 21474836480;
+      nix.linux-builder.config.virtualisation.darwin-builder.max-free = 42949672960;
       nix.linux-builder.config.virtualisation.qemu.options = [ "-machine gic-version=max" ];
       nix.gc = {
         automatic = true;
@@ -48,4 +50,16 @@ in
       };
       nix.settings = nixSettings;
     };
+
+  flake.modules.nixos.nix-settings = {
+    system.stateVersion = "25.05";
+    nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+    nix.gc = {
+      automatic = true;
+      dates = "daily";
+      options = "--delete-older-than 30d";
+    };
+    nix.optimise.automatic = true;
+    nix.settings = nixSettings;
+  };
 }

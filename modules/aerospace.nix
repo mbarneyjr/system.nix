@@ -138,6 +138,10 @@
             "if".app-id = "com.apple.backup.launcher";
             run = "layout floating";
           }
+          {
+            "if".app-id = "com.utmapp.UTM";
+            run = "layout floating";
+          }
         ];
       };
     };
