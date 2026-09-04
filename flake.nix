@@ -31,6 +31,9 @@
 
     dark-text.url = "github:vimjoyer/dark-text";
     dark-text.flake = false;
+
+    helium.url = "github:amaanq/helium-flake";
+    helium.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =

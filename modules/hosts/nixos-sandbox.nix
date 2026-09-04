@@ -32,6 +32,7 @@ in
             homeManager.tmux
             homeManager.ghostty
             homeManager.hyprland
+            homeManager.helium
             homeManager.quickshell
             homeManager.dark-text
             homeManager.awsume

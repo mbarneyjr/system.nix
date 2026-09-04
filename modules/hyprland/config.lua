@@ -3,6 +3,7 @@ local mod = "SUPER"
 hl.monitor({ output = "", scale = 1 })
 
 hl.bind(mod .. " + RETURN", hl.dsp.exec_cmd("ghostty"))
+hl.bind(mod .. " + B", hl.dsp.exec_cmd("helium"))
 hl.bind(mod .. " + Q", hl.dsp.window.close())
 hl.bind(mod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mod .. " + F", hl.dsp.window.fullscreen())
