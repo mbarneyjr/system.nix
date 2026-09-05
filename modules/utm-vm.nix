@@ -51,7 +51,13 @@ in
         publish.enable = true;
         publish.addresses = true;
       };
-      users.users.${username}.initialPassword = "nixos";
+      users.users.${username} = {
+        initialPassword = "nixos";
+        openssh.authorizedKeys.keys = [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHcRmsnP+464ZAAvD3MB1k9UerIc+gGjPODITqEBRh9v"
+        ];
+      };
+      security.sudo.wheelNeedsPassword = false;
 
       home-manager.users.${username} =
         { pkgs, ... }:
