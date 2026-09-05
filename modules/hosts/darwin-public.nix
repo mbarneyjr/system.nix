@@ -1,4 +1,4 @@
-{ config, inputs, ... }:
+{ config, inputs, lib, ... }:
 let
   inherit (config.flake.modules) darwin homeManager;
 in
@@ -38,6 +38,7 @@ in
       }
 
       { nixpkgs.hostPlatform = "aarch64-darwin"; }
+      { nix.linux-builder.enable = lib.mkForce false; }
     ];
   };
 }

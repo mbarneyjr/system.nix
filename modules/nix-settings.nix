@@ -25,6 +25,7 @@ in
       nix.checkConfig = true;
       nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
       nix.linux-builder.enable = true;
+      nix.linux-builder.config.virtualisation.qemu.options = [ "-machine gic-version=max" ];
       nix.gc = {
         automatic = true;
         interval = [
