@@ -25,12 +25,6 @@ in
       nix.checkConfig = true;
       nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
       nix.linux-builder.enable = true;
-      nix.linux-builder.config.virtualisation.cores = 8;
-      nix.linux-builder.config.virtualisation.darwin-builder.memorySize = 8192;
-      nix.linux-builder.config.virtualisation.darwin-builder.diskSize = 81920;
-      nix.linux-builder.config.virtualisation.darwin-builder.min-free = 21474836480;
-      nix.linux-builder.config.virtualisation.darwin-builder.max-free = 42949672960;
-      nix.linux-builder.config.virtualisation.qemu.options = [ "-machine gic-version=max" ];
       nix.gc = {
         automatic = true;
         interval = [
