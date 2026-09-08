@@ -16,6 +16,7 @@ jobs:
       id-token: write
       contents: read
       pull-requests: write
+      actions: write
     steps:
       - name: checkout PR
         uses: actions/checkout@v4
@@ -47,6 +48,18 @@ jobs:
           extra_nix_config: |
             trusted-public-keys = ${{ env.PUBLIC_KEY }} cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
             substituters = https://nix.barney.dev/ https://cache.nixos.org/
+            download-buffer-size = 1073741824
+            max-substitution-jobs = 32
+      - name: cache nix store
+        uses: nix-community/cache-nix-action@v7
+        with:
+          primary-key: nix-pr-${{ github.event.number }}-${{ hashFiles('flake.lock') }}
+          restore-prefixes-first-match: |
+            nix-pr-${{ github.event.number }}-
+            nix-main-
+          purge: true
+          purge-prefixes: nix-pr-${{ github.event.number }}-
+          purge-primary-key: never
       - name: build main
         run: |
           set -euo pipefail

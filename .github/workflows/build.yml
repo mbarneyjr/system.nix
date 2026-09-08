@@ -12,6 +12,7 @@ jobs:
     permissions:
       id-token: write
       contents: read
+      actions: write
     steps:
       - name: checkout
         uses: actions/checkout@v4
@@ -42,6 +43,16 @@ jobs:
           extra_nix_config: |
             trusted-public-keys = ${{ env.PUBLIC_KEY }} cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
             substituters = https://nix.barney.dev/ https://cache.nixos.org/
+            download-buffer-size = 1073741824
+            max-substitution-jobs = 32
+      - name: cache nix store
+        uses: nix-community/cache-nix-action@v7
+        with:
+          primary-key: nix-main-${{ hashFiles('flake.lock') }}
+          restore-prefixes-first-match: nix-main-
+          purge: true
+          purge-prefixes: nix-main-
+          purge-primary-key: never
       - name: build public-cache darwin configuration
         run: |
           nix build --quiet .#darwinConfigurations.aarch64-public.system
