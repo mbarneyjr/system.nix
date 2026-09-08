@@ -47,16 +47,17 @@ jobs:
           extra_nix_config: |
             trusted-public-keys = ${{ env.PUBLIC_KEY }} cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
             substituters = https://nix.barney.dev/ https://cache.nixos.org/
-      - name: capture packages before (main)
+      - name: build main
         run: |
           set -euo pipefail
           git checkout main
-          nix build --quiet .#darwinConfigurations.aarch64-public.system --print-out-paths | xargs nix path-info -r | sed 's|/nix/store/[^-]*-||' | sort > packages-before.txt
-      - name: capture packages after target
+          before=$(nix build --quiet --no-link --print-out-paths .#darwinConfigurations.aarch64-public.system)
+          echo "BEFORE=$before" >> "$GITHUB_ENV"
+      - name: build PR head
         run: |
           set -euo pipefail
           git checkout ${{ github.sha }}
-          nix build --quiet .#darwinConfigurations.aarch64-public.system --print-out-paths | xargs nix path-info -r | sed 's|/nix/store/[^-]*-||' | sort > packages-after.txt
+          nix build --quiet --out-link result .#darwinConfigurations.aarch64-public.system
       - name: assume role
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -70,69 +71,14 @@ jobs:
           echo "successfully uploaded to cache at s3://nix.barney.dev"
       - name: generate package diff
         run: |
+          set -euo pipefail
           {
             echo "## Package Changes"
             echo ""
-            echo "| Package | Before Version | After Version |"
-            echo "|---------|----------------|---------------|"
+            echo '```'
+            nix run --inputs-from . nixpkgs#dix -- --color never "$BEFORE" ./result
+            echo '```'
           } > package-changes.md
-
-          # Create temporary files for processing
-          temp_before=$(mktemp)
-          temp_after=$(mktemp)
-
-          # Extract package names and versions from both files
-          if [[ -f "packages-before.txt" ]]; then
-              sed 's/^[0-9]*| //' packages-before.txt | grep -v '^$' > "$temp_before"
-          else
-              touch "$temp_before"
-          fi
-
-          if [[ -f "packages-after.txt" ]]; then
-              sed 's/^[0-9]*| //' packages-after.txt | grep -v '^$' > "$temp_after"
-          else
-              touch "$temp_after"
-          fi
-
-          # Get all unique package names (base names without versions)
-          all_packages=$(cat "$temp_before" "$temp_after" | sed 's/-[0-9].*//' | sort -u)
-
-          changes_found=false
-          for package in $all_packages; do
-              # Find matching lines in both files
-              before_line=$(grep "^$package-" "$temp_before" | head -1)
-              after_line=$(grep "^$package-" "$temp_after" | head -1)
-
-              if [[ -n "$before_line" && -n "$after_line" ]]; then
-                  # Package exists in both - check if version changed
-                  if [[ "$before_line" != "$after_line" ]]; then
-                      before_version=${before_line#"$package-"}
-                      after_version=${after_line#"$package-"}
-                      echo "| $package | $before_version | $after_version |" >> package-changes.md
-                      changes_found=true
-                  fi
-              elif [[ -n "$before_line" && -z "$after_line" ]]; then
-                  # Package was removed
-                  before_version=${before_line#"${package}-"}
-                  echo "| $package | $before_version | ❌ Removed |" >> package-changes.md
-                  changes_found=true
-              elif [[ -z "$before_line" && -n "$after_line" ]]; then
-                  # Package was added
-                  after_version=${after_line#"${package}-"}
-                  echo "| $package | ➕ Added | $after_version |" >> package-changes.md
-                  changes_found=true
-              fi
-          done
-
-          if [[ "$changes_found" == "false" ]]; then
-              echo "" >> package-changes.md
-              echo "No package changes detected." >> package-changes.md
-          fi
-
-          # Clean up temporary files
-          rm "$temp_before" "$temp_after"
-
-          echo "Package diff generated in package-changes.md"
       - name: comment on PR
         if: github.event_name == 'pull_request'
         env:
