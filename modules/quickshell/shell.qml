@@ -5,6 +5,7 @@ ShellRoot {
     Variants {
         model: Quickshell.screens
 
+        // qmllint disable uncreatable-type
         PanelWindow {
             required property var modelData
             screen: modelData

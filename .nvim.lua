@@ -17,3 +17,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
     client:notify("workspace/didChangeConfiguration", { settings = client.settings })
   end,
 })
+
+if vim.env.QML_IMPORT_PATH and vim.fn.executable("qmlls") == 1 then
+  vim.lsp.config("qmlls", { cmd = { "qmlls", "-E" } })
+  vim.lsp.enable("qmlls")
+end
