@@ -22,3 +22,18 @@ if vim.env.QML_IMPORT_PATH and vim.fn.executable("qmlls") == 1 then
   vim.lsp.config("qmlls", { cmd = { "qmlls", "-E" } })
   vim.lsp.enable("qmlls")
 end
+
+if vim.fn.executable("qmlformat") == 1 then
+  vim.api.nvim_create_autocmd("BufWritePost", {
+    pattern = "*.qml",
+    callback = function(args)
+      vim.system({ "qmlformat", "-i", args.file }, {}, function(obj)
+        if obj.code == 0 then
+          vim.schedule(function()
+            vim.cmd.checktime(args.buf)
+          end)
+        end
+      end)
+    end,
+  })
+end
