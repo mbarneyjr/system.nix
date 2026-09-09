@@ -1,5 +1,9 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
+import QtQuick.Layouts
 import Quickshell
+import Quickshell.Hyprland
 
 ShellRoot {
     Variants {
@@ -7,8 +11,12 @@ ShellRoot {
 
         // qmllint disable uncreatable-type
         PanelWindow {
+            id: bar
+
             required property var modelData
             screen: modelData
+            property var monitor: Hyprland.monitorFor(modelData)
+            readonly property string barFont: Qt.fontFamilies().includes("Berkeley Mono") ? "Berkeley Mono" : "SauceCodePro Nerd Font"
 
             anchors {
                 top: true
@@ -17,12 +25,50 @@ ShellRoot {
             }
 
             height: 32
-            color: "black"
+            color: Qt.rgba(0, 0, 0, 0.2)
+
+            RowLayout {
+                anchors.left: parent.left
+                anchors.leftMargin: 8
+                anchors.verticalCenter: parent.verticalCenter
+                spacing: 6
+
+                Repeater {
+                    model: Hyprland.workspaces
+
+                    Rectangle {
+                        id: ws
+
+                        required property var modelData
+                        visible: modelData.monitor === bar.monitor
+                        implicitWidth: 22
+                        implicitHeight: 22
+                        color: modelData.focused ? "#554cb9b9" : "transparent"
+                        border.color: "white"
+                        border.width: modelData.active && !modelData.focused ? 1 : 0
+
+                        Text {
+                            anchors.centerIn: parent
+                            text: ws.modelData.name
+                            color: "white"
+                            font.family: bar.barFont
+                            font.pixelSize: 16
+                        }
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: ws.modelData.activate()
+                        }
+                    }
+                }
+            }
 
             Text {
-                anchors.centerIn: parent
+                anchors.right: parent.right
+                anchors.rightMargin: 8
+                anchors.verticalCenter: parent.verticalCenter
                 color: "white"
-                font.family: "Berkeley Mono"
+                font.family: bar.barFont
                 font.pixelSize: 16
                 text: Qt.formatDateTime(clock.date, "ddd MMM dd hh:mm:ss AP")
             }
