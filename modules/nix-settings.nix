@@ -2,7 +2,10 @@
 let
   username = config.user.name;
   nixSettings = {
-    experimental-features = "nix-command flakes";
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
     substituters = [
       "https://nix.barney.dev/"
       "https://cache.nixos.org/"
