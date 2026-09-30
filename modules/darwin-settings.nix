@@ -98,6 +98,9 @@ in
         };
         CustomUserPreferences = {
           NSGlobalDomain.SLSMenuBarUseBlurredAppearance = true;
+          "com.apple.symbolichotkeys".AppleSymbolicHotKeys."263" = {
+            enabled = false;
+          };
         };
       };
       system.keyboard = {
