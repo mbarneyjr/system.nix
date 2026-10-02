@@ -4,6 +4,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Hyprland
+import Quickshell.Wayland
 
 ShellRoot {
     Variants {
@@ -24,8 +25,15 @@ ShellRoot {
                 right: true
             }
 
-            height: 32
-            color: Qt.rgba(0, 0, 0, 0.2)
+            implicitHeight: 32
+            color: "transparent"
+
+            WlrLayershell.namespace: "quickshell:bar"
+
+            Rectangle {
+                anchors.fill: parent
+                color: Qt.rgba(0, 0, 0, 0.33)
+            }
 
             RowLayout {
                 anchors.left: parent.left

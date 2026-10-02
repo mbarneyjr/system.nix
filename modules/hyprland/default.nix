@@ -37,5 +37,16 @@ in
       portalPackage = null;
       extraLuaFiles.config = ./config.lua;
     };
+
+    services.hyprpaper = {
+      enable = true;
+      settings = {
+        splash = false;
+        wallpaper = {
+          monitor = "";
+          path = "${../../assets/orion-nebula.jxl}";
+        };
+      };
+    };
   };
 }
