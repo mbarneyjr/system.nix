@@ -89,6 +89,9 @@ in
         screensaver = {
           askForPassword = true;
         };
+        loginwindow = {
+          HideUserAvatarAndName = true;
+        };
         universalaccess = {
           closeViewScrollWheelToggle = true;
           reduceMotion = true;
