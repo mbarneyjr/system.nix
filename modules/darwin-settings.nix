@@ -101,11 +101,13 @@ in
         };
         CustomUserPreferences = {
           NSGlobalDomain.SLSMenuBarUseBlurredAppearance = true;
-          "com.apple.symbolichotkeys".AppleSymbolicHotKeys."263" = {
-            enabled = false;
+          "com.apple.symbolichotkeys".AppleSymbolicHotKeys = {
+            "60".enabled = false;
+            "263".enabled = false;
           };
         };
       };
+
       system.keyboard = {
         enableKeyMapping = true;
         remapCapsLockToEscape = true;
