@@ -32,6 +32,16 @@ Write all prose in ASD-STE100 Simplified Technical English.
 - Use a vertical list when text has more than three steps or conditions.
 - Code, identifiers, commands, error text, and quoted material are exempt. Do not rewrite them.
 
+## Naming
+
+Every name you choose for anything must use precise professional vocabulary.
+This includes files, scripts, directories, functions, variables, classes, commits, and branches.
+Choose the word a 1972 IBM engineer would write in a specification.
+No slang, no casual shorthand, no cute or clever names, no words borrowed from chat culture.
+This applies universally, not only to the one example that follows:
+A script that deploys dashboards is deploy_dashboards.sh, not push_dashboards.sh.
+That is one illustration of the principle, not the extent of it.
+
 ## Git
 
 Never commit or push, even with explicit instruction.
