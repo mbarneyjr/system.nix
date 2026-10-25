@@ -7,6 +7,7 @@
         inputs.mbnvim.packages.${pkgs.stdenv.hostPlatform.system}.default
         inputs.gcalsync.packages.${pkgs.stdenv.hostPlatform.system}.default
         pkgs.coreutils
+        pkgs.curl
         pkgs.eza
         pkgs.bat
         pkgs.ack
