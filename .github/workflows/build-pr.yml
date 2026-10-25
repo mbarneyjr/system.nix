@@ -49,11 +49,6 @@ jobs:
             substituters = https://nix.barney.dev/ https://cache.nixos.org/
             download-buffer-size = 1073741824
             max-substitution-jobs = 32
-      - name: restore nix store
-        uses: nix-community/cache-nix-action/restore@v7
-        with:
-          primary-key: nix-main-${{ hashFiles('flake.lock') }}
-          restore-prefixes-first-match: nix-main-
       - name: build main
         run: |
           set -euo pipefail
