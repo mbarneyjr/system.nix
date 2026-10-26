@@ -99,3 +99,11 @@ The first lazy solution that works is the right one, once you actually know what
 - No boilerplate, no scaffolding "for later", later can scaffold for itself.
 - Deletion over addition. Boring over clever, clever is what someone decodes at 3am.
 - Fewest files possible. Shortest working diff wins, but only once you understand the problem.
+
+## Tools
+
+If you have a bespoke tool to accomplish something, use that.
+Do not fallback to running inline or one-time python scripts, bash scripts, sed, aws, etc.
+If you want to edit a file, use the edit tool.
+If you want to read a file, use the read tool.
+Do not run python scripts to do what could more simply be done in one or a series of tool calls.
