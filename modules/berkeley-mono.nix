@@ -23,7 +23,7 @@ let
         };
         rev = lib.mkOption {
           type = lib.types.str;
-          default = "cefdbcc46656894441902c8e64712e83420a9fa4";
+          default = "227b58291b45c59696fe3f8a77c9cdbe0d327e86";
         };
         directory = lib.mkOption {
           type = lib.types.str;
