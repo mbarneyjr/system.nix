@@ -46,7 +46,8 @@ in
           export CLAUDE_CODE_USE_BEDROCK=1
           exec ${pkgs.claude-code}/bin/claude "$@"
         '')
-      ] ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
+      ]
+      ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
         pkgs.openusage
       ];
 
@@ -101,23 +102,6 @@ in
             ];
           };
         };
-      };
-
-      programs.codex = {
-        enable = true;
-        inherit (cfg) context skills;
-      };
-    };
-
-  flake.modules.darwin.agents =
-    { pkgs, ... }:
-    let
-      cfg = agentConfig pkgs;
-      tomlFormat = pkgs.formats.toml { };
-    in
-    {
-      environment.etc."codex/managed_config.toml".source = tomlFormat.generate "codex-managed-config" {
-        mcp_servers = cfg.mcpServers;
       };
     };
 }

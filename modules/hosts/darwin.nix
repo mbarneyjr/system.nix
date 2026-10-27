@@ -14,7 +14,6 @@ in
       darwin.fonts
       darwin.berkeley-mono
       darwin.user
-      darwin.agents
 
       inputs.home-manager.darwinModules.home-manager
       {

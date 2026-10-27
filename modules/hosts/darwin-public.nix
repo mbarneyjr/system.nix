@@ -1,4 +1,9 @@
-{ config, inputs, lib, ... }:
+{
+  config,
+  inputs,
+  lib,
+  ...
+}:
 let
   inherit (config.flake.modules) darwin homeManager;
 in
@@ -13,7 +18,6 @@ in
       darwin.sketchybar
       darwin.fonts
       darwin.user
-      darwin.agents
 
       inputs.home-manager.darwinModules.home-manager
       {
