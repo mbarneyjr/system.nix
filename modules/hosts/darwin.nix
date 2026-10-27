@@ -24,6 +24,7 @@ in
           imports = [
             homeManager.user
             homeManager.packages
+            homeManager.pythonTools
             homeManager.zsh
             homeManager.direnv
             homeManager.git

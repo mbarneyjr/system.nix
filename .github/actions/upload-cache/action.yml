@@ -1,0 +1,18 @@
+name: upload-cache
+description: Re-assume the AWS role, then sign the build result and upload it to the binary cache.
+
+runs:
+  using: composite
+  steps:
+    - name: assume role
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-region: us-east-2
+        role-to-assume: arn:aws:iam::792172458894:role/github-actions
+        role-session-name: GitHubActions-${{ github.run_id }}
+    - name: sign and upload to cache
+      shell: bash
+      run: |
+        nix store sign --verbose --key-file ./private-key --recursive ./result
+        nix copy --quiet --max-jobs auto --to "s3://nix.barney.dev?region=us-east-2" ./result
+        echo "successfully uploaded to cache at s3://nix.barney.dev"

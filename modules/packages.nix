@@ -17,7 +17,6 @@
         pkgs.tree
         pkgs.ripgrep
         pkgs.jq
-        pkgs.yq
         pkgs.delta
         pkgs.gnupg
         pkgs.ffmpeg
@@ -26,34 +25,12 @@
         pkgs.kitty
         pkgs.gh
         pkgs.awscli2
-        pkgs.aws-sam-cli
-        pkgs.pipx
         pkgs.uv
-        pkgs.presenterm
-        pkgs.nixpkgs-review
-        pkgs.nix-output-monitor
-        pkgs.glow
-        pkgs.gonzo
-        pkgs.trufflehog
-        pkgs.aws-vault
-        pkgs.okta-aws-cli
-        pkgs.hyperfine
-        pkgs.nixfmt
-        pkgs.nix-tree
-        pkgs.rainfrog
         pkgs.fastfetch
-        pkgs.speedtest-cli
         pkgs._1password-cli
         pkgs.shellcheck
-        pkgs.aws-sso-util
         pkgs.ssm-session-manager-plugin
-        pkgs.awscurl
-        pkgs.rain
-        pkgs.cfn-transform
-        pkgs.former
-        pkgs.aws-whoami
         pkgs.mergiraf
-        (pkgs.git-remote-codecommit.overrideAttrs (_: { doInstallCheck = false; }))
       ];
     };
 }

@@ -1,0 +1,5 @@
+[project]
+name = "yq-environment"
+version = "0"
+requires-python = ">=3.10"
+dependencies = ["yq"]

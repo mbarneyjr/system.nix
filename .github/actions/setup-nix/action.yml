@@ -1,0 +1,40 @@
+name: setup-nix
+description: Assume the AWS role, fetch the cache signing key, and install nix with the binary cache configured.
+
+inputs:
+  github_token:
+    description: Token used by the nix installer to access GitHub.
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: assume role
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-region: us-east-2
+        role-to-assume: arn:aws:iam::792172458894:role/github-actions
+        role-session-name: GitHubActions-${{ github.run_id }}
+    - name: get signing key
+      shell: bash
+      run: |
+        secret=$(aws secretsmanager get-secret-value \
+          --secret-id /nix/cache/signing-key \
+          --query SecretString \
+          --output text)
+        private_key=$(echo "$secret" | jq -r '.privateKey')
+        public_key=$(echo "$secret" | jq -r '.publicKey')
+        echo "::add-mask::${private_key}"
+        echo "$private_key" > private-key
+        chmod 600 private-key
+        echo "PUBLIC_KEY=${public_key}" >> "$GITHUB_ENV"
+    - name: install nix
+      uses: cachix/install-nix-action@v31
+      with:
+        github_access_token: ${{ inputs.github_token }}
+        install_url: https://releases.nixos.org/nix/nix-2.35.3/install
+        extra_nix_config: |
+          trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= ${{ env.PUBLIC_KEY }}
+          substituters = https://cache.nixos.org/ https://nix.barney.dev/
+          download-buffer-size = 1073741824
+          max-substitution-jobs = 32

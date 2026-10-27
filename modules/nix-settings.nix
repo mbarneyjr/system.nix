@@ -7,8 +7,8 @@ let
       "flakes"
     ];
     substituters = [
-      "https://nix.barney.dev/"
       "https://cache.nixos.org/"
+      "https://nix.barney.dev/"
     ];
     trusted-public-keys = [
       "nix.barney.dev-1:Wz6Nj2M/3PogEKI4/SRIdUm83QlC6zZN/0CCTS9oJ2o="
