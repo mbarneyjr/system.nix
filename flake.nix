@@ -25,7 +25,6 @@
     mbnvim.inputs.nixpkgs.follows = "nixpkgs";
     mbnvim.inputs.flake-parts.follows = "flake-parts";
     mbnvim.inputs.import-tree.follows = "import-tree";
-    mbnvim.inputs.cfn-nvim.inputs.import-tree.follows = "import-tree";
 
     gcalsync.url = "github:mbarneyjr/gcalsync";
     gcalsync.inputs.nixpkgs.follows = "nixpkgs";
