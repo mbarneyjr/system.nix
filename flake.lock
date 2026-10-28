@@ -285,11 +285,11 @@
         "nvim-ts-context-commentstring": "nvim-ts-context-commentstring"
       },
       "locked": {
-        "lastModified": 1793040262,
-        "narHash": "sha256-v1v5OQIl+z/nzeBcEmc4H/4QYMm0XhA9ibONfyGq4hM=",
+        "lastModified": 1793156132,
+        "narHash": "sha256-xWpUTQFvTV/9M4FKycxAUFg/+ulCTvblcVrsoOIMa8Q=",
         "owner": "mbarneyjr",
         "repo": "mbnvim",
-        "rev": "3f2610011f4cc3136fd29259bae61f1d005c9b3d",
+        "rev": "6a5a10858682f1df00d4ae5dca5414ac28715b3e",
         "type": "github"
       },
       "original": {
