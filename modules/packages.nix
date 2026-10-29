@@ -22,11 +22,10 @@
         pkgs.ffmpeg
         pkgs.graphviz
         pkgs.imagemagick
-        pkgs.kitty
+        pkgs.timg
         pkgs.gh
         pkgs.awscli2
         pkgs.uv
-        pkgs.fastfetch
         pkgs._1password-cli
         pkgs.shellcheck
         pkgs.ssm-session-manager-plugin

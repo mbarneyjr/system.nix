@@ -26,7 +26,7 @@ in
     {
       system.stateVersion = 6;
       nix.checkConfig = true;
-      nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+      nix.registry.nixpkgs.flake = inputs.nixpkgs;
       nix.linux-builder.enable = true;
       nix.linux-builder.config.virtualisation.qemu.options = [ "-machine gic-version=max" ];
       nix.gc = {
@@ -36,7 +36,7 @@ in
             Hour = 0;
           }
         ];
-        options = "--delete-older-than 30d";
+        options = "--delete-older-than 14d";
       };
       nix.optimise = {
         automatic = true;
@@ -55,7 +55,7 @@ in
     nix.gc = {
       automatic = true;
       dates = "daily";
-      options = "--delete-older-than 30d";
+      options = "--delete-older-than 14d";
     };
     nix.optimise.automatic = true;
     nix.settings = nixSettings;

@@ -91,8 +91,9 @@ alias tmn="~/.local/bin/tmux-new-session.sh"
 alias awsume="source awsume"
 alias awsumel="source awsume --role-duration 43200"
 alias awsumer="source awsume \${AWSUME_COMMAND}";
-alias icat="kitten icat --align left"
-alias idot="dot -Tsvg | kitten icat --align left"
+alias timg="timg -pk"
+alias icat="timg"
+alias idot="dot -Tpng | timg -"
 alias flush-mac-dns="sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
 alias docker="finch"
 
