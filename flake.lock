@@ -65,6 +65,7 @@
           "flake-parts"
         ],
         "import-tree": [
+          "mbnvim",
           "import-tree"
         ],
         "nixpkgs": [
@@ -282,14 +283,17 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "nvim-ts-context-commentstring": "nvim-ts-context-commentstring"
+        "nvim-ts-context-commentstring": "nvim-ts-context-commentstring",
+        "pyproject-build-systems": "pyproject-build-systems",
+        "pyproject-nix": "pyproject-nix",
+        "uv2nix": "uv2nix"
       },
       "locked": {
-        "lastModified": 1793156132,
-        "narHash": "sha256-xWpUTQFvTV/9M4FKycxAUFg/+ulCTvblcVrsoOIMa8Q=",
+        "lastModified": 1793282973,
+        "narHash": "sha256-d7rmX0KQaXc6iRNvaN8Wz5wdma6X8LylZicpHG8CHHM=",
         "owner": "mbarneyjr",
         "repo": "mbnvim",
-        "rev": "6a5a10858682f1df00d4ae5dca5414ac28715b3e",
+        "rev": "ec8e71372ed458d80709f253d37abc44deaad2a4",
         "type": "github"
       },
       "original": {
@@ -339,11 +343,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1792842277,
-        "narHash": "sha256-pGPnZGi8y9d76xNeracniXO3dsYVROEmMkMc8jD0Ihc=",
+        "lastModified": 1793225069,
+        "narHash": "sha256-sx1f99WGrDfJ83KKuQrqGPmot0rnDgmpLJDzpU2oHQQ=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "d3b13ad75cc492690728f9307e443dec9ef9a20e",
+        "rev": "e62746b0b472753ef019baceab6f1e2e52014980",
         "type": "github"
       },
       "original": {
@@ -372,6 +376,35 @@
     "pyproject-build-systems": {
       "inputs": {
         "nixpkgs": [
+          "mbnvim",
+          "nixpkgs"
+        ],
+        "pyproject-nix": [
+          "mbnvim",
+          "pyproject-nix"
+        ],
+        "uv2nix": [
+          "mbnvim",
+          "uv2nix"
+        ]
+      },
+      "locked": {
+        "lastModified": 1792499785,
+        "narHash": "sha256-mGOkvueuMGSRiD75ccxFzfEvSlIU9ztjFluHMKOtogY=",
+        "owner": "pyproject-nix",
+        "repo": "build-system-pkgs",
+        "rev": "a17819c85163988e063806ffc4f6d2716bc8ead8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pyproject-nix",
+        "repo": "build-system-pkgs",
+        "type": "github"
+      }
+    },
+    "pyproject-build-systems_2": {
+      "inputs": {
+        "nixpkgs": [
           "nixpkgs"
         ],
         "pyproject-nix": [
@@ -396,6 +429,27 @@
       }
     },
     "pyproject-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "mbnvim",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1793240426,
+        "narHash": "sha256-NPWgb6H4arnWyTKvYIys5U0xqd5QY74Z+lyTJA+7XGY=",
+        "owner": "pyproject-nix",
+        "repo": "pyproject.nix",
+        "rev": "bf7d4b1d6de61db02fd4e748395634f03006e5de",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pyproject-nix",
+        "repo": "pyproject.nix",
+        "type": "github"
+      }
+    },
+    "pyproject-nix_2": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
@@ -429,12 +483,37 @@
         "nix-darwin": "nix-darwin",
         "nix-homebrew": "nix-homebrew",
         "nixpkgs": "nixpkgs",
-        "pyproject-build-systems": "pyproject-build-systems",
-        "pyproject-nix": "pyproject-nix",
-        "uv2nix": "uv2nix"
+        "pyproject-build-systems": "pyproject-build-systems_2",
+        "pyproject-nix": "pyproject-nix_2",
+        "uv2nix": "uv2nix_2"
       }
     },
     "uv2nix": {
+      "inputs": {
+        "nixpkgs": [
+          "mbnvim",
+          "nixpkgs"
+        ],
+        "pyproject-nix": [
+          "mbnvim",
+          "pyproject-nix"
+        ]
+      },
+      "locked": {
+        "lastModified": 1793272761,
+        "narHash": "sha256-3CE1CEwprYlHRlRVkXDkhqec0jjF9Cti7tdk8vVDsCM=",
+        "owner": "pyproject-nix",
+        "repo": "uv2nix",
+        "rev": "c361746c7d630d98b972378290547c8d35542a7a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pyproject-nix",
+        "repo": "uv2nix",
+        "type": "github"
+      }
+    },
+    "uv2nix_2": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
