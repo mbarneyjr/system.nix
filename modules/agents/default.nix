@@ -51,6 +51,10 @@ in
         pkgs.openusage
       ];
 
+      home.sessionVariables = lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
+        CLAUDE_CODE_CERT_STORE = "bundled,system";
+      };
+
       programs.claude-code = {
         enable = true;
         inherit (cfg) context skills mcpServers;
