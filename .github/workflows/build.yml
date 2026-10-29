@@ -24,3 +24,12 @@ jobs:
           nix build --quiet --out-link result .#darwinConfigurations.aarch64-public.system
       - name: upload to cache
         uses: ./.github/actions/upload-cache
+      - name: generate closure snapshot
+        run: |
+          nix run --inputs-from . nixpkgs#dix -- snapshot ./result > snapshot.json
+      - name: upload closure snapshot
+        uses: actions/upload-artifact@v4
+        with:
+          name: snapshot
+          path: snapshot.json
+          retention-days: 90

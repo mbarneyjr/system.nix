@@ -15,6 +15,7 @@ jobs:
     permissions:
       id-token: write
       contents: read
+      actions: read
       pull-requests: write
     steps:
       - name: checkout PR
@@ -25,19 +26,18 @@ jobs:
         uses: ./.github/actions/setup-nix
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-      - name: build main
-        run: |
-          set -euo pipefail
-          git checkout main
-          before=$(nix build --quiet --no-link --print-out-paths .#darwinConfigurations.aarch64-public.system)
-          echo "BEFORE=$before" >> "$GITHUB_ENV"
       - name: build PR head
         run: |
-          set -euo pipefail
-          git checkout ${{ github.sha }}
           nix build --quiet --out-link result .#darwinConfigurations.aarch64-public.system
       - name: upload to cache
         uses: ./.github/actions/upload-cache
+      - name: download main snapshot
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          run=$(gh run list --workflow build.yml --branch main --status success --limit 1 --json databaseId --jq '.[0].databaseId')
+          gh run download "$run" --name snapshot
       - name: generate package diff
         run: |
           set -euo pipefail
@@ -45,7 +45,7 @@ jobs:
             echo "## Package Changes"
             echo ""
             echo '```'
-            nix run --inputs-from . nixpkgs#dix -- --color never "$BEFORE" ./result
+            nix run --inputs-from . nixpkgs#dix -- --color never diff snapshot.json ./result
             echo '```'
           } > package-changes.md
       - name: comment on PR
