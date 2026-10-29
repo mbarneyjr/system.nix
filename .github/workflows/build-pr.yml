@@ -37,7 +37,12 @@ jobs:
         run: |
           set -euo pipefail
           run=$(gh run list --workflow build.yml --branch main --status success --limit 1 --json databaseId --jq '.[0].databaseId')
-          gh run download "$run" --name snapshot
+          if ! gh run download "$run" --name snapshot; then
+            git checkout main
+            before=$(nix build --quiet --no-link --print-out-paths .#darwinConfigurations.aarch64-public.system)
+            git checkout ${{ github.sha }}
+            nix run --inputs-from . nixpkgs#dix -- snapshot "$before" > snapshot.json
+          fi
       - name: generate package diff
         run: |
           set -euo pipefail
