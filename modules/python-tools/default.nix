@@ -44,6 +44,13 @@
           executables = [ "cfn-transform" ];
         }
         {
+          name = "cfn-flip";
+          executables = [
+            "cfn-flip"
+            "flip"
+          ];
+        }
+        {
           name = "former";
           executables = [ "former" ];
         }
