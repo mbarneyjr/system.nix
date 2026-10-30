@@ -33,6 +33,7 @@ in
             homeManager.git
             homeManager.tmux
             homeManager.ghostty
+            homeManager.rex
             homeManager.awsume
             homeManager.awsuse
             homeManager.agents

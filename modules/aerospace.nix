@@ -131,6 +131,10 @@
             run = "move-node-to-workspace 3";
           }
           {
+            "if".app-id = "com.superlogical.rex";
+            run = "move-node-to-workspace 3";
+          }
+          {
             "if".app-id = "com.apple.backup.launcher";
             run = "layout floating";
           }

@@ -14,6 +14,8 @@
           else
             compinit -C
           fi
+          autoload -Uz _claude
+          compdef _claude claude
           source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
         '';
         initContent = builtins.readFile ./zshrc;
