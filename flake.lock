@@ -290,11 +290,11 @@
         "uv2nix": "uv2nix"
       },
       "locked": {
-        "lastModified": 1793374539,
-        "narHash": "sha256-MZceIbn0GAIPzwaaQN+EKFlxowbaAh725TzYnZDpqOY=",
+        "lastModified": 1793417144,
+        "narHash": "sha256-WxhwA/THTlFs7md2gJ4BrZl9gsgyzJN7l36x01mjdB4=",
         "owner": "mbarneyjr",
         "repo": "mbnvim",
-        "rev": "c33104753dbc6a2bd8b722d4127a45d52064f4e0",
+        "rev": "4b623db275449d6cad07993bbb64239f36c4c87b",
         "type": "github"
       },
       "original": {
