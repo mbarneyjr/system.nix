@@ -62,7 +62,7 @@ precmd() {
     EXIT_STATUS=$?
 }
 NEWLINE=$'\n'
-PROMPT='%F{yellow}➜'
+PROMPT=$'%{\e]133;A\a%}%F{yellow}➜'
 PROMPT+=' %F{cyan}%*'
 PROMPT+=' $(_exit_status)'
 PROMPT+=' $(_aws_region)'
