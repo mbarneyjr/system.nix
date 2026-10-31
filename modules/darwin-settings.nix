@@ -71,6 +71,7 @@ in
             "/Applications/Slack.app"
             "/Applications/Google Chrome.app"
             "/Applications/Ghostty.app"
+            "/Applications/Rex Beta.app"
           ];
         };
         finder = {
