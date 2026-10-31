@@ -3,21 +3,21 @@ rex.bind("ctrl+b>s", "pane.split", { direction = "down" })
 rex.bind("ctrl+b>f", "pane.zoom")
 rex.bind("ctrl+b>shift+s", "session.switch")
 local function float_command(name, title, command)
-  rex.action({
-    name = name,
-    title = title,
-    run = function(ctx)
-      rex.session.new_layer({
-        session_id = ctx.session_id,
-        bounds = { 0.2, 0.2, 0.6, 0.6 },
-        focus = true,
-        layout = rex.layout.block({
-          flavor = "com.superlogical.terminal.shell",
-          options = { command = { command } },
-        }),
-      })
-    end,
-  })
+	rex.action({
+		name = name,
+		title = title,
+		run = function(ctx)
+			rex.session.new_layer({
+				session_id = ctx.session_id,
+				bounds = { 0.2, 0.2, 0.6, 0.6 },
+				focus = true,
+				layout = rex.layout.block({
+					flavor = "com.superlogical.terminal.shell",
+					options = { command = { command } },
+				}),
+			})
+		end,
+	})
 end
 
 float_command("sessionizer", "Project Sessions", REX_SESSIONIZER)
@@ -51,6 +51,7 @@ rex.bind("prompt/k", "client.prompt.previous")
 rex.bind("ctrl+shift+h", "client.tab.previous")
 rex.bind("ctrl+shift+l", "client.tab.next")
 rex.bind("ctrl+shift+n", "client.tab.new")
-rex.bind("ctrl+shift+j", "session.switch")
+rex.bind("ctrl+shift+j", "session.next")
+rex.bind("ctrl+shift+k", "session.previous")
 
 require("navigator").setup()
