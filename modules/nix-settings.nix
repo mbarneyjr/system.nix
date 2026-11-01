@@ -28,6 +28,7 @@ in
       nix.checkConfig = true;
       nix.registry.nixpkgs.flake = inputs.nixpkgs;
       nix.linux-builder.enable = true;
+      nix.linux-builder.ephemeral = true;
       nix.linux-builder.config.virtualisation.qemu.options = [ "-machine gic-version=max" ];
       nix.gc = {
         automatic = true;
