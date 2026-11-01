@@ -1,7 +1,7 @@
 { ... }:
 {
   flake.modules.homeManager.rex =
-    { pkgs, ... }:
+    { lib, pkgs, ... }:
     let
       sessionizer = pkgs.writeShellApplication {
         name = "rex-sessionizer";
@@ -31,8 +31,11 @@
           export PATH="$REX_BIN_DIR:$PATH"
         fi
       '';
+      home.activation.rexCustomThemes = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        run /usr/bin/defaults write com.superlogical.rex Workspace.customThemes -data "$(${pkgs.xxd}/bin/xxd -p -c 0 ${./custom-themes.json})"
+      '';
       targets.darwin.defaults."com.superlogical.rex" = {
-        "Workspace.darkThemeID" = "merino-dark";
+        "Workspace.darkThemeID" = "custom-tokyonight";
         "Workspace.lightThemeID" = "merino-light";
         "Workspace.interfaceStyle" = "modern";
         "Workspace.paneDensity" = "compact";
