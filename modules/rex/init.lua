@@ -21,9 +21,12 @@ local function float_command(name, title, command)
 end
 
 float_command("sessionizer", "Project Sessions", REX_SESSIONIZER)
+float_command("switch_session", "Switch Session", REX_SWITCH_SESSION)
 float_command("new_project", "New Project Session", REX_NEW_SESSION)
 
 rex.bind("ctrl+f", "sessionizer")
+rex.bind("ctrl+;", "switch_session")
+rex.bind("ctrl+shift+;", "switch_session")
 rex.bind("ctrl+shift+f", "new_project")
 
 rex.bind("ctrl+b>ctrl+l", "pane.resize", { direction = "right" })

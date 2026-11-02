@@ -12,6 +12,14 @@
         ];
         text = builtins.readFile ./rex-sessionizer.sh;
       };
+      switchSession = pkgs.writeShellApplication {
+        name = "rex-switch-session";
+        runtimeInputs = [
+          pkgs.fzf
+          pkgs.jq
+        ];
+        text = builtins.readFile ./rex-switch-session.sh;
+      };
       newSession = pkgs.writeShellApplication {
         name = "rex-new-session";
         runtimeInputs = [
@@ -24,6 +32,7 @@
     {
       home.packages = [
         sessionizer
+        switchSession
         newSession
       ];
       programs.zsh.initContent = ''
@@ -49,6 +58,7 @@
       xdg.configFile."rex/navigator.lua".source = ./navigator.lua;
       xdg.configFile."rex/init.lua".text = ''
         local REX_SESSIONIZER = "${sessionizer}/bin/rex-sessionizer"
+        local REX_SWITCH_SESSION = "${switchSession}/bin/rex-switch-session"
         local REX_NEW_SESSION = "${newSession}/bin/rex-new-session"
         ${builtins.readFile ./init.lua}
       '';
