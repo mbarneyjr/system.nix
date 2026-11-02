@@ -122,6 +122,15 @@ in
         /usr/bin/pmset -b sleep 1
       '';
 
+      launchd.daemons.caffeinate.serviceConfig = {
+        ProgramArguments = [
+          "/usr/bin/caffeinate"
+          "-s"
+        ];
+        RunAtLoad = true;
+        KeepAlive = true;
+      };
+
       system.keyboard = {
         enableKeyMapping = true;
         remapCapsLockToEscape = true;
