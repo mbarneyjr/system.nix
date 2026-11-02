@@ -117,6 +117,9 @@ testbrew() {
 autoload -Uz bashcompinit && bashcompinit
 complete -C 'aws_completer' aws
 eval "$(command gcalsync completion zsh)"
+if command -v rex >/dev/null; then
+  eval "$(command rex completion zsh)"
+fi
 
 eval "$(command fzf --zsh)"
 autoload -Uz edit-command-line
