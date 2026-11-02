@@ -106,8 +106,21 @@ in
             "60".enabled = false;
             "263".enabled = false;
           };
+          "io.tailscale.ipn.macsys" = {
+            HideDockIcon = true;
+            TailscaleStartOnLogin = true;
+            UnstableUpdatesEnabled = false;
+            SUAutomaticallyUpdate = true;
+            SUEnableAutomaticChecks = true;
+            SUScheduledCheckInterval = 259200;
+          };
         };
       };
+
+      system.activationScripts.postActivation.text = ''
+        /usr/bin/pmset -c sleep 0
+        /usr/bin/pmset -b sleep 1
+      '';
 
       system.keyboard = {
         enableKeyMapping = true;
