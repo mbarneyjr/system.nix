@@ -95,7 +95,7 @@ in
         };
         universalaccess = {
           closeViewScrollWheelToggle = true;
-          reduceMotion = true;
+          reduceMotion = false;
         };
         WindowManager = {
           EnableStandardClickToShowDesktop = false;
