@@ -9,7 +9,11 @@ if [[ $# -eq 0 ]]; then
 fi
 
 selected=$1
-name=$(basename "$selected")
+if [[ $selected == "$HOME/system.nix" ]]; then
+  name=${selected/#$HOME/\~}
+else
+  name=$(basename "$(dirname "$selected")")/$(basename "$selected")
+fi
 session_id=$(rex ls --json | jq -r --arg name "$name" '.sessions[] | select(.label == $name) | .session_id')
 
 if [[ -z $session_id ]]; then
