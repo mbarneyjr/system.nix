@@ -1,7 +1,6 @@
 rex.bind("ctrl+b>v", "pane.split", { direction = "right" })
 rex.bind("ctrl+b>s", "pane.split", { direction = "down" })
 rex.bind("ctrl+b>f", "pane.zoom")
-rex.bind("ctrl+b>shift+s", "session.switch")
 local function float_command(name, title, command)
 	rex.action({
 		name = name,
