@@ -60,7 +60,14 @@ in
         inherit (cfg) context skills mcpServers;
         settings = {
           model = "opusplan";
-          includeCoAuthoredBy = false;
+          theme = "auto";
+          editorMode = "vim";
+          tui = "fullscreen";
+          attribution = {
+            commit = "";
+            pr = "";
+            sessionUrl = false;
+          };
           statusLine = {
             type = "command";
             command = ./statusline.sh;
@@ -94,16 +101,6 @@ in
             '';
           };
           hooks = {
-            Notification = [
-              {
-                hooks = [
-                  {
-                    type = "command";
-                    command = "say '[[volm 0.2]] claude needs input'";
-                  }
-                ];
-              }
-            ];
             SessionStart = [
               {
                 hooks = [
