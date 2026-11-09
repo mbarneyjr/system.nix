@@ -82,7 +82,7 @@
         "Workspace.terminalPaddingY" = 0.0;
         "Workspace.terminalSmoothScrolling" = true;
         "Workspace.terminalUsesDisplayP3" = true;
-        "Workspace.terminalUseThemePalette" = true;
+        "Workspace.terminalUseThemePalette" = false;
         "Workspace.tintsPanesWithProgramBackground" = true;
         "Workspace.usesPaneGlass" = true;
         "Workspace.usesStandardInactiveWindowPaneStyles" = true;
