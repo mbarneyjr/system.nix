@@ -50,7 +50,7 @@
       targets.darwin.defaults."com.superlogical.rex" = {
         "Workspace.darkThemeID" = "custom-tokyonight";
         "Workspace.lightThemeID" = "custom-tokyonight-day";
-        "Workspace.interfaceStyle" = "system";
+        "Workspace.interfaceStyle" = "blendTheme";
         "Workspace.paneDensity" = "compact";
         "Workspace.inactivePaneFadeMode" = "both";
         "Workspace.darkUsesExtendedThemePalette" = true;
