@@ -90,6 +90,7 @@
           alt-shift-semicolon = "mode service";
           alt-shift-f = "fullscreen";
           alt-shift-c = "exec-and-forget ${centerToggle}/bin/aerospace-center-toggle";
+          alt-shift-d = "exec-and-forget /usr/bin/osascript -e 'tell application \"System Events\" to tell appearance preferences to set dark mode to not dark mode'";
         };
         mode.service.binding = {
           esc = [
