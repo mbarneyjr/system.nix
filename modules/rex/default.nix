@@ -71,6 +71,7 @@
         "Workspace.terminalFallbackFontNames" = [ ];
         "Workspace.terminalFontName" = "Berkeley Mono";
         "Workspace.terminalFontPointSize" = 20;
+        "Workspace.terminalImproveTextContrast" = false;
         "Workspace.terminalFontSmoothing" = true;
         "Workspace.terminalPaddingColor" = "extend";
         "Workspace.terminalPaddingX" = 10.0;
