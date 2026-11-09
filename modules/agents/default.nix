@@ -15,6 +15,7 @@ let
       caveman-commit = ./skills/caveman-commit;
       caveman-review = ./skills/caveman-review;
       show-me = ./skills/show-me;
+      rex-digest = ./skills/rex-digest;
     };
 
     mcpServers = {
