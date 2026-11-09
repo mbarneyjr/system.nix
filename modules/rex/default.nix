@@ -39,14 +39,18 @@
         if [ -n "$REX_BIN_DIR" ]; then
           export PATH="$REX_BIN_DIR:$PATH"
         fi
+
+        rex-clear() {
+          rex session ls | awk -v group="$1" 'NR > 1 && index($1, group "/") == 1 { print $NF }' | xargs rex session kill
+        }
       '';
       home.activation.rexCustomThemes = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         run /usr/bin/defaults write com.superlogical.rex Workspace.customThemes -data "$(${pkgs.xxd}/bin/xxd -p -c 0 ${./custom-themes.json})"
       '';
       targets.darwin.defaults."com.superlogical.rex" = {
         "Workspace.darkThemeID" = "custom-tokyonight";
-        "Workspace.lightThemeID" = "merino-light";
-        "Workspace.interfaceStyle" = "modern";
+        "Workspace.lightThemeID" = "custom-tokyonight-day";
+        "Workspace.interfaceStyle" = "system";
         "Workspace.paneDensity" = "compact";
         "Workspace.inactivePaneFadeMode" = "both";
         "Workspace.darkUsesExtendedThemePalette" = true;
@@ -77,10 +81,10 @@
         "Workspace.terminalPaddingX" = 10.0;
         "Workspace.terminalPaddingY" = 0.0;
         "Workspace.terminalSmoothScrolling" = true;
-        "Workspace.terminalUsesDisplayP3" = false;
+        "Workspace.terminalUsesDisplayP3" = true;
         "Workspace.terminalUseThemePalette" = false;
-        "Workspace.tintsPanesWithProgramBackground" = true;
-        "Workspace.usesPaneGlass" = true;
+        "Workspace.tintsPanesWithProgramBackground" = false;
+        "Workspace.usesPaneGlass" = false;
         "Workspace.usesStandardInactiveWindowPaneStyles" = true;
         "RexAppUpdateAutomation" = "install";
         "RexAppUpdateChannel" = "snapshot";
