@@ -102,6 +102,7 @@ in
         };
         CustomUserPreferences = {
           NSGlobalDomain.SLSMenuBarUseBlurredAppearance = true;
+          "com.apple.universalaccess".closeViewSmoothImages = true;
           "com.apple.symbolichotkeys".AppleSymbolicHotKeys = {
             "60".enabled = false;
             "263".enabled = false;
