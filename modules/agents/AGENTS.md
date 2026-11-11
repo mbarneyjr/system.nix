@@ -100,6 +100,19 @@ The first lazy solution that works is the right one, once you actually know what
 - Deletion over addition. Boring over clever, clever is what someone decodes at 3am.
 - Fewest files possible. Shortest working diff wins, but only once you understand the problem.
 
+- Describe each distinct thing explicitly, in its own block.
+  This applies to every system description: infrastructure, config, schemas, routes, handlers, tests, and imperative code.
+- Do not generate separate things from a table, map, loop, or template when you can write them out.
+  Different things will diverge.
+  A change to one must not require restructuring the others.
+- Allow a loop or generator only when both conditions hold:
+  - The items are identical in shape and behavior.
+  - The set is dynamic, so it cannot be listed.
+- Do not add a helper, local, variable, or parameter for fewer than three consumers.
+- When you consider a loop to remove repetition, ask:
+  "If one item needs a different option tomorrow, does this structure still hold?"
+  If the answer is no, write the items out.
+
 ## Tools
 
 If you have a bespoke tool to accomplish something, use that.
