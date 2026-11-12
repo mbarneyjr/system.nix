@@ -51,7 +51,7 @@
         "Workspace.darkThemeID" = "custom-tokyonight";
         "Workspace.lightThemeID" = "custom-tokyonight-day";
         "Workspace.interfaceStyle" = "blendTheme";
-        "Workspace.paneDensity" = "compact";
+        "Workspace.paneDensity" = "comfortable";
         "Workspace.inactivePaneFadeMode" = "both";
         "Workspace.darkUsesExtendedThemePalette" = true;
         "Workspace.lightUsesExtendedThemePalette" = true;
