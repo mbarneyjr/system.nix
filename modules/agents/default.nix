@@ -37,7 +37,12 @@ let
 in
 {
   flake.modules.homeManager.agents =
-    { pkgs, lib, ... }:
+    {
+      pkgs,
+      lib,
+      config,
+      ...
+    }:
     let
       cfg = agentConfig pkgs;
     in
@@ -52,6 +57,18 @@ in
         pkgs.openusage
       ];
 
+      home.file."${config.programs.claude-code.configDir}/settings.json".enable = false;
+
+      home.activation.mergeClaudeSettings = lib.hm.dag.entryAfter [ "linkGeneration" ] ''
+        target="${config.programs.claude-code.configDir}/settings.json"
+        managed="${config.home.file."${config.programs.claude-code.configDir}/settings.json".source}"
+        current="{}"
+        if [ -f "$target" ]; then current="$(cat "$target")"; fi
+        rm -f "$target"
+        printf '%s' "$current" | ${pkgs.jq}/bin/jq -s '.[0] * .[1]' - "$managed" > "$target"
+        chmod 644 "$target"
+      '';
+
       home.sessionVariables = lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
         CLAUDE_CODE_CERT_STORE = "bundled,system";
       };
@@ -60,7 +77,7 @@ in
         enable = true;
         inherit (cfg) context skills mcpServers;
         settings = {
-          model = "opusplan";
+          model = "opus";
           theme = "auto";
           editorMode = "vim";
           tui = "fullscreen";
@@ -75,7 +92,7 @@ in
             padding = 0;
           };
           permissions = {
-            defaultMode = "auto";
+            defaultMode = "bypassPermissions";
             allow = [
               "mcp__review_nvim"
               "mcp__aws-mcp__aws___read_documentation"
@@ -92,6 +109,7 @@ in
               "mcp__plugin_claude-code-home-manager_aws-mcp__aws___get_regional_availability"
             ];
           };
+          skipDangerousModePermissionPrompt = true;
           env = {
             CLAUDE_ENV_FILE = pkgs.writeText "claude-env.sh" ''
               export DIRENV_LOG_FORMAT=
