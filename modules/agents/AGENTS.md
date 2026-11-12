@@ -32,6 +32,69 @@ Write all prose in ASD-STE100 Simplified Technical English.
 - Use a vertical list when text has more than three steps or conditions.
 - Code, identifiers, commands, error text, and quoted material are exempt. Do not rewrite them.
 
+### Visualizing in the terminal (Rex + kitty graphics)
+
+When a diagram, chart, or sketch makes an answer clearer than text, render one and show it in a Rex pane.
+Do this without being asked when the topic is an architecture, a data flow, a sequence, a state machine, or a comparison with more than three moving parts.
+
+Tools on this machine: `dot` (Graphviz) for diagrams, `timg` for display.
+Both are in the profile.
+Do not install anything else.
+
+Procedure:
+
+1. Write the diagram source in the scratchpad directory, one file per diagram.
+   Use Graphviz DOT with filled rounded nodes and node `fontsize` of 20 or more.
+   Choose orientation from the pane shape:
+   `rankdir=TB` for a pane that is taller than wide (a right or left split) or
+   `rankdir=LR` for a pane that is wider than tall (a split above or below).
+   Keep each diagram to about 12 nodes.
+   Split a larger picture into several diagrams.
+2. Render with `dot`.
+3. Read the PNG with the Read tool.
+   Fix layout problems before showing it.
+   An image whose aspect ratio is more than 3:1 away from the pane shape renders too small.
+4. Display with `timg -pk` (kitty protocol).
+   `timg` does not see the pane size at launch and does not redraw after a resize or zoom, so always run it through this wrapper, save it in the scratchpad:
+
+   ```sh
+   #!/bin/sh
+   image="$1"
+   last=""
+   while :; do
+     size="$(stty size < /dev/tty 2>/dev/null)"
+     if [ -n "$size" ] && [ "$size" != "$last" ]; then
+       rows="${size% *}"
+       cols="${size#* }"
+       clear
+       timg -pk -U -g "${cols}x$((rows - 1))" --center "$image"
+       last="$size"
+     fi
+     sleep 0.5
+   done
+   ```
+
+5. Open the pane as a split of the current pane, not a new tab, unless the user asks for a tab:
+
+   ```sh
+   rex split -s "$REX_SESSION" -b "$REX_BLOCK" --split=right --ratio 60 --label "LABEL" --focus=false --json -- "$SCRATCHPAD/display_image.sh" "$SCRATCHPAD/NAME.png"
+   ```
+
+   For a second diagram, split the new pane again with `-b` set to the block id returned by the first split.
+   Save every block id returned.
+   Default to vertical splits (`--split=right`).
+   Use `--split=below` only for wide, short images.
+
+6. Tell the user the pane labels and the PNG paths in one or two sentences.
+   Do not describe the whole diagram in prose.
+7. Close the panes with `rex block close -s "$REX_SESSION" BLOCK_ID` when the user says they are done, or before a rewind.
+
+Rules:
+
+- Never zoom a pane to make an image bigger. The wrapper redraws on resize, so the user can zoom it themselves.
+- Never run `timg` directly as the pane command. It renders once at a default size and exits.
+- Keep the diagram source files. The user may ask to copy them into a project.
+
 ## Naming
 
 Every name you choose for anything must use precise professional vocabulary.
