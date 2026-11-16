@@ -52,7 +52,7 @@
         "Workspace.lightThemeID" = "custom-tokyonight-day";
         "Workspace.interfaceStyle" = "blendTheme";
         "Workspace.paneDensity" = "comfortable";
-        "Workspace.inactivePaneFadeMode" = "both";
+        "Workspace.inactivePaneFadeMode" = "none";
         "Workspace.darkUsesExtendedThemePalette" = true;
         "Workspace.lightUsesExtendedThemePalette" = true;
         "Workspace.animationStyle" = "natural";
@@ -85,7 +85,7 @@
         "Workspace.terminalUseThemePalette" = false;
         "Workspace.tintsPanesWithProgramBackground" = true;
         "Workspace.usesPaneGlass" = true;
-        "Workspace.usesStandardInactiveWindowPaneStyles" = true;
+        "Workspace.usesStandardInactiveWindowPaneStyles" = false;
         "RexAppUpdateAutomation" = "install";
         "RexAppUpdateChannel" = "snapshot";
         "rex.agents.names-sessions" = true;
