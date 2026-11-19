@@ -80,6 +80,7 @@ in
           model = "opus";
           theme = "auto";
           editorMode = "vim";
+          autoCompactEnabled = false;
           tui = "fullscreen";
           attribution = {
             commit = "";
