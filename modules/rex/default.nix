@@ -3,15 +3,6 @@
   flake.modules.homeManager.rex =
     { lib, pkgs, ... }:
     let
-      sessionizer = pkgs.writeShellApplication {
-        name = "rex-sessionizer";
-        runtimeInputs = [
-          pkgs.fzf
-          pkgs.jq
-          pkgs.findutils
-        ];
-        text = builtins.readFile ./rex-sessionizer.sh;
-      };
       switchSession = pkgs.writeShellApplication {
         name = "rex-switch-session";
         runtimeInputs = [
@@ -20,20 +11,10 @@
         ];
         text = builtins.readFile ./rex-switch-session.sh;
       };
-      newSession = pkgs.writeShellApplication {
-        name = "rex-new-session";
-        runtimeInputs = [
-          pkgs.git
-          sessionizer
-        ];
-        text = builtins.readFile ./rex-new-session.sh;
-      };
     in
     {
       home.packages = [
-        sessionizer
         switchSession
-        newSession
       ];
       programs.zsh.initContent = ''
         if [ -n "$REX_BIN_DIR" ]; then
@@ -99,9 +80,7 @@
       };
       xdg.configFile."rex/navigator.lua".source = ./navigator.lua;
       xdg.configFile."rex/init.lua".text = ''
-        local REX_SESSIONIZER = "${sessionizer}/bin/rex-sessionizer"
         local REX_SWITCH_SESSION = "${switchSession}/bin/rex-switch-session"
-        local REX_NEW_SESSION = "${newSession}/bin/rex-new-session"
         ${builtins.readFile ./init.lua}
       '';
     };
