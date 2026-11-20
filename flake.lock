@@ -150,11 +150,11 @@
     "gh-review-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1787456683,
-        "narHash": "sha256-Z61PKGvhIuVZ1FLMhHMutECU1Wn5lCxl9K/zPhUjmWY=",
+        "lastModified": 1793804668,
+        "narHash": "sha256-lSHMy1gX2j+ysCa/K/zyJTVoChQvHGksZ2JI6OXavlU=",
         "owner": "gh-tui-tools",
         "repo": "gh-review.nvim",
-        "rev": "fb6dfda9d78ead4ba87bb3b2c970c12dfed5cc77",
+        "rev": "a8f7913cbe9bf9310c2f8eace85b9747f7f84325",
         "type": "github"
       },
       "original": {
@@ -290,11 +290,11 @@
         "uv2nix": "uv2nix"
       },
       "locked": {
-        "lastModified": 1794407408,
-        "narHash": "sha256-pK7QppNZVlp+ND8NdvINEjz2MaJH+N4FTlD83VgCLPk=",
+        "lastModified": 1795187062,
+        "narHash": "sha256-7fuY9a8aJlIvB3E3jIGUrarxo1C+I3ESMH/mEbh1/CU=",
         "owner": "mbarneyjr",
         "repo": "mbnvim",
-        "rev": "4185f38b6bdb9cfc7d569134a152759179d4c78e",
+        "rev": "4c375fdb9cd627a9c137b9d285c2313d872197cc",
         "type": "github"
       },
       "original": {
@@ -390,11 +390,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1792499785,
-        "narHash": "sha256-mGOkvueuMGSRiD75ccxFzfEvSlIU9ztjFluHMKOtogY=",
+        "lastModified": 1794012432,
+        "narHash": "sha256-zBKFTg7tEGApNt+CEKI5+WNNomD5MZqYNBr+r6/Bmdg=",
         "owner": "pyproject-nix",
         "repo": "build-system-pkgs",
-        "rev": "a17819c85163988e063806ffc4f6d2716bc8ead8",
+        "rev": "bdbc5f8dd2ad6136bb2ccecb14f6ec343965b194",
         "type": "github"
       },
       "original": {
@@ -437,11 +437,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1793240426,
-        "narHash": "sha256-NPWgb6H4arnWyTKvYIys5U0xqd5QY74Z+lyTJA+7XGY=",
+        "lastModified": 1793820880,
+        "narHash": "sha256-NUMabnvaL/0Ah9WM9pBMXEp+dQjMSYjezZ/fNjXouLQ=",
         "owner": "pyproject-nix",
         "repo": "pyproject.nix",
-        "rev": "bf7d4b1d6de61db02fd4e748395634f03006e5de",
+        "rev": "d43f0e74444c1f266c640fc49ce6ce6fb69d33c3",
         "type": "github"
       },
       "original": {
@@ -473,11 +473,11 @@
     "rex-navigator-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1793054068,
-        "narHash": "sha256-la/7BqqaskJeXz6D0WEQJB4Bmj9AvBOKSg2chtZ3cZ4=",
+        "lastModified": 1793608605,
+        "narHash": "sha256-gVrD1IuaN+JmEPmUb6q+P+MxaaeuENtXJElxxyzHOnw=",
         "owner": "baggiponte",
         "repo": "rex-navigator.nvim",
-        "rev": "09c8da1c2696bdabbf37a773fbe8ee8779c9b8c1",
+        "rev": "69c035110dd47423b1a672db943216de28da5784",
         "type": "github"
       },
       "original": {
